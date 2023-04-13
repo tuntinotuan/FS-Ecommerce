@@ -14,6 +14,9 @@ import UpdatePassword from "./components/User/UpdatePassword";
 import ProtectedRoute from "./components/Route/ProtectedRoute";
 import ForgotPassword from "./components/User/ForgotPassword";
 import ResetPassword from "./components/User/ResetPassword";
+import Cart from "./components/Cart/Cart";
+import Shipping from "./components/Cart/Shipping";
+import ConfirmOrder from "./components/Cart/ConfirmOrder";
 
 function App() {
   useEffect(() => {
@@ -58,6 +61,14 @@ function App() {
           />
 
           <Route path="/login" element={<LoginSignUp></LoginSignUp>}></Route>
+
+          <Route path="/cart" element={<Cart></Cart>}></Route>
+          <Route path="/login/shipping" element={<Shipping></Shipping>}></Route>
+          <Route
+            path="/order/confirm"
+            element={<ConfirmOrder></ConfirmOrder>}
+          ></Route>
+
           <Route path="*" element={<div>Page not found</div>}></Route>
         </Route>
       </Routes>

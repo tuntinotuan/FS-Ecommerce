@@ -11,7 +11,7 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
 // import { useAlert } from "react-alert";
-// import { addItemsToCart } from "../../actions/cartAction";
+import { addItemsToCart } from "../../actions/cartAction";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -47,22 +47,22 @@ const ProductDetails = ({ match }) => {
   const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
+    console.log("increase");
     if (product?.Stock <= quantity) return;
-
     const qty = quantity + 1;
     setQuantity(qty);
   };
 
   const decreaseQuantity = () => {
+    console.log("decrease");
     if (1 >= quantity) return;
-
     const qty = quantity - 1;
     setQuantity(qty);
   };
 
   const addToCartHandler = () => {
-    // dispatch(addItemsToCart(idProduct || match?.params?.id, quantity));
-    alert.success("Item Added To Cart");
+    dispatch(addItemsToCart(idProduct || match?.params?.id, quantity));
+    // alert.success("Item Added To Cart");
   };
 
   const submitReviewToggle = () => {

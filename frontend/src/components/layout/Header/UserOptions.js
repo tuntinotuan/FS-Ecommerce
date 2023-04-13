@@ -9,6 +9,7 @@ import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 // import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LogoutIcon from "@mui/icons-material/Logout";
 // import ListAltIcon from "@material-ui/icons/ListAlt";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 // import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -24,18 +25,18 @@ const UserOptions = ({ user }) => {
   const dispatch = useDispatch();
   // const alert = useAlert();
   const [open, setOpen] = useState(false);
-  // const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const options = [
-    { icon: <HeadphonesIcon />, name: "Orders", func: orders },
+    { icon: <ListAltIcon />, name: "Orders", func: orders },
     { icon: <EmojiEmotionsIcon />, name: "Profile", func: account },
     {
       icon: (
         <ShoppingCartIcon
-        // style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
         />
       ),
-      // name: `Cart(${cartItems.length})`,
+      name: `Cart(${cartItems.length})`,
       func: cart,
     },
     { icon: <LogoutIcon />, name: "Logout", func: logoutUser },

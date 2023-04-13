@@ -7,6 +7,7 @@ import Profile from "../../images/Profile.png";
 // import LockOpenIcon from "@material-ui/icons/LockOpen";
 // import FaceIcon from "@material-ui/icons/Face";
 // import { useAlert } from "react-alert";
+import { Alert } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -19,7 +20,7 @@ const LoginSignUp = ({ history }) => {
   const location = useLocation();
   const navigate = useNavigate();
   // const history = unstable_HistoryRouter();
-  // const alert = useAlert();
+  // const alert = Alert();
 
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
@@ -92,12 +93,13 @@ const LoginSignUp = ({ history }) => {
   console.log("location~", redirect);
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
+      Alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isAuthenticated) {
-      history?.push(redirect);
+      // history?.push(redirect);
       navigate(redirect);
     }
   }, [dispatch, error, alert, history, isAuthenticated, redirect]);
