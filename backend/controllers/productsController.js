@@ -16,17 +16,56 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 });
 // Get All Product
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
-  const resultPerPage = 5;
-  const producCount = await Product.countDocuments();
+  const resultPerPage = 8;
+  const productsCount = await Product.countDocuments();
 
-  const apiFeatures = new ApiFeatures(Product.find(), req.query)
+  const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
     .pagination(resultPerPage);
-  const products = await apiFeatures.query;
+  const products = await apiFeature.query;
+  let filteredProductsCount = products.length;
+
+  // let products = await apiFeature.query;
+
+  // let filteredProductsCount = products.length;
+
+  // apiFeature.pagination(resultPerPage);
+
+  // products = await apiFeature.query;
   // const products = await Product.find({ name: "samosa" });
-  res.status(200).json({ success: true, products, producCount });
+  res.status(200).json({
+    success: true,
+    products,
+    productsCount,
+    resultPerPage,
+    filteredProductsCount,
+  });
 });
+// exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
+//   const resultPerPage = 8;
+//   const productsCount = await Product.countDocuments();
+
+//   const apiFeature = new ApiFeatures(Product.find(), req.query)
+//     .search()
+//     .filter();
+
+//   let products = await apiFeature.query;
+
+//   let filteredProductsCount = products.length;
+
+//   apiFeature.pagination(resultPerPage);
+
+//   products = await apiFeature.query;
+
+//   res.status(200).json({
+//     success: true,
+//     products,
+//     productsCount,
+//     resultPerPage,
+//     filteredProductsCount,
+//   });
+// });
 
 // Get Product Details
 exports.getAllProductDetails = catchAsyncErrors(async (req, res, next) => {
@@ -82,6 +121,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   const review = {
     user: req.user._id,
     name: req.user.name,
+    avatar: req.user.avatar,
     rating: Number(rating),
     comment,
   };
