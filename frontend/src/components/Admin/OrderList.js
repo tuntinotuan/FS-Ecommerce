@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Link, useNavigate } from "react-router-dom";
+// import { useAlert } from "react-alert";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import SideBar from "./Sidebar";
 import {
   deleteOrder,
@@ -18,8 +18,9 @@ import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
 const OrderList = ({ history }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const alert = useAlert();
+  // const alert = useAlert();
 
   const { error, orders } = useSelector((state) => state.allOrders);
 
@@ -31,18 +32,19 @@ const OrderList = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      // alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Order Deleted Successfully");
-      history.push("/admin/orders");
+      // alert.success("Order Deleted Successfully");
+      // history.push("/admin/orders");
+      navigate("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }
 
@@ -58,9 +60,7 @@ const OrderList = ({ history }) => {
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+        return params.orderStatus === "Delivered" ? "greenColor" : "redColor";
       },
     },
     {
@@ -89,15 +89,11 @@ const OrderList = ({ history }) => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/order/${params.id}`}>
               <EditIcon />
             </Link>
 
-            <Button
-              onClick={() =>
-                deleteOrderHandler(params.getValue(params.id, "id"))
-              }
-            >
+            <Button onClick={() => deleteOrderHandler(params.id)}>
               <DeleteIcon />
             </Button>
           </Fragment>

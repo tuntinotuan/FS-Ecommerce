@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+// import { useAlert } from "react-alert";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import PersonIcon from "@material-ui/icons/Person";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PersonIcon from "@mui/icons-material/Person";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import SideBar from "./Sidebar";
 import { UPDATE_USER_RESET } from "../../constants/userConstants";
 import {
@@ -14,10 +14,13 @@ import {
   clearErrors,
 } from "../../actions/userAction";
 import Loader from "../layout/Loader/Loader";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateUser = ({ history, match }) => {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const { idUser } = useParams();
+  const navigate = useNavigate();
+  // const alert = useAlert();
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
 
@@ -31,32 +34,33 @@ const UpdateUser = ({ history, match }) => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
 
-  const userId = match.params.id;
+  // const userId = match.params.id;
 
   useEffect(() => {
-    if (user && user._id !== userId) {
-      dispatch(getUserDetails(userId));
+    if (user && user._id !== idUser) {
+      dispatch(getUserDetails(idUser));
     } else {
       setName(user.name);
       setEmail(user.email);
       setRole(user.role);
     }
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      alert.error(updateError);
+      // alert.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("User Updated Successfully");
-      history.push("/admin/users");
+      // alert.success("User Updated Successfully");
+      // history.push("/admin/users");
+      navigate("/admin/users");
       dispatch({ type: UPDATE_USER_RESET });
     }
-  }, [dispatch, alert, error, history, isUpdated, updateError, user, userId]);
+  }, [dispatch, alert, error, history, isUpdated, updateError, user, idUser]);
 
   const updateUserSubmitHandler = (e) => {
     e.preventDefault();
@@ -67,7 +71,7 @@ const UpdateUser = ({ history, match }) => {
     myForm.set("email", email);
     myForm.set("role", role);
 
-    dispatch(updateUser(userId, myForm));
+    dispatch(updateUser(idUser, myForm));
   };
 
   return (

@@ -25,6 +25,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
 import Dashboard from "./components/Admin/Dashboard";
+import OrderDetails from "./components/Order/OrderDetails";
+import ProductList from "./components/Admin/ProductList";
+import NewProduct from "./components/Admin/NewProduct";
+import UpdateProduct from "./components/Admin/UpdateProduct";
+import OrderList from "./components/Admin/OrderList";
+import ProcessOrder from "./components/Admin/ProcessOrder";
+import UsersList from "./components/Admin/UsersList";
+import UpdateUser from "./components/Admin/UpdateUser";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -100,9 +108,43 @@ function App() {
           ></Route>
           <Route path="/orders" element={<MyOrders></MyOrders>}></Route>
           <Route
+            path="/order/:idOrder"
+            element={<OrderDetails></OrderDetails>}
+          ></Route>
+          <Route
             path="/admin/dashboard"
             element={<Dashboard></Dashboard>}
           ></Route>
+          <Route
+            path="/admin/products"
+            element={<ProductList></ProductList>}
+          ></Route>
+          <Route
+            path="/admin/product"
+            element={<NewProduct></NewProduct>}
+          ></Route>
+          <Route
+            path="/admin/product/:idProduct"
+            element={<UpdateProduct></UpdateProduct>}
+          ></Route>
+          <Route path="/admin/orders" element={<OrderList></OrderList>}></Route>
+          <Route
+            path="/admin/order/:idOrder"
+            element={<ProcessOrder></ProcessOrder>}
+          ></Route>
+          <Route path="/admin/users" element={<UsersList></UsersList>} />
+
+          <Route
+            path="/admin/user/:idUser"
+            element={<UpdateUser></UpdateUser>}
+          />
+
+          {/* <Route
+          exact
+          path="/admin/reviews"
+          isAdmin={true}
+          component={ProductReviews}
+        /> */}
 
           <Route path="*" element={<div>Page not found</div>}></Route>
         </Route>

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
-import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Link, useParams } from "react-router-dom";
+import { Typography } from "@mui/material";
 import SideBar from "./Sidebar";
 import {
   getOrderDetails,
@@ -10,9 +10,9 @@ import {
 } from "../../actions/orderAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
-import { useAlert } from "react-alert";
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import { Button } from "@material-ui/core";
+// import { useAlert } from "react-alert";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import { Button } from "@mui/material";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 import "./processOrder.css";
 
@@ -27,30 +27,31 @@ const ProcessOrder = ({ history, match }) => {
 
     myForm.set("status", status);
 
-    dispatch(updateOrder(match.params.id, myForm));
+    dispatch(updateOrder(idOrder, myForm));
   };
 
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const { idOrder } = useParams();
+  // const alert = useAlert();
 
   const [status, setStatus] = useState("");
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
     if (updateError) {
-      alert.error(updateError);
+      // alert.error(updateError);
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("Order Updated Successfully");
+      // alert.success("Order Updated Successfully");
       dispatch({ type: UPDATE_ORDER_RESET });
     }
 
-    dispatch(getOrderDetails(match.params.id));
-  }, [dispatch, alert, error, match.params.id, isUpdated, updateError]);
+    dispatch(getOrderDetails(idOrder));
+  }, [dispatch, alert, error, idOrder, isUpdated, updateError]);
 
   return (
     <Fragment>
