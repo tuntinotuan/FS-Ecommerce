@@ -1,6 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./ProductDetails.css";
 import ReactStars from "react-rating-stars-component";
+// import { Rating } from "@material-ui/lab";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
@@ -83,17 +91,17 @@ const ProductDetails = ({ match }) => {
   console.log("idProduct", idProduct);
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (reviewError) {
-      alert.error(reviewError);
+      // alert.error(reviewError);
       dispatch(clearErrors());
     }
 
     if (success) {
-      alert.success("Review Submitted Successfully");
+      // alert.success("Review Submitted Successfully");
       dispatch({ type: NEW_REVIEW_RESET });
     }
     dispatch(getProductDetails(idProduct || match?.params?.id));
@@ -107,6 +115,7 @@ const ProductDetails = ({ match }) => {
   ]);
   const ratingChanged = (newRating) => {
     console.log(newRating);
+    setRating(newRating);
   };
   return (
     <Fragment>
@@ -197,17 +206,28 @@ const ProductDetails = ({ match }) => {
 
           <h3 className="reviewsHeading">REVIEWS</h3>
 
-          {/* <Dialog
+          <Dialog
             aria-labelledby="simple-dialog-title"
             open={open}
             onClose={submitReviewToggle}
           >
             <DialogTitle>Submit Review</DialogTitle>
             <DialogContent className="submitDialog">
-              <Rating
+              {/* <Rating
                 onChange={(e) => setRating(e.target.value)}
                 value={rating}
                 size="large"
+              /> */}
+              <ReactStars
+                count={5}
+                onChange={ratingChanged}
+                size={24}
+                isHalf={true}
+                emptyIcon={<i className="far fa-star"></i>}
+                halfIcon={<i className="fa fa-star-half-alt"></i>}
+                fullIcon={<i className="fa fa-star"></i>}
+                activeColor="#ffd700"
+                {...options}
               />
 
               <textarea
@@ -226,7 +246,7 @@ const ProductDetails = ({ match }) => {
                 Submit
               </Button>
             </DialogActions>
-          </Dialog> */}
+          </Dialog>
 
           {product?.reviews && product?.reviews[0] ? (
             <div className="reviews">

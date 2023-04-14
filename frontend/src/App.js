@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/home/Home";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Main from "./components/layout/Main";
 import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products";
@@ -17,10 +17,28 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import Payment from "./components/Cart/Payment";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import OrderSuccess from "./components/Cart/OrderSuccess";
+import MyOrders from "./components/Order/MyOrders";
+import Dashboard from "./components/Admin/Dashboard";
 
 function App() {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v1/stripeapikey");
+
+    setStripeApiKey(data.stripeApiKey);
+  }
   useEffect(() => {
     store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
@@ -67,6 +85,23 @@ function App() {
           <Route
             path="/order/confirm"
             element={<ConfirmOrder></ConfirmOrder>}
+          ></Route>
+          <Route
+            path="/process/payment"
+            element={
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <Payment></Payment>
+              </Elements>
+            }
+          ></Route>
+          <Route
+            path="/success"
+            element={<OrderSuccess></OrderSuccess>}
+          ></Route>
+          <Route path="/orders" element={<MyOrders></MyOrders>}></Route>
+          <Route
+            path="/admin/dashboard"
+            element={<Dashboard></Dashboard>}
           ></Route>
 
           <Route path="*" element={<div>Page not found</div>}></Route>
