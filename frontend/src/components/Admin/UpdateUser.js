@@ -29,11 +29,12 @@ const UpdateUser = ({ history, match }) => {
     error: updateError,
     isUpdated,
   } = useSelector((state) => state.profile);
+  console.log("isUpdated", isUpdated);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-
+  console.log("name, email, role", name, email, role);
   // const userId = match.params.id;
 
   useEffect(() => {

@@ -33,6 +33,7 @@ import OrderList from "./components/Admin/OrderList";
 import ProcessOrder from "./components/Admin/ProcessOrder";
 import UsersList from "./components/Admin/UsersList";
 import UpdateUser from "./components/Admin/UpdateUser";
+import ProductReviews from "./components/Admin/ProductReviews";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -139,12 +140,10 @@ function App() {
             element={<UpdateUser></UpdateUser>}
           />
 
-          {/* <Route
-          exact
-          path="/admin/reviews"
-          isAdmin={true}
-          component={ProductReviews}
-        /> */}
+          <Route
+            path="/admin/reviews"
+            element={<ProductReviews></ProductReviews>}
+          />
 
           <Route path="*" element={<div>Page not found</div>}></Route>
         </Route>

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productReviews.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -7,19 +7,20 @@ import {
   getAllReviews,
   deleteReviews,
 } from "../../actions/productAction";
-import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+// import { useAlert } from "react-alert";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Star from "@material-ui/icons/Star";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Star from "@mui/icons-material/Star";
 
 import SideBar from "./Sidebar";
 import { DELETE_REVIEW_RESET } from "../../constants/productConstants";
+import { useNavigate } from "react-router-dom";
 
 const ProductReviews = ({ history }) => {
   const dispatch = useDispatch();
-
-  const alert = useAlert();
+  const navigate = useNavigate();
+  // const alert = useAlert();
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.review
@@ -45,18 +46,19 @@ const ProductReviews = ({ history }) => {
       dispatch(getAllReviews(productId));
     }
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      // alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Review Deleted Successfully");
-      history.push("/admin/reviews");
+      // alert.success("Review Deleted Successfully");
+      // history.push("/admin/reviews");
+      navigate("/admin/reviews");
       dispatch({ type: DELETE_REVIEW_RESET });
     }
   }, [dispatch, alert, error, deleteError, history, isDeleted, productId]);
@@ -86,9 +88,7 @@ const ProductReviews = ({ history }) => {
       flex: 0.4,
 
       cellClassName: (params) => {
-        return params.getValue(params.id, "rating") >= 3
-          ? "greenColor"
-          : "redColor";
+        return params.id.rating >= 3 ? "greenColor" : "redColor";
       },
     },
 
@@ -104,7 +104,8 @@ const ProductReviews = ({ history }) => {
           <Fragment>
             <Button
               onClick={() =>
-                deleteReviewHandler(params.getValue(params.id, "id"))
+                // deleteReviewHandler(params.getValue(params.id, "id"))
+                deleteReviewHandler(params.id)
               }
             >
               <DeleteIcon />
