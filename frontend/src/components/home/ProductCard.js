@@ -22,37 +22,64 @@ const ProductCard = ({ product }) => {
     readOnly: true,
     precision: 0.5,
   };
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
   return (
-    <Link className="productCard" to={`/product/${product._id}`}>
-      <img src={product.images[0]?.url} alt={product.name} />
-      <p>{product.name}</p>
-      <div>
-        {/* <ReactStars
-          count={5}
-          onChange={ratingChanged}
-          size={24}
-          isHalf={true}
-          emptyIcon={<i className="far fa-star"></i>}
-          halfIcon={<i className="fa fa-star-half-alt"></i>}
-          fullIcon={<i className="fa fa-star"></i>}
-          activeColor="#ffd700"
-          {...options}
-        /> */}
-        <Rating
-          name="text-feedback size-small"
-          size="small"
-          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-          {...options}
-        />
-        {/* <Box sx={{ ml: 2 }}>{labels[product.ratings]}</Box> */}
-        <span className="productCardSpan">
-          ({product.numOfReviews} Reviews)
-        </span>
+    // <Link className="productCard" to={`/product/${product._id}`}>
+    //   <img src={product.images[0]?.url} alt={product.name} />
+    //   <p className="font-bold">{product.name}</p>
+    //   <div>
+    //     {/* <ReactStars
+    //       count={5}
+    //       onChange={ratingChanged}
+    //       size={24}
+    //       isHalf={true}
+    //       emptyIcon={<i className="far fa-star"></i>}
+    //       halfIcon={<i className="fa fa-star-half-alt"></i>}
+    //       fullIcon={<i className="fa fa-star"></i>}
+    //       activeColor="#ffd700"
+    //       {...options}
+    //     /> */}
+    //     <Rating
+    //       name="text-feedback size-small"
+    //       size="small"
+    //       emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+    //       {...options}
+    //     />
+    //     {/* <Box sx={{ ml: 2 }}>{labels[product.ratings]}</Box> */}
+    //     <span className="productCardSpan">
+    //       ({product.numOfReviews} Reviews)
+    //     </span>
+    //   </div>
+    //   <span>{`₹${product.price}`}</span>
+    // </Link>
+    <Link
+      className="h-[292px] bg-white border border-transparent hover:border-primary hover:-translate-y-[2px] shadow-sm rounded-sm transition-all "
+      to={`/product/${product._id}`}
+    >
+      <img
+        src={product.images[0]?.url}
+        alt={product.name}
+        className="w-full h-[60%] object-contain"
+      />
+      <div className="flex flex-col justify-start h-[40%] p-3">
+        <p className="text-xs">{product.name}</p>
+        <div className="flex items-center gap-2 my-1">
+          <Rating
+            name="text-feedback size-small"
+            size="small"
+            emptyIcon={
+              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+            }
+            {...options}
+          />
+          <span className="productCardSpan">
+            ({product.numOfReviews} Reviews)
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs mt-auto">
+          <span className="text-secondary">{`₫${product.price}`}</span>
+          <span className="opacity-50">{`Đã bán ${product.price}`}</span>
+        </div>
       </div>
-      <span>{`₹${product.price}`}</span>
     </Link>
   );
 };

@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body{
+    @apply bg-body font-body px-5;
+  }
+}
+@layer components {
+  .page-container {
+    max-width: 1200px;
+    @apply mx-auto;
+  }
+  .page-container-fluid {
+    max-width: 1440px;
+    @apply mx-auto;
+  }
+  .movie-list .swiper-slide {
+    width: 300px;
+    height: auto;
+  }
+  .banner .swiper {
+    height: 100%;
+  }
+}
+.greenColor {
+  color: green !important;
+}
+.redColor {
+  color: red !important;
+}
+
+// Banner Main css customize button sliders
+.banner-main .swiper-button-next,
+.course-list .swiper-button-next,
+.slide-teacher .swiper-button-next {
+  background-image: url(https://cdn-icons-png.flaticon.com/512/318/318476.png);
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  background-size: 100% auto;
+  background-position: center;
+  z-index: 999;
+  opacity: 0.6;
+}
+.banner-main .swiper-button-next::after,
+.course-list .swiper-button-next::after,
+.slide-teacher .swiper-button-next::after{
+  display: none;
+}
+.banner-main .swiper-button-prev,
+.slide-teacher .swiper-button-prev {
+  background-image: url(https://cdn-icons-png.flaticon.com/512/318/318477.png);
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  background-size: 100% auto;
+  background-position: center;
+  z-index: 999;
+  opacity: 0.6;
+}
+.banner-main .swiper-button-prev::after,
+.slide-teacher .swiper-button-prev::after{
+  display: none;
+}
+.banner-main .swiper-button-next.swiper-button-disabled,
+.banner-main .swiper-button-prev.swiper-button-disabled {
+  display: none;
+}

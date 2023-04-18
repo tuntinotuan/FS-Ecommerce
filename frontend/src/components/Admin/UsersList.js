@@ -70,7 +70,7 @@ const UsersList = ({ history }) => {
     {
       field: "role",
       headerName: "Role",
-      type: "number",
+      // type: "number",
       minWidth: 150,
       flex: 0.3,
       cellClassName: (params) => {

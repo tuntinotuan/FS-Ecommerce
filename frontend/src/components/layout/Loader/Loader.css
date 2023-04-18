@@ -38,26 +38,31 @@
   height: 80px;
   top: 13.333333333333336px;
   left: 13.333333333333336px;
-  background: #2196f3;
+  /* background: #2196f3; */
+  background: linear-gradient(to right, #43c6ac, #f8ffae);
   animation: ldio-5jjkfkdq8wm 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   animation-delay: -0.3s;
 }
 .ldio-5jjkfkdq8wm div:nth-child(2) {
   top: 13.333333333333336px;
   left: 106.66666666666666px;
-  background: #ff40da;
+  /* background: #ff40da; */
+  background: linear-gradient(to bottom, #43c6ac, #f8ffae);
+  /* background: linear-gradient(to right, #f8ffae, #43c6ac); */
   animation-delay: -0.2s;
 }
 .ldio-5jjkfkdq8wm div:nth-child(3) {
   top: 106.66666666666666px;
   left: 13.333333333333336px;
-  background: #f4448f;
+  /* background: #f4448f; */
+  background: linear-gradient(to top, #4568dc, #b06ab3);
   animation-delay: 0s;
 }
 .ldio-5jjkfkdq8wm div:nth-child(4) {
   top: 106.66666666666666px;
   left: 106.66666666666666px;
-  background: #00bcd4;
+  /* background: #00bcd4; */
+  background: linear-gradient(to left, #4568dc, #b06ab3);
   animation-delay: -0.1s;
 }
 .loadingio-spinner-cube-0302fg3qa2t {

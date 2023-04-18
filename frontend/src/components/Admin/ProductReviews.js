@@ -88,7 +88,7 @@ const ProductReviews = ({ history }) => {
       flex: 0.4,
 
       cellClassName: (params) => {
-        return params.id.rating >= 3 ? "greenColor" : "redColor";
+        return params.rating >= 3 ? "greenColor" : "redColor";
       },
     },
 

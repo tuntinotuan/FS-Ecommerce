@@ -14,6 +14,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
+import BannerMain from "../banner/BannerMain";
 
 const products = [
   {
@@ -39,31 +40,38 @@ const Home = () => {
 
   return (
     <Fragment>
+      <MetaData title="ECOMMERCE" />
       {loading ? (
         <Loader></Loader>
       ) : (
         <Fragment>
-          <MetaData title="ECOMMERCE" />
+          <BannerMain></BannerMain>
+          <section className="page-container my-10">
+            {/* <div className="banner">
+              <p>Welcome to Ecommerce</p>
+              <h1>FIND AMAZING PRODUCTS BELOW</h1>
+              <a href="#container">
+                <button>
+                  Scroll
+                  <CgMouse />
+                </button>
+              </a>
+            </div> */}
 
-          <div className="banner">
-            <p>Welcome to Ecommerce</p>
-            <h1>FIND AMAZING PRODUCTS BELOW</h1>
-
-            <a href="#container">
-              <button>
-                Scroll
-                <CgMouse />
-              </button>
-            </a>
-          </div>
-
-          <h2 className="homeHeading">Featured Products</h2>
-          <div className="container" id="container">
-            {products &&
-              products.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-          </div>
+            <h2 className="homeHeading">Featured Products</h2>
+            {/* <div className="container" id="container">
+              {products &&
+                products.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
+            </div> */}
+            <div className="grid grid-cols-5 gap-3" id="container">
+              {products &&
+                products.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
+            </div>
+          </section>
         </Fragment>
       )}
     </Fragment>
