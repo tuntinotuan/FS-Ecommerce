@@ -9,15 +9,15 @@ import "./CheckoutSteps.css";
 const CheckoutSteps = ({ activeStep }) => {
   const steps = [
     {
-      label: <Typography>Shipping Details</Typography>,
+      label: "Chi Tiết Vận Chuyển",
       icon: <LocalShippingIcon />,
     },
     {
-      label: <Typography>Confirm Order</Typography>,
+      label: "Xác Nhận Đơn Hàng",
       icon: <LibraryAddCheckIcon />,
     },
     {
-      label: <Typography>Payment</Typography>,
+      label: "Thanh Toán",
       icon: <AccountBalanceIcon />,
     },
   ];
@@ -37,11 +37,18 @@ const CheckoutSteps = ({ activeStep }) => {
           >
             <StepLabel
               style={{
-                color: activeStep >= index ? "tomato" : "rgba(0, 0, 0, 0.649)",
+                color: activeStep >= index ? "#43c6ac" : "rgba(0, 0, 0, 0.649)",
               }}
               icon={item.icon}
             >
-              {item.label}
+              <div
+                style={{
+                  color:
+                    activeStep >= index ? "#43c6ac" : "rgba(0, 0, 0, 0.649)",
+                }}
+              >
+                {item.label}
+              </div>
             </StepLabel>
           </Step>
         ))}

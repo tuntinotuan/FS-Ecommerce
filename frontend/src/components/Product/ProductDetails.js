@@ -1,7 +1,293 @@
+// import React, { Fragment, useEffect, useState } from "react";
+// import "./ProductDetails.css";
+// import ReactStars from "react-rating-stars-component";
+// // import { Rating } from "@material-ui/lab";
+// import {
+//   Dialog,
+//   DialogActions,
+//   DialogContent,
+//   DialogTitle,
+//   Button,
+// } from "@mui/material";
+// import { useSelector, useDispatch } from "react-redux";
+// import {
+//   clearErrors,
+//   getProductDetails,
+//   newReview,
+// } from "../../actions/productAction";
+// import ReviewCard from "./ReviewCard.js";
+// import Loader from "../layout/Loader/Loader";
+// import MetaData from "../layout/MetaData";
+// // import { useAlert } from "react-alert";
+// import { addItemsToCart } from "../../actions/cartAction";
+// import { NEW_REVIEW_RESET } from "../../constants/productConstants";
+// import { useParams } from "react-router-dom";
+// import Rating from "@mui/material/Rating";
+// import StarIcon from "@mui/icons-material/Star";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Pagination } from "swiper";
+// import "swiper/css";
+// import "swiper/css/pagination";
+
+// const ProductDetails = ({ match }) => {
+//   const dispatch = useDispatch();
+//   const { idProduct } = useParams();
+//   // const alert = useAlert();
+
+//   const { product, loading, error } = useSelector(
+//     (state) => state.productDetails
+//   );
+
+//   console.log("product", product);
+
+//   const { success, error: reviewError } = useSelector(
+//     (state) => state.newReview
+//   );
+
+//   const options = {
+//     value: product?.ratings,
+//     readOnly: true,
+//     precision: 0.5,
+//   };
+
+//   const [quantity, setQuantity] = useState(1);
+//   const [open, setOpen] = useState(false);
+//   const [rating, setRating] = useState(5);
+//   const [comment, setComment] = useState("");
+
+//   const increaseQuantity = () => {
+//     console.log("increase");
+//     if (product?.Stock <= quantity) return;
+//     const qty = quantity + 1;
+//     setQuantity(qty);
+//   };
+
+//   const decreaseQuantity = () => {
+//     console.log("decrease");
+//     if (1 >= quantity) return;
+//     const qty = quantity - 1;
+//     setQuantity(qty);
+//   };
+
+//   const addToCartHandler = () => {
+//     dispatch(addItemsToCart(idProduct || match?.params?.id, quantity));
+//     // alert.success("Item Added To Cart");
+//   };
+
+//   const submitReviewToggle = () => {
+//     open ? setOpen(false) : setOpen(true);
+//   };
+
+//   const reviewSubmitHandler = () => {
+//     const myForm = new FormData();
+
+//     myForm.set("rating", rating);
+//     myForm.set("comment", comment);
+//     myForm.set("productId", idProduct || match?.params?.id);
+
+//     dispatch(newReview(myForm));
+
+//     setOpen(false);
+//   };
+//   console.log("idProduct", idProduct);
+//   useEffect(() => {
+//     if (error) {
+//       // alert.error(error);
+//       dispatch(clearErrors());
+//     }
+
+//     if (reviewError) {
+//       // alert.error(reviewError);
+//       dispatch(clearErrors());
+//     }
+
+//     if (success) {
+//       // alert.success("Review Submitted Successfully");
+//       dispatch({ type: NEW_REVIEW_RESET });
+//     }
+//     dispatch(getProductDetails(idProduct || match?.params?.id));
+//   }, [
+//     dispatch,
+//     idProduct || match?.params?.id,
+//     error,
+//     alert,
+//     reviewError,
+//     success,
+//   ]);
+//   const ratingChanged = (newRating) => {
+//     console.log(newRating);
+//     setRating(newRating);
+//   };
+//   const currentDate = new Date().toLocaleDateString("en-GB");
+//   const prevDate = new Date(product?.createAt).toLocaleDateString("en-GB");
+//   return (
+//     <Fragment>
+//       {loading ? (
+//         <Loader />
+//       ) : (
+//         <Fragment>
+//           <MetaData title={`${product?.name} -- ECOMMERCE`} />
+//           <div className="ProductDetails">
+//             {/* <div> */}
+//             <Swiper
+//               pagination={{
+//                 dynamicBullets: true,
+//               }}
+//               modules={[Pagination]}
+//               className="mySwiper"
+//             >
+//               {product?.images &&
+//                 product?.images.map((item, i) => (
+//                   <SwiperSlide>
+//                     <img
+//                       className="CarouselImage"
+//                       key={i}
+//                       src={item.url}
+//                       alt={`${i} Slide`}
+//                     />
+//                   </SwiperSlide>
+//                 ))}
+//             </Swiper>
+//             {/* </div> */}
+
+//             <div>
+//               <div className="detailsBlock-1">
+//                 {product?.numOfReviews > 9 && product?.ratings > 4 && (
+//                   <span className="text-xs bg-taghot text-white shadow-sm px-3">
+//                     Yêu thích
+//                   </span>
+//                 )}
+//                 {currentDate === prevDate && (
+//                   <span className="text-xs bg-tagnew text-white px-3">New</span>
+//                 )}
+//                 <h2>{product?.name}</h2>
+//                 <p>Product # {product?._id}</p>
+//               </div>
+//               <div className="detailsBlock-2">
+//                 <Rating
+//                   name="text-feedback size-small"
+//                   size="small"
+//                   emptyIcon={
+//                     <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+//                   }
+//                   {...options}
+//                 />
+//                 {/* <ReactStars
+//                   count={5}
+//                   onChange={ratingChanged}
+//                   size={24}
+//                   isHalf={true}
+//                   emptyIcon={<i className="far fa-star"></i>}
+//                   halfIcon={<i className="fa fa-star-half-alt"></i>}
+//                   fullIcon={<i className="fa fa-star"></i>}
+//                   activeColor="#ffd700"
+//                   {...options}
+//                 /> */}
+//                 <span className="detailsBlock-2-span">
+//                   ({product?.numOfReviews} Reviews)
+//                 </span>
+//               </div>
+//               <div className="detailsBlock-3">
+//                 <h1 className="text-primary">{`₫${product?.price?.toLocaleString(
+//                   "it-IT"
+//                 )}`}</h1>
+//                 <div className="detailsBlock-3-1">
+//                   <div className="detailsBlock-3-1-1">
+//                     <button onClick={decreaseQuantity}>-</button>
+//                     <input readOnly type="number" value={quantity} />
+//                     <button onClick={increaseQuantity}>+</button>
+//                   </div>
+//                   <button
+//                     disabled={product?.Stock < 1 ? true : false}
+//                     onClick={addToCartHandler}
+//                   >
+//                     Add to Cart
+//                   </button>
+//                 </div>
+
+//                 <p>
+//                   Status:
+//                   <b className={product?.Stock < 1 ? "redColor" : "greenColor"}>
+//                     {product?.Stock < 1 ? "OutOfStock" : "InStock"}
+//                   </b>
+//                 </p>
+//               </div>
+
+//               <div className="detailsBlock-4">
+//                 Description : <p>{product?.description}</p>
+//               </div>
+
+//               <button onClick={submitReviewToggle} className="submitReview">
+//                 Submit Review
+//               </button>
+//             </div>
+//           </div>
+
+//           <h3 className="reviewsHeading">REVIEWS</h3>
+
+//           <Dialog
+//             aria-labelledby="simple-dialog-title"
+//             open={open}
+//             onClose={submitReviewToggle}
+//           >
+//             <DialogTitle>Submit Review</DialogTitle>
+//             <DialogContent className="submitDialog">
+//               {/* <Rating
+//                 onChange={(e) => setRating(e.target.value)}
+//                 value={rating}
+//                 size="large"
+//               /> */}
+//               <ReactStars
+//                 count={5}
+//                 onChange={ratingChanged}
+//                 value={5}
+//                 precision={0.5}
+//                 size={24}
+//                 isHalf={true}
+//                 emptyIcon={<i className="far fa-star"></i>}
+//                 halfIcon={<i className="fa fa-star-half-alt"></i>}
+//                 fullIcon={<i className="fa fa-star"></i>}
+//                 activeColor="#ffd700"
+//               />
+
+//               <textarea
+//                 className="submitDialogTextArea"
+//                 cols="30"
+//                 rows="5"
+//                 value={comment}
+//                 onChange={(e) => setComment(e.target.value)}
+//               ></textarea>
+//             </DialogContent>
+//             <DialogActions>
+//               <Button onClick={submitReviewToggle} color="secondary">
+//                 Cancel
+//               </Button>
+//               <Button onClick={reviewSubmitHandler} color="primary">
+//                 Submit
+//               </Button>
+//             </DialogActions>
+//           </Dialog>
+
+//           {product?.reviews && product?.reviews[0] ? (
+//             <div className="reviews">
+//               {product?.reviews &&
+//                 product?.reviews.map((review) => (
+//                   <ReviewCard key={review._id} review={review} />
+//                 ))}
+//             </div>
+//           ) : (
+//             <p className="noReviews">No Reviews Yet</p>
+//           )}
+//         </Fragment>
+//       )}
+//     </Fragment>
+//   );
+// };
+
+// export default ProductDetails;
 import React, { Fragment, useEffect, useState } from "react";
 import "./ProductDetails.css";
 import ReactStars from "react-rating-stars-component";
-// import { Rating } from "@material-ui/lab";
 import {
   Dialog,
   DialogActions,
@@ -18,19 +304,38 @@ import {
 import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
-// import { useAlert } from "react-alert";
 import { addItemsToCart } from "../../actions/cartAction";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import { useParams } from "react-router-dom";
+import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { BsCartPlus, BsDash } from "react-icons/bs";
+import { FaRegSmileBeam } from "react-icons/fa";
+import BlockTitle from "../others/BlockTitle";
+import { nFormatter } from "../home/ProductCard";
+import useHover from "../../hooks/useHover";
+import { GrFormAdd } from "react-icons/gr";
+const labels = {
+  0.5: "Rất tệ",
+  1: "Tệ",
+  1.5: "Rất không hài lòng",
+  2: "Không hài lòng",
+  2.5: "Tạm ổn",
+  3: "Bình thường",
+  3.5: "Tốt",
+  4: "Hài lòng",
+  4.5: "Tuyệt vời",
+  5: "Trên cả tuyệt vời",
+};
 const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const { idProduct } = useParams();
-  // const alert = useAlert();
+  const { hovered, nodeRef } = useHover();
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -43,7 +348,6 @@ const ProductDetails = ({ match }) => {
   );
 
   const options = {
-    size: "large",
     value: product?.ratings,
     readOnly: true,
     precision: 0.5,
@@ -51,7 +355,7 @@ const ProductDetails = ({ match }) => {
 
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
@@ -117,147 +421,279 @@ const ProductDetails = ({ match }) => {
     console.log(newRating);
     setRating(newRating);
   };
+  const currentDate = new Date().toLocaleDateString("en-GB");
+  const prevDate = new Date(product?.createAt).toLocaleDateString("en-GB");
   return (
     <Fragment>
+      <MetaData title={`${product?.name} -- ${product?.category}`} />
       {loading ? (
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`${product?.name} -- ECOMMERCE`} />
-          <div className="ProductDetails">
-            {/* <div> */}
-            <Swiper
-              pagination={{
-                dynamicBullets: true,
-              }}
-              modules={[Pagination]}
-              className="mySwiper"
-            >
-              {product?.images &&
-                product?.images.map((item, i) => (
-                  <SwiperSlide>
-                    <img
-                      className="CarouselImage"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-            {/* </div> */}
+          <section className="py-5">
+            <div className="page-container flex items-start gap-10 bg-white rounded-[3px] shadow-sm p-4">
+              <div
+                className="banner-main product-details-slides relative flex items-center justify-center h-[400px] w-[400px]"
+                ref={nodeRef}
+              >
+                {product?.Stock < 1 && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-center z-40">
+                    <div className="flex items-center justify-center w-[120px] h-[120px] bg-primary bg-opacity-20 rounded-full">
+                      <h2 className="text-2xl text-taghot">Hết hàng</h2>
+                    </div>
+                  </div>
+                )}
+                <Swiper
+                  pagination={{
+                    dynamicBullets: true,
+                  }}
+                  grabCursor="true"
+                  slidesPerView={"auto"}
+                  navigation={hovered}
+                  modules={[Navigation, Pagination]}
+                  className="mySwiper w-full h-full"
+                >
+                  {product &&
+                    product?.images?.map((item, i) => (
+                      <SwiperSlide>
+                        <div className="w-full h-full rounded-[3px] shadow-sm overflow-hidden">
+                          <img
+                            key={i}
+                            src={item.url}
+                            alt={`${i} Slide`}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+              </div>
 
-            <div>
-              <div className="detailsBlock-1">
-                <h2>{product?.name}</h2>
-                <p>Product # {product?._id}</p>
-              </div>
-              <div className="detailsBlock-2">
-                {/* <Rating {...options} /> */}
-                <ReactStars
-                  count={5}
-                  onChange={ratingChanged}
-                  size={24}
-                  isHalf={true}
-                  emptyIcon={<i className="far fa-star"></i>}
-                  halfIcon={<i className="fa fa-star-half-alt"></i>}
-                  fullIcon={<i className="fa fa-star"></i>}
-                  activeColor="#ffd700"
-                  {...options}
-                />
-                <span className="detailsBlock-2-span">
-                  {" "}
-                  ({product?.numOfReviews} Reviews)
-                </span>
-              </div>
-              <div className="detailsBlock-3">
-                <h1>{`₹${product?.price}`}</h1>
-                <div className="detailsBlock-3-1">
-                  <div className="detailsBlock-3-1-1">
-                    <button onClick={decreaseQuantity}>-</button>
-                    <input readOnly type="number" value={quantity} />
-                    <button onClick={increaseQuantity}>+</button>
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  {product?.numOfReviews > 9 && product?.ratings > 4 && (
+                    <span className="text-xs bg-taghot text-white shadow-sm px-3">
+                      Yêu thích
+                    </span>
+                  )}
+                  {currentDate === prevDate && (
+                    <span className="text-xs bg-tagnew text-white px-3">
+                      New
+                    </span>
+                  )}
+                  <h2 className="text-lg">{product?.name}</h2>
+                  {/* <p>Product # {product?._id}</p> */}
+                </div>
+                <div className="flex items-center gap-5">
+                  <div className="flex items-center gap-1">
+                    <span className="text-[16px] text-[#faaf00] border border-transparent border-b-[#faaf00]">
+                      {`${
+                        product.ratings === 5 ||
+                        product.ratings === 4 ||
+                        product.ratings === 3 ||
+                        product.ratings === 2 ||
+                        product.ratings === 1
+                          ? `${product.ratings}.0`
+                          : `${nFormatter(product.ratings, 1)}`
+                      } `}
+                    </span>
+                    <Rating
+                      name="text-feedback size-small"
+                      size="small"
+                      emptyIcon={
+                        <StarIcon
+                          style={{ opacity: 0.55 }}
+                          fontSize="inherit"
+                        />
+                      }
+                      {...options}
+                    />
+                  </div>
+                  <p className="flex items-center gap-1 text-sm border border-transparent border-l-slate-300 pl-3">
+                    <span className="text-[16px] border border-transparent border-b-slate-900 pb-[2px]">
+                      {product?.numOfReviews}
+                    </span>
+                    <span className="text-graytagp">Đánh Giá</span>
+                  </p>
+                  <p className="flex items-center gap-1 text-sm border border-transparent border-l-slate-300 pl-3">
+                    <span className="text-[16px] border border-transparent border-b-slate-900 pb-[2px]">
+                      {product?.numOfReviews}
+                    </span>
+                    <span className="text-graytagp">Đã bán</span>
+                    <AiOutlineQuestionCircle className="text-[16px] text-graytagp"></AiOutlineQuestionCircle>
+                  </p>
+                </div>
+                <div className="flex items-center justify-between bg-body rounded-[3px] my-4 p-4">
+                  <h1 className="text-3xl text-primary">{`₫${product?.price?.toLocaleString(
+                    "it-IT"
+                  )}`}</h1>
+                  <b
+                    className={
+                      product?.Stock < 1 ? "text-taghot" : "text-primary"
+                    }
+                  >
+                    {product?.Stock < 1 ? " Hết hàng" : "  Còn hàng"}
+                  </b>
+                </div>
+                <div className="">
+                  <div className="flex items-center text-sm mb-5">
+                    <p className="w-[100px] text-graytagp">Số lượng</p>
+                    <div className="text-center flex justify-center mr-4">
+                      <button
+                        disabled={product?.Stock < 1 ? true : false}
+                        className="border border-[#d3d3d3] w-8 h-8 flex justify-center items-center"
+                        onClick={decreaseQuantity}
+                      >
+                        <BsDash />
+                      </button>
+                      <input
+                        disabled={product?.Stock < 1 ? true : false}
+                        type="number"
+                        value={quantity}
+                        className="w-12 h-8 text-center p-2 border border-t-[#d3d3d3] border-b-[#d3d3d3] outline-none"
+                      />
+                      <button
+                        disabled={product?.Stock < 1 ? true : false}
+                        className="border border-[#d3d3d3] w-8 h-8 flex justify-center items-center"
+                        onClick={increaseQuantity}
+                      >
+                        <GrFormAdd />
+                      </button>
+                    </div>
+                    <p className="text-graytagp">{`${product.Stock} sản phẩm có sẵn`}</p>
                   </div>
                   <button
                     disabled={product?.Stock < 1 ? true : false}
                     onClick={addToCartHandler}
+                    className="flex items-center gap-2 text-primary opacity-80 hover:opacity-100 border border-primary shadow-primary py-2 px-5"
                   >
-                    Add to Cart
+                    <BsCartPlus></BsCartPlus>
+                    Thêm Vào Giỏ Hàng
                   </button>
                 </div>
-
-                <p>
-                  Status:
-                  <b className={product?.Stock < 1 ? "redColor" : "greenColor"}>
-                    {product?.Stock < 1 ? "OutOfStock" : "InStock"}
-                  </b>
-                </p>
               </div>
-
-              <div className="detailsBlock-4">
-                Description : <p>{product?.description}</p>
+            </div>
+            <div className="page-container flex flex-col gap-4 bg-white rounded-[3px] shadow-sm p-6 my-4">
+              <div className="">
+                <BlockTitle className="uppercase mb-6" locateText="">
+                  Chi tiết Sản Phẩm:
+                </BlockTitle>
+                <div className="flex flex-col gap-2 px-4">
+                  <div className="flex items-center text-sm">
+                    <p className="w-[150px] text-graytagp">Danh mục</p>
+                    <p className="text-sm">{product?.category}</p>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <p className="w-[150px] text-graytagp">Số lượng</p>
+                    <p className="text-sm">{product?.Stock}</p>
+                  </div>
+                </div>
               </div>
-
-              <button onClick={submitReviewToggle} className="submitReview">
-                Submit Review
-              </button>
+              <div className="">
+                <BlockTitle className="uppercase mb-6" locateText="">
+                  Mô Tả Sản Phẩm:
+                </BlockTitle>
+                <p className="text-sm px-4">{product?.description}</p>
+              </div>
             </div>
-          </div>
 
-          <h3 className="reviewsHeading">REVIEWS</h3>
+            <Dialog
+              aria-labelledby="simple-dialog-title"
+              open={open}
+              onClose={submitReviewToggle}
+              className="w-[800px] mx-auto"
+            >
+              <DialogTitle>Đánh Giá Sản Phẩm</DialogTitle>
+              <DialogContent className="">
+                <div className="flex items-center gap-2">
+                  <h2 className="mr-10">Chất lượng sản phẩm</h2>
+                  <ReactStars
+                    count={5}
+                    onChange={ratingChanged}
+                    value={5}
+                    precision={0.5}
+                    size={24}
+                    isHalf={true}
+                    emptyIcon={<i className="far fa-star"></i>}
+                    halfIcon={<i className="fa fa-star-half-alt"></i>}
+                    fullIcon={<i className="fa fa-star"></i>}
+                    activeColor="#ffd700"
+                  />
+                  <p
+                    className={`${
+                      rating > 3 ? "text-tagnew" : "text-graytagp"
+                    }`}
+                  >
+                    {labels[rating]}
+                  </p>
+                </div>
 
-          <Dialog
-            aria-labelledby="simple-dialog-title"
-            open={open}
-            onClose={submitReviewToggle}
-          >
-            <DialogTitle>Submit Review</DialogTitle>
-            <DialogContent className="submitDialog">
-              {/* <Rating
-                onChange={(e) => setRating(e.target.value)}
-                value={rating}
-                size="large"
-              /> */}
-              <ReactStars
-                count={5}
-                onChange={ratingChanged}
-                size={24}
-                isHalf={true}
-                emptyIcon={<i className="far fa-star"></i>}
-                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-                {...options}
-              />
+                <textarea
+                  className="w-full border border-slate-200"
+                  cols="30"
+                  rows="5"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                ></textarea>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={submitReviewToggle}
+                  color="secondary"
+                  className="uppercase"
+                >
+                  Trở lại
+                </Button>
+                <Button onClick={reviewSubmitHandler} color="primary">
+                  Hoàn Thành
+                </Button>
+              </DialogActions>
+            </Dialog>
 
-              <textarea
-                className="submitDialogTextArea"
-                cols="30"
-                rows="5"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              ></textarea>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={submitReviewToggle} color="secondary">
-                Cancel
-              </Button>
-              <Button onClick={reviewSubmitHandler} color="primary">
-                Submit
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-          {product?.reviews && product?.reviews[0] ? (
-            <div className="reviews">
-              {product?.reviews &&
-                product?.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
-                ))}
+            <div className="page-container flex flex-col gap-4 bg-white rounded-[3px] shadow-sm p-6 my-4">
+              <h1 className="text-xl uppercase">Đánh giá sản phẩm</h1>
+              <div className="flex items-center gap-5 bg-primary bg-opacity-10 border border-slate-200 rounded-[3px] p-8">
+                <div className="flex flex-col items-center gap-2 w-[120px]">
+                  <h1 className="flex items-end gap-1 text-lg text-[#faaf00]">
+                    <h1 className="text-3xl">{`${
+                      product.ratings === 5 ||
+                      product.ratings === 4 ||
+                      product.ratings === 3 ||
+                      product.ratings === 2 ||
+                      product.ratings === 1
+                        ? `${product.ratings}.0`
+                        : `${nFormatter(product.ratings, 1)}`
+                    } `}</h1>
+                    trên 5
+                  </h1>
+                  <Rating
+                    name="text-feedback size-medium"
+                    size="medium"
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                    {...options}
+                  />
+                </div>
+                <button onClick={submitReviewToggle} className="submitReview">
+                  Submit Review
+                </button>
+              </div>
+              {product?.reviews && product?.reviews[0] ? (
+                <div className="reviews">
+                  {product?.reviews &&
+                    product?.reviews.map((review) => (
+                      <ReviewCard key={review._id} review={review} />
+                    ))}
+                </div>
+              ) : (
+                <div className="page-container flex items-center gap-2 text-graytagp py-20">
+                  <p className="noReviews">Sản phẩm chưa có bình luận nào</p>
+                  <FaRegSmileBeam></FaRegSmileBeam>
+                </div>
+              )}
             </div>
-          ) : (
-            <p className="noReviews">No Reviews Yet</p>
-          )}
+          </section>
         </Fragment>
       )}
     </Fragment>

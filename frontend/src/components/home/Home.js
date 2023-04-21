@@ -15,6 +15,9 @@ import {
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import BannerMain from "../banner/BannerMain";
+import BlockTitle from "../others/BlockTitle";
+import SlidesFamousPerson from "../slides/SlidesFamousPerson";
+import CollaborateBrands from "../others/CollaborateBrands";
 
 const products = [
   {
@@ -40,7 +43,7 @@ const Home = () => {
 
   return (
     <Fragment>
-      <MetaData title="ECOMMERCE" />
+      <MetaData title="Shop thương mại điện tử Việt Nam | Mua và Bán trên website" />
       {loading ? (
         <Loader></Loader>
       ) : (
@@ -57,8 +60,8 @@ const Home = () => {
                 </button>
               </a>
             </div> */}
-
-            <h2 className="homeHeading">Featured Products</h2>
+            <BlockTitle></BlockTitle>
+            {/* <h2 className="homeHeading">Sản phẩm nổi bật</h2> */}
             {/* <div className="container" id="container">
               {products &&
                 products.map((product) => (
@@ -68,9 +71,19 @@ const Home = () => {
             <div className="grid grid-cols-5 gap-3" id="container">
               {products &&
                 products.map((product) => (
-                  <ProductCard key={product._id} product={product} />
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    hiddenReview
+                  />
                 ))}
             </div>
+            <BlockTitle className="mt-3">Đại sứ thương hiệu</BlockTitle>
+            <SlidesFamousPerson></SlidesFamousPerson>
+            <BlockTitle className="mt-3">
+              Thương hiệu đồng hành cùng Shop
+            </BlockTitle>
+            <CollaborateBrands></CollaborateBrands>
           </section>
         </Fragment>
       )}

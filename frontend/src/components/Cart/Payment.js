@@ -19,6 +19,9 @@ import EventIcon from "@mui/icons-material/Event";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { createOrder, clearErrors } from "../../actions/orderAction";
 import { useNavigate } from "react-router-dom";
+import Master from "../../images/master.png";
+import Jbc from "../../images/jcb.png";
+import Visa from "../../images/visa.png";
 
 const Payment = ({ history }) => {
   const navigate = useNavigate();
@@ -126,7 +129,7 @@ const Payment = ({ history }) => {
           <Typography>Card Info</Typography>
           <div>
             <CreditCardIcon />
-            <CardNumberElement className="paymentInput" />
+            <CardNumberElement className="paymentInput font-bold" />
           </div>
           <div>
             <EventIcon />
@@ -143,7 +146,70 @@ const Payment = ({ history }) => {
             ref={payBtn}
             className="paymentFormBtn"
           />
+          <p>4000002760003184</p>
         </form>
+      </div>
+      <div>
+        <div className="flex justify-center items-center py-10">
+          <form className="bg-white rounded shadow-sm p-10 flex flex-col gap-6">
+            <div className="flex justify-between items-center gap-8">
+              <button className="bg-[#f2f2f2] py-5 px-8 rounded">
+                <img src={Visa} />
+              </button>
+              <button className="bg-[#f2f2f2] py-5 px-8 rounded">
+                <img src={Master} />
+              </button>
+              <button className="bg-[#f2f2f2] py-5 px-8 rounded">
+                <img src={Jbc} />
+              </button>
+            </div>
+            <div className="flex justify-between items-center">
+              <hr className="h-[1px] w-20 " />
+              <p>hoặc thanh toán bằng thẻ tín dụng</p>
+              <hr className="h-[1px] w-20" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <lable className="opacity-75">Họ và tên chủ thẻ</lable>
+              <input
+                placeholder="Nhập họ và tên thẻ"
+                className="p-2 border outline-primary rounded"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <lable className="opacity-75">Số thẻ</lable>
+              <input
+                type="tel"
+                pattern="\d*"
+                maxlength="16"
+                placeholder="1234 1234 1234 1234"
+                className="p-2 border outline-primary rounded"
+              />
+            </div>
+
+            <div className="flex justify-between gap-2">
+              <div className="flex  gap-2 flex-col">
+                <lable className="opacity-75">Hạn sử dụng</lable>
+                <input
+                  type="month"
+                  placeholder="10/23"
+                  className="p-2 border outline-primary rounded"
+                />
+              </div>
+              <div className="flex  gap-2 flex-col">
+                <lable className="opacity-75">CVC</lable>
+                <input
+                  placeholder="CVC"
+                  className="p-2 border outline-primary rounded"
+                />
+              </div>
+            </div>
+            <button className="flex  gap-2 items-center justify-center text-white bg-primary rounded p-3 hover:opacity-100 opacity-80">
+              <span>THANH TOÁN</span>
+              <span className="w-1 bg-white h-[1px]"></span>
+              <span>12351353đ</span>
+            </button>
+          </form>
+        </div>
       </div>
     </Fragment>
   );

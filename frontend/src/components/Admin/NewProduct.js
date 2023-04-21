@@ -52,12 +52,12 @@ const NewProduct = ({ history }) => {
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, history, success]);
-
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
+    // let priceConvertToDot = Number(price).toLocaleString("it-IT");
+    // console.log("priceConvertToDot ~:", priceConvertToDot);
 
     const myForm = new FormData();
-
     myForm.set("name", name);
     myForm.set("price", price);
     myForm.set("description", description);

@@ -139,3 +139,10 @@
     font: 300 1vmax "Roboto";
   }
 }
+/* ... */
+.card-name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

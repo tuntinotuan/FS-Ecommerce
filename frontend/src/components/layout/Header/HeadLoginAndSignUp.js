@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import shopNow from "../../../images/shopNow.png";
 
 import "./Header.css";
 
@@ -9,11 +10,7 @@ const HeadLoginAndSignUp = ({ title }) => {
       <div className="page-container w-full flex items-center justify-between px-3">
         <div className="flex items-center gap-5">
           <Link to="/">
-            <img
-              src="https://ecomking.vn/wp-content/uploads/2021/07/e-commerce-definizione-cos-e.jpg"
-              alt=""
-              className="w-[80px]"
-            />
+            <img src={shopNow} alt="" className="w-[160px]" />
           </Link>
           <h1 className="text-2xl">{title || "Đăng nhập"}</h1>
         </div>

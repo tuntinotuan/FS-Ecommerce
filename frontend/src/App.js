@@ -34,6 +34,10 @@ import ProcessOrder from "./components/Admin/ProcessOrder";
 import UsersList from "./components/Admin/UsersList";
 import UpdateUser from "./components/Admin/UpdateUser";
 import ProductReviews from "./components/Admin/ProductReviews";
+import PageNotFound from "./components/layout/PageNotFound/PageNotFound";
+import Footer from "./components/layout/Footer/Footer";
+import HeadLoginAndSignUp from "./components/layout/Header/HeadLoginAndSignUp";
+import WrapAdmin from "./components/Admin/WrapAdmin";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -72,22 +76,20 @@ function App() {
             element={<Products></Products>}
           ></Route>
           <Route path="/search" element={<Search></Search>}></Route>
-          <Route path="/account" element={<Profile></Profile>} />
+          {/* <Route path="/account" element={<Profile></Profile>} /> */}
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Profile></Profile>
+              </ProtectedRoute>
+            }
+          />
           <Route path="/me/update" element={<UpdateProfile></UpdateProfile>} />
           <Route
             path="/password/update"
             element={<UpdatePassword></UpdatePassword>}
           />
-          <Route
-            path="/password/forgot"
-            element={<ForgotPassword></ForgotPassword>}
-          />
-          <Route
-            path="/password/reset/:token"
-            element={<ResetPassword></ResetPassword>}
-          />
-
-          <Route path="/login" element={<LoginSignUp></LoginSignUp>}></Route>
 
           <Route path="/cart" element={<Cart></Cart>}></Route>
           <Route path="/login/shipping" element={<Shipping></Shipping>}></Route>
@@ -112,41 +114,87 @@ function App() {
             path="/order/:idOrder"
             element={<OrderDetails></OrderDetails>}
           ></Route>
-          <Route
-            path="/admin/dashboard"
-            element={<Dashboard></Dashboard>}
-          ></Route>
-          <Route
-            path="/admin/products"
-            element={<ProductList></ProductList>}
-          ></Route>
-          <Route
-            path="/admin/product"
-            element={<NewProduct></NewProduct>}
-          ></Route>
-          <Route
-            path="/admin/product/:idProduct"
-            element={<UpdateProduct></UpdateProduct>}
-          ></Route>
-          <Route path="/admin/orders" element={<OrderList></OrderList>}></Route>
-          <Route
-            path="/admin/order/:idOrder"
-            element={<ProcessOrder></ProcessOrder>}
-          ></Route>
-          <Route path="/admin/users" element={<UsersList></UsersList>} />
 
-          <Route
-            path="/admin/user/:idUser"
-            element={<UpdateUser></UpdateUser>}
-          />
-
-          <Route
-            path="/admin/reviews"
-            element={<ProductReviews></ProductReviews>}
-          />
-
-          <Route path="*" element={<div>Page not found</div>}></Route>
+          <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
         </Route>
+        {/* <Route
+          path="/admin/dashboard"
+          element={<Dashboard></Dashboard>}
+        ></Route> */}
+        {/* <Route element={<WrapAdmin></WrapAdmin>}> */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute isAdmin>
+              <Dashboard></Dashboard>
+            </ProtectedRoute>
+          }
+        ></Route>
+        {/* </Route> */}
+        <Route
+          path="/admin/products"
+          element={<ProductList></ProductList>}
+        ></Route>
+        <Route
+          path="/admin/product"
+          element={<NewProduct></NewProduct>}
+        ></Route>
+        <Route
+          path="/admin/product/:idProduct"
+          element={<UpdateProduct></UpdateProduct>}
+        ></Route>
+        <Route path="/admin/orders" element={<OrderList></OrderList>}></Route>
+        <Route
+          path="/admin/order/:idOrder"
+          element={<ProcessOrder></ProcessOrder>}
+        ></Route>
+        <Route path="/admin/users" element={<UsersList></UsersList>} />
+
+        <Route path="/admin/user/:idUser" element={<UpdateUser></UpdateUser>} />
+
+        <Route
+          path="/admin/reviews"
+          element={<ProductReviews></ProductReviews>}
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <HeadLoginAndSignUp></HeadLoginAndSignUp>
+              <LoginSignUp></LoginSignUp>
+              <Footer></Footer>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <>
+              <HeadLoginAndSignUp title="Đăng ký"></HeadLoginAndSignUp>
+              <LoginSignUp registerSwitch></LoginSignUp>
+              <Footer></Footer>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/password/forgot"
+          element={
+            <>
+              <HeadLoginAndSignUp title="Đặt lại mật khẩu"></HeadLoginAndSignUp>
+              <ForgotPassword></ForgotPassword>
+              <Footer></Footer>
+            </>
+          }
+        />
+        <Route
+          path="/password/reset/:token"
+          element={
+            <>
+              <HeadLoginAndSignUp title="Cấp lại mật khẩu mới"></HeadLoginAndSignUp>
+              <ResetPassword></ResetPassword> <Footer></Footer>
+            </>
+          }
+        />
       </Routes>
     </Fragment>
   );

@@ -11,6 +11,8 @@ module.exports = {
         primary: "#43c6ac",
         secondary: "#4568dc",
         graytagp: "#737373",
+        taghot: "#D7253B",
+        tagnew: "#FFD839",
       },
     },
   },

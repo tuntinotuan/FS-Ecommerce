@@ -29,10 +29,10 @@
 }
 
 .page-item {
-  background-color: rgb(255, 255, 255);
   list-style: none;
-  border: 1px solid rgba(0, 0, 0, 0.178);
-  padding: 1vmax 1.5vmax;
+  /* background-color: rgb(255, 255, 255); */
+  /* border: 1px solid rgba(0, 0, 0, 0.178); */
+  padding: 2px 20px;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -45,21 +45,22 @@
 }
 .page-link {
   text-decoration: none;
-  font: 300 0.7vmax "Roboto";
-  color: rgb(80, 80, 80);
+  font: 300 20px "Roboto";
+  font-weight: bold;
+  color: #737373;
   transition: all 0.3s;
 }
 
-.page-item:hover {
+/* .page-item:hover {
   background-color: rgb(230, 230, 230);
 }
 
 .page-item:hover .page-link {
   color: rgb(0, 0, 0);
-}
+} */
 
 .pageItemActive {
-  background-color: tomato;
+  background-color: #43c6ac;
 }
 
 .pageLinkActive {

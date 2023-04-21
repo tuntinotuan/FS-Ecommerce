@@ -31,6 +31,13 @@
   color: red !important;
 }
 
+// unCount input type="Number"
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 // Banner Main css customize button sliders
 .banner-main .swiper-button-next,
 .course-list .swiper-button-next,
@@ -43,6 +50,7 @@
   background-position: center;
   z-index: 999;
   opacity: 0.6;
+  transition: all .3s;
 }
 .banner-main .swiper-button-next::after,
 .course-list .swiper-button-next::after,
@@ -59,10 +67,15 @@
   background-position: center;
   z-index: 999;
   opacity: 0.6;
+  transition: all .3s;
 }
 .banner-main .swiper-button-prev::after,
 .slide-teacher .swiper-button-prev::after{
   display: none;
+}
+.banner-main .swiper-button-next:hover,
+.banner-main .swiper-button-prev:hover {
+  opacity: 1;
 }
 .banner-main .swiper-button-next.swiper-button-disabled,
 .banner-main .swiper-button-prev.swiper-button-disabled {

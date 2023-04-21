@@ -20,23 +20,23 @@ const MyOrders = () => {
   const { user } = useSelector((state) => state.user);
   console.log("orders~", orders);
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+    { field: "id", headerName: "Mã sản phẩm", minWidth: 200, flex: 1 },
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Trạng thái",
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
         // return params?.getValue(params?.id, "status") === "Delivered"
         //   ? "greenColor"
         //   : "redColor";
-        return params?.status === "Delivered" ? "greenColor" : "redColor";
+        return params.id === "Delivered" ? "text-primary" : "text-taghot";
       },
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Số lượng sản phẩm",
       type: "number",
       minWidth: 150,
       flex: 0.3,
@@ -44,7 +44,7 @@ const MyOrders = () => {
 
     {
       field: "amount",
-      headerName: "Amount",
+      headerName: "Số tiền",
       type: "number",
       minWidth: 270,
       flex: 0.5,
@@ -53,7 +53,7 @@ const MyOrders = () => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
+      headerName: "Thao tác",
       minWidth: 150,
       type: "number",
       sortable: false,
@@ -93,23 +93,23 @@ const MyOrders = () => {
 
   return (
     <Fragment>
-      <MetaData title={`${user?.name} - Orders`} />
+      <MetaData title={`${user?.name} - Sản phẩm`} />
 
       {loading ? (
         <Loader />
       ) : (
-        <div className="myOrdersPage">
+        <section className="page-container py-5">
           <DataGrid
             rows={rows}
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
-            className="myOrdersTable"
+            className="bg-white text-black shadow-sm"
             autoHeight
           />
 
-          <Typography id="myOrdersHeading">{user?.name}'s Orders</Typography>
-        </div>
+          <div className="text-center">{`Đơn hàng của ${user?.name}'s <3`}</div>
+        </section>
       )}
     </Fragment>
   );

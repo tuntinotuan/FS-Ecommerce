@@ -1,4 +1,4 @@
-.ProductDetails {
+/* .ProductDetails {
   background-color: rgb(255, 255, 255);
   width: 100vw;
   max-width: 100%;
@@ -289,7 +289,6 @@
   }
 }
 
-/* ... */
 #app {
   height: 100%;
 }
@@ -300,8 +299,6 @@ body {
 }
 
 body {
-  /* background: #eee; */
-  /* font-family: Helvetica Neue, Helvetica, Arial, sans-serif; */
   font-size: 14px;
   color: #000;
   margin: 0;
@@ -318,7 +315,6 @@ body {
   font-size: 18px;
   background: #fff;
 
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -329,4 +325,10 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+} */
+
+/* Customize swiper */
+.product-details-slides .swiper-wrapper {
+  display: flex;
+  align-items: center;
 }

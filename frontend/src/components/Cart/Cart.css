@@ -1,4 +1,4 @@
-.emptyCart {
+/* .emptyCart {
   margin: auto;
   text-align: center;
   padding: 10vmax;
@@ -175,4 +175,8 @@
     width: 100%;
     font: 300 2vmax "Roboto";
   }
+} */
+
+.pay_container {
+  box-shadow: 0px 0px 10px 5px rgb(96, 198, 177, 0.2);
 }

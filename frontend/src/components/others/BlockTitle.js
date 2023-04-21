@@ -1,15 +1,18 @@
 import React from "react";
 
-const BlockTitle = ({ className = "", children, ...props }) => {
+const BlockTitle = ({
+  className = "",
+  children,
+  locateText = "text-center",
+  ...props
+}) => {
   return (
-    <div
-      className={`bg-white text-center border-[4px] border-transparent border-b-primary py-4 rounded-[3px] select-none mb-3 ${className}`}
+    <h1
+      className={`bg-white ${locateText} border-[4px] border-transparent border-b-primary py-4 text-[16px] text-primary rounded-[3px] select-none mb-3 ${className}`}
       {...props}
     >
-      <h1 className="text-[16px] text-primary">
-        {children || "GỢI Ý HÔM NAY"}
-      </h1>
-    </div>
+      {children || "GỢI Ý HÔM NAY"}
+    </h1>
   );
 };
 
