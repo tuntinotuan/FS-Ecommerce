@@ -72,7 +72,11 @@ function App() {
           ></Route>
           <Route path="/products" element={<Products></Products>}></Route>
           <Route
-            path="/products/:filter"
+            path="/products-category/:category"
+            element={<Products></Products>}
+          ></Route>
+          <Route
+            path="/products/:keyword"
             element={<Products></Products>}
           ></Route>
           <Route path="/search" element={<Search></Search>}></Route>

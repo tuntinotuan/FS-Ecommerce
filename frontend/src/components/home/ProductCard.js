@@ -85,11 +85,20 @@ const ProductCard = ({ product, hiddenReview = false }) => {
         className="relative h-[292px] bg-white border border-transparent hover:border-primary hover:-translate-y-[2px] hover:shadow-md shadow-sm rounded-sm transition-all "
         to={`/product/${product._id}`}
       >
-        <img
-          src={product.images[0]?.url}
-          alt={product.name}
-          className="w-full h-[60%] object-contain"
-        />
+        <div className="relative w-full h-[60%] ">
+          <img
+            src={product.images[0]?.url}
+            alt={product.name}
+            className="w-full h-full object-contain"
+          />
+          {product?.Stock < 1 && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-center z-40">
+              <div className="flex items-center justify-center w-[90px] h-[90px] bg-primary bg-opacity-20 rounded-full">
+                <h2 className="text-xl text-taghot">Hết hàng</h2>
+              </div>
+            </div>
+          )}
+        </div>
         <div className="flex flex-col justify-start h-[40%] p-3">
           <p className="card-name text-xs text-ellipsis">{product.name}</p>
           {!hiddenReview && (

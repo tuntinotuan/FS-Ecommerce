@@ -51,13 +51,15 @@
 
 // export default Header;
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { BsPhone, BsLaptop, BsTablet } from "react-icons/bs";
+import { BsPhone, BsLaptop, BsTablet, BsKeyboard } from "react-icons/bs";
 import { RiComputerLine } from "react-icons/ri";
 import { AiOutlineApple, AiOutlineShoppingCart } from "react-icons/ai";
+import { SlEarphonesAlt } from "react-icons/sl";
 import { BiLogIn } from "react-icons/bi";
+import { useAlert } from "react-alert";
 import { GiArchiveRegister } from "react-icons/gi";
 import shopNow from "../../../images/shopNow.png";
 import EmptyCart from "../../../images/empty-cart.webp";
@@ -69,6 +71,8 @@ import { logout } from "../../../actions/userAction";
 const Header = ({ history }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const alert = useAlert();
+
   const [keyword, setKeyword] = useState("");
   const [hiddenCart, setHiddenCart] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
@@ -85,8 +89,16 @@ const Header = ({ history }) => {
   };
   function logoutUser() {
     dispatch(logout());
-    // alert.success("Logout Successfully");
+    alert.success("Logout Successfully");
   }
+  const currentUrl = window.location.href;
+  useEffect(() => {
+    if (!currentUrl.includes("http://localhost:3000/products/")) {
+      setKeyword("");
+    }
+  }, [currentUrl]);
+  // console.log("window.location.href", window.location.href);
+
   return (
     <header className="bg-gradient-to-t from-primary to-[#43CDAC] z-50 fixed top-0 right-0 left-0 shadow-md">
       <div className="flex justify-between items-center page-container w-full py-3">
@@ -99,6 +111,7 @@ const Header = ({ history }) => {
             onSubmit={searchSubmitHandler}
           >
             <input
+              value={keyword}
               className="rounded-lg w-full h-full outline-none ml-2"
               type="text"
               placeholder="Tìm kiếm sản phẩm..."
@@ -119,7 +132,7 @@ const Header = ({ history }) => {
         <ul className="text-white text-base flex items-center">
           <li className="h-full text-center mx-3">
             <Link
-              to="products?category=Phone"
+              to="products-category/SmartPhones"
               className="list_link flex flex-col items-center justify-center"
             >
               <div className="relative overflow-hidden p-1 text-center">
@@ -131,7 +144,7 @@ const Header = ({ history }) => {
           </li>
           <li className="h-full text-center mx-3">
             <Link
-              to="products?category=Laptop"
+              to="products-category/Laptop"
               className="list_link flex flex-col items-center justify-center"
             >
               <div className="relative overflow-hidden p-1 text-center">
@@ -143,7 +156,7 @@ const Header = ({ history }) => {
           </li>
           <li className="h-full text-center mx-3">
             <Link
-              to=""
+              to="products-category/Ipad"
               className="list_link flex flex-col items-center justify-center"
             >
               <div className="relative overflow-hidden p-1 text-center">
@@ -153,32 +166,31 @@ const Header = ({ history }) => {
               <span className="text-sm">IPad</span>
             </Link>
           </li>
-
           <li className="h-full text-center mx-3">
             <Link
-              to=""
+              to="products-category/Keyboard"
               className="list_link flex flex-col items-center justify-center"
             >
               <div className="relative overflow-hidden p-1 text-center">
-                <RiComputerLine size={28} className="not-hover" />
-                <RiComputerLine size={28} className="hover" />
+                <BsKeyboard size={28} className="not-hover" />
+                <BsKeyboard size={28} className="hover" />
               </div>
-              <span className="text-sm">Máy Tính</span>
+              <span className="text-sm">Bàn phím</span>
             </Link>
           </li>
-
           <li className="h-full text-center mx-3">
             <Link
-              to=""
+              to="products-category/Earphone"
               className="list_link flex flex-col items-center justify-center"
             >
               <div className="relative overflow-hidden p-1 text-center">
-                <AiOutlineApple size={28} className="not-hover" />
-                <AiOutlineApple size={28} className="hover" />
+                <SlEarphonesAlt size={28} className="not-hover" />
+                <SlEarphonesAlt size={28} className="hover" />
               </div>
-              <span className="text-sm">Apple</span>
+              <span className="text-sm">Tai nghe</span>
             </Link>
           </li>
+
           <li className="cart_container relative h-full text-center mx-3">
             <Link
               to="/cart"

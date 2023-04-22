@@ -182,17 +182,16 @@ import Loader from "../layout/Loader/Loader";
 import Pagination from "react-js-pagination";
 import MetaData from "../layout/MetaData";
 import ProductCard from "../home/ProductCard";
-import { Link, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { Typography } from "@mui/material";
 import BlockTitle from "../others/BlockTitle";
-import { IoIosArrowDown } from "react-icons/io";
 import { GrList } from "react-icons/gr";
-import useHover from "../../hooks/useHover";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
-import { BiFirstPage, BiLastPage } from "react-icons/bi";
+import { BiFirstPage, BiLastPage, BiWinkSmile } from "react-icons/bi";
 import SlidesProducts from "../slides/SlidesProducts";
+import FilterPrice from "../others/FilterPrice";
 
 const categories = [
   "Laptop",
@@ -212,12 +211,11 @@ function valuetext(value) {
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
-  const { filter } = useParams();
-  const { hovered, nodeRef } = useHover();
+  const { keyword, category } = useParams();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 99999]);
-  const [category, setCategory] = useState("");
+  // const [category, setCategory] = useState("");
 
   const [ratings, setRatings] = useState(0);
   let array = [];
@@ -230,6 +228,7 @@ const Products = ({ match }) => {
     resultPerPage,
     filteredProductsCount,
   } = useSelector((state) => state.products);
+
   console.log("products ~", products);
   // products.filter(
   //   (product) =>
@@ -239,7 +238,7 @@ const Products = ({ match }) => {
   //     // null
   // );
   console.log("array ~", array);
-  const keyword = filter || match?.params?.keyword;
+  // const keyword = filter || match?.params?.keyword;
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -268,110 +267,108 @@ const Products = ({ match }) => {
   return (
     <Fragment>
       <MetaData title="PRODUCTS -- ECOMMERCE" />
-      <section className="page-container py-4">
-        <SlidesProducts></SlidesProducts>
-        <BlockTitle children="Sản phẩm" className="mt-5"></BlockTitle>
+      {loading ? (
+        <Loader></Loader>
+      ) : (
+        <section className="page-container py-4">
+          <SlidesProducts></SlidesProducts>
+          <BlockTitle children="Sản phẩm" className="mt-5"></BlockTitle>
 
-        <div className="flex items-start gap-5">
-          <div className="w-[200px]">
-            <li
-              className="flex items-center gap-3 border border-transparent border-b-slate-200 p-3 cursor-pointer"
-              onClick={() => setCategory("")}
-            >
-              <GrList></GrList>
-              <h2 className="text-lg font-bold">Tất cả sản phẩm</h2>
-            </li>
-            <ul className="flex flex-col gap-2 py-4 px-2">
-              {categories.map((category) => (
-                <li
-                  className="hover:text-primary hover:font-bold cursor-pointer"
-                  key={category}
-                  onClick={() => setCategory(category)}
-                >
-                  {category}
-                </li>
-              ))}
-            </ul>
-            <Box
-            // sx={{ width: 100 }}
-            >
-              <Slider
-                getAriaLabel={() => "Temperature range"}
-                value={price}
-                onChange={priceHandler}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-                min={0}
-                max={99999}
-              />
-            </Box>
-            <fieldset>
-              <Typography component="legend">Ratings Above</Typography>
-              <Slider
-                value={ratings}
-                onChange={(e, newRating) => {
-                  setRatings(newRating);
-                }}
-                aria-labelledby="continuous-slider"
-                valueLabelDisplay="auto"
-                min={0}
-                max={5}
-              />
-            </fieldset>
-          </div>
-          <div className="flex-1 mb-3">
-            <div className="flex items-center gap-3 bg-[#EDEDED] rounded-[3px] py-3 px-4 mb-3">
-              <p>Sắp xếp theo</p>
-              <div
-                className="relative flex items-center justify-between h-full w-[200px] bg-white rounded-[3px] py-2 px-3 shadow-sm cursor-pointer"
-                ref={nodeRef}
+          <div className="flex items-start gap-5">
+            <div className="w-[200px]">
+              <Link
+                className="flex items-center gap-3 border border-transparent border-b-slate-200 p-3 cursor-pointer"
+                to={`/products`}
               >
-                <p>Giá</p>
-                <IoIosArrowDown></IoIosArrowDown>
-                {hovered && (
-                  <div className="absolute top-[102%] left-0 right-0 bg-white rounded-[3px] shadow-md py-2 px-3 z-50">
-                    <ul className="flex flex-col">
-                      <Link className="hover:text-primary py-2">
-                        Giá: Thấp đến Cao
-                      </Link>
-                      <Link className="hover:text-primary py-2">
-                        Giá: Cao đến Thấp
-                      </Link>
-                    </ul>
-                  </div>
-                )}
-              </div>
+                <GrList></GrList>
+                <h2 className="text-lg font-bold">Tất cả sản phẩm</h2>
+              </Link>
+              <ul className="flex flex-col gap-2 py-4 px-2">
+                {categories.map((category) => (
+                  <NavLink
+                    key={category}
+                    to={`/products-category/${category}`}
+                    className={({ isActive }) =>
+                      isActive ? "text-primary font-bold" : "hover:text-primary"
+                    }
+                  >
+                    {category}
+                  </NavLink>
+                ))}
+              </ul>
+              <Box
+              // sx={{ width: 100 }}
+              >
+                <Slider
+                  getAriaLabel={() => "Temperature range"}
+                  value={price}
+                  onChange={priceHandler}
+                  valueLabelDisplay="auto"
+                  getAriaValueText={valuetext}
+                  min={0}
+                  max={99999}
+                />
+              </Box>
+              <fieldset>
+                <Typography component="legend">Ratings Above</Typography>
+                <Slider
+                  value={ratings}
+                  onChange={(e, newRating) => {
+                    setRatings(newRating);
+                  }}
+                  aria-labelledby="continuous-slider"
+                  valueLabelDisplay="auto"
+                  min={0}
+                  max={5}
+                />
+              </fieldset>
             </div>
-            <div className="grid grid-cols-5 gap-3">
-              {products && products.length !== 0 ? (
-                products.map((product) => (
-                  <ProductCard key={product._id} product={product} />
-                ))
+
+            <div className="flex-1 mb-3">
+              <div className="flex items-center gap-3 bg-[#EDEDED] rounded-[3px] py-3 px-4 mb-3">
+                <p>Sắp xếp theo</p>
+                <FilterPrice></FilterPrice>
+              </div>
+              {products?.length !== 0 ? (
+                <div className="grid grid-cols-5 gap-3">
+                  {products &&
+                    products.map((product) => (
+                      <ProductCard key={product._id} product={product} />
+                    ))}
+                </div>
               ) : (
-                <p className="text-primary">null product</p>
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <span className="text-primary">
+                    Không tìm thấy sản phẩm nào
+                  </span>
+                  <div className="flex items-center gap-2 text-lg text-primary">
+                    <h3>Bạn hãy thử tìm sản phẩm khác nhé</h3>
+                    <BiWinkSmile></BiWinkSmile>
+                  </div>
+                </div>
+              )}
+              {resultPerPage < count && (
+                <div className="my-10">
+                  <Pagination
+                    activePage={currentPage}
+                    itemsCountPerPage={resultPerPage}
+                    totalItemsCount={productsCount}
+                    onChange={setCurrentPageNo}
+                    nextPageText={<GrFormNext></GrFormNext>}
+                    firstPageText={<BiFirstPage></BiFirstPage>}
+                    prevPageText={<GrFormPrevious></GrFormPrevious>}
+                    lastPageText={<BiLastPage></BiLastPage>}
+                    itemClass="page-item"
+                    linkClass="page-link"
+                    activeClass="pageItemActive"
+                    activeLinkClass="pageLinkActive"
+                  />
+                </div>
               )}
             </div>
-            {resultPerPage < count && (
-              <div className="my-10">
-                <Pagination
-                  activePage={currentPage}
-                  itemsCountPerPage={resultPerPage}
-                  totalItemsCount={productsCount}
-                  onChange={setCurrentPageNo}
-                  nextPageText={<GrFormNext></GrFormNext>}
-                  firstPageText={<BiFirstPage></BiFirstPage>}
-                  prevPageText={<GrFormPrevious></GrFormPrevious>}
-                  lastPageText={<BiLastPage></BiLastPage>}
-                  itemClass="page-item"
-                  linkClass="page-link"
-                  activeClass="pageItemActive"
-                  activeLinkClass="pageLinkActive"
-                />
-              </div>
-            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </Fragment>
   );
 };
