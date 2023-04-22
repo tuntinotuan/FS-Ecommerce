@@ -70,6 +70,7 @@ const Header = ({ history }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
+  const [hiddenCart, setHiddenCart] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
@@ -182,6 +183,7 @@ const Header = ({ history }) => {
             <Link
               to="/cart"
               className=" list_link flex flex-col items-center justify-center"
+              onMouseOver={() => setHiddenCart(false)}
             >
               <div
                 className="cart__count relative overflow-hidden p-1 text-center"
@@ -199,7 +201,11 @@ const Header = ({ history }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="empty_cart w-96 h-auto bg-white shadow-lg rounded mt-[28px] text-black">
+                  <div
+                    className={`empty_cart w-96 h-auto bg-white shadow-lg rounded mt-[28px] text-black  ${
+                      hiddenCart ? "hidden" : ""
+                    }`}
+                  >
                     <div className="text-[#e0dde0] px-3 py-2 ">
                       <h5>Sản Phẩm</h5>
                     </div>
@@ -208,7 +214,8 @@ const Header = ({ history }) => {
                         {cartItems.map((items) => (
                           <Link
                             to={`/product/${items.product}`}
-                            className="flex items-start gap-3 text-sm hover:bg-[#f0f0f0] p-3"
+                            className={`flex items-start gap-3 text-sm hover:bg-[#f0f0f0] p-3`}
+                            onClick={() => setHiddenCart(true)}
                           >
                             <div className="w-[12%] h-[40px]">
                               <img
@@ -237,7 +244,11 @@ const Header = ({ history }) => {
                       </ul>
                     </div>
                     <div className="flex items-center justify-end p-3 ">
-                      <Link to="/cart" className="text-secondary">
+                      <Link
+                        to="/cart"
+                        className="text-secondary"
+                        onClick={() => setHiddenCart(true)}
+                      >
                         Xem Giỏ Hàng
                       </Link>
                     </div>

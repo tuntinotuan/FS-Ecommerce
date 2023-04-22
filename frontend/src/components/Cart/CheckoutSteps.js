@@ -28,7 +28,12 @@ const CheckoutSteps = ({ activeStep }) => {
 
   return (
     <Fragment>
-      <Stepper alternativeLabel activeStep={activeStep} style={stepStyles}>
+      <Stepper
+        alternativeLabel
+        activeStep={activeStep}
+        style={stepStyles}
+        className="pt-5"
+      >
         {steps.map((item, index) => (
           <Step
             key={index}

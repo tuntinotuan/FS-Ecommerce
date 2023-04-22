@@ -103,7 +103,7 @@ import "./ResetPassword.css";
 import Loader from "../layout/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, resetPassword } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -117,7 +117,7 @@ const ResetPassword = ({ history, match }) => {
   const dispatch = useDispatch();
   const { token } = useParams();
   const navigate = useNavigate();
-  // const alert = useAlert();
+  const alert = useAlert();
   const { click, setClick } = useClickEye();
 
   const { error, success, loading } = useSelector(
@@ -140,12 +140,12 @@ const ResetPassword = ({ history, match }) => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
-      // alert.success("Password Updated Successfully");
+      alert.success("Cấp lại mật khẩu thành công");
 
       navigate("/login");
     }

@@ -167,7 +167,8 @@ const Cart = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   const scrollbarHeight = document.body.scrollHeight;
-  let pointScrollFixed = offset < scrollbarHeight - 1400;
+  // let pointScrollFixed = offset < scrollbarHeight - 1400;
+  let pointScrollFixed = true;
   console.log("offset", offset);
   console.log("document.body.scrollHeight", document.body.scrollHeight);
   return (

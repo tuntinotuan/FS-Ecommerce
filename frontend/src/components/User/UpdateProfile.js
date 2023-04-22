@@ -142,7 +142,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import FaceIcon from "@mui/icons-material/Face";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, updateProfile, loadUser } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 import { Link, useNavigate } from "react-router-dom";
@@ -151,7 +151,7 @@ import { BsArrowLeft } from "react-icons/bs";
 const UpdateProfile = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const alert = useAlert();
+  const alert = useAlert();
 
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
@@ -193,12 +193,12 @@ const UpdateProfile = ({ history }) => {
     }
 
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success("Profile Updated Successfully");
+      alert.success("Cập nhật hồ sơ thành công");
       dispatch(loadUser());
 
       // history.push("/account");

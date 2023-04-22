@@ -280,7 +280,7 @@ const Shipping = () => {
         <CheckoutSteps activeStep={0} />
       </div>
 
-      <div className="flex px-40">
+      <div className="flex gap-5 px-40">
         <div className="w-[50%]">
           <div className="w-full h-auto shadow-md rounded bg-white p-10">
             <div className="text-center font-bold opacity-60 text-lg tracking-widest pb-4">
@@ -310,7 +310,7 @@ const Shipping = () => {
           </div>
         </div>
         <form
-          className="w-[50%] pl-5"
+          className="w-[50%]"
           encType="multipart/form-data"
           onSubmit={shippingSubmit}
         >
@@ -323,7 +323,7 @@ const Shipping = () => {
                 <div className="flex flex-col w-[50%] pr-4">
                   <label className="text-base mb-2">Tỉnh/ Thành phố</label>
                   <select
-                    required
+                    // required
                     // value={provinces}
                     onChange={onChange}
                     className="border outline-none h-8 w-full px-2 rounded"
@@ -339,7 +339,7 @@ const Shipping = () => {
                 <div className="flex flex-col w-[50%] pl-4">
                   <label className="text-base mb-2">Quận/ Huyện</label>
                   <select
-                    required
+                    // required
                     // value={districts}
                     onChange={onChangeWards}
                     className="border outline-none h-8 w-full px-2 rounded"
@@ -357,7 +357,7 @@ const Shipping = () => {
                 <div className="flex flex-col w-[50%] pr-4 ">
                   <label className="text-base mb-2">Xã/ Phường</label>
                   <select
-                    required
+                    // required
                     className="border outline-none h-8 w-full px-2 rounded"
                   >
                     <option value="">Chọn Quận/ Huyện</option>
@@ -395,14 +395,14 @@ const Shipping = () => {
           <div className="flex justify-end mt-10 gap-4">
             <Link
               to="/cart"
-              className="h-10 w-36 text-center rounded bg-[#03a9f4] py-3 px-5 text-white hover:opacity-100 opacity-80"
+              className="text-center rounded bg-[#03a9f4] py-3 px-5 text-white hover:opacity-100 opacity-80"
             >
               TRỞ LẠI
             </Link>
             <button
               type="submit"
               value="Continue"
-              className="h-10 w-36 text-center rounded bg-primary py-3 px-5 text-white hover:opacity-100 opacity-80"
+              className="text-center rounded bg-primary py-3 px-5 text-white hover:opacity-100 opacity-80"
               disabled={state ? false : true}
             >
               TIẾP THEO

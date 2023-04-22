@@ -3,7 +3,7 @@ import "./UpdatePassword.css";
 import Loader from "../layout/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, updatePassword } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -18,7 +18,7 @@ import useClickEye from "../../hooks/useClickEye";
 const UpdatePassword = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const alert = useAlert();
+  const alert = useAlert();
   const { click, setClick } = useClickEye();
 
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
@@ -41,12 +41,12 @@ const UpdatePassword = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success("Profile Updated Successfully");
+      alert.success("Đổi mật khẩu thành công");
 
       // history.push("/account");
       navigate("/account");

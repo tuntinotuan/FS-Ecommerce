@@ -49,7 +49,7 @@ const Home = () => {
       ) : (
         <Fragment>
           <BannerMain></BannerMain>
-          <section className="page-container my-10">
+          <section className="home-page page-container my-10">
             {/* <div className="banner">
               <p>Welcome to Ecommerce</p>
               <h1>FIND AMAZING PRODUCTS BELOW</h1>
@@ -68,7 +68,10 @@ const Home = () => {
                   <ProductCard key={product._id} product={product} />
                 ))}
             </div> */}
-            <div className="grid grid-cols-5 gap-3" id="container">
+            <div
+              className="home-products grid grid-cols-5 gap-3"
+              id="container"
+            >
               {products &&
                 products.map((product) => (
                   <ProductCard

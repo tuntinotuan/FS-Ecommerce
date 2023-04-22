@@ -450,6 +450,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../images/cartShopNow.png";
 import "./LoginSignUp.css";
+import { useAlert } from "react-alert";
 import { RxEyeClosed } from "react-icons/rx";
 import { FaEye } from "react-icons/fa";
 import "./LoginSignUp.css";
@@ -464,7 +465,7 @@ const LoginSignUp = ({ registerSwitch = false }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  // const alert = useAlert();
+  const alert = useAlert();
   const { click, setClick } = useClickEye();
   const { error, isAuthenticated } = useSelector((state) => state.user);
 
@@ -525,7 +526,7 @@ const LoginSignUp = ({ registerSwitch = false }) => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 

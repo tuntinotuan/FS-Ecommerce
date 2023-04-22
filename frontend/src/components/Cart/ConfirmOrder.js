@@ -143,7 +143,7 @@ const ConfirmOrder = () => {
 
   const shippingCharges = subtotal > 1000 ? 0 : 200;
 
-  const tax = subtotal * 0.18;
+  const tax = Number((subtotal * 0.18).toFixed(0));
 
   const totalPrice = subtotal + tax + shippingCharges;
 
@@ -169,7 +169,7 @@ const ConfirmOrder = () => {
       </div>
 
       <div>
-        <div className="my-10 px-40">
+        <div className="my-5 px-40">
           <div className="flex h-[500px]">
             <div className="w-[60%] h-full pr-5">
               <div className="p-5 h-full bg-white rounded shadow-lg flex flex-col">
@@ -210,7 +210,7 @@ const ConfirmOrder = () => {
                             className="p-2 w-[94%] rounded bg-white border border-primary flex justify-between items-center mb-4"
                             key={item?.product}
                           >
-                            <div className="flex items-center w-[70%]">
+                            <div className="flex items-center w-[60%]">
                               <Link
                                 to={`/product/${item?.product}`}
                                 className="w-10 h-10 border mr-5"
@@ -230,14 +230,20 @@ const ConfirmOrder = () => {
                                 </Link>
                               </div>
                             </div>
-                            <div className="flex items-center text-xs w-30%]">
+                            <div className="flex items-center text-xs w-40%]">
                               <div className="px-2 italic">
                                 <span>
-                                  {item?.quantity} X ₫{item?.price} ={" "}
+                                  {item?.quantity.toLocaleString("it-IT")} x ₫
+                                  {item?.price.toLocaleString("it-IT")} ={" "}
                                 </span>
                               </div>
                               <div>
-                                <span>₫{item?.price * item?.quantity}</span>
+                                <span className="text-sm text-primary font-bold">
+                                  ₫
+                                  {(
+                                    item?.price * item?.quantity
+                                  ).toLocaleString("it-IT")}
+                                </span>
                               </div>
                             </div>
                           </li>
@@ -256,19 +262,19 @@ const ConfirmOrder = () => {
                 <div className="gap-3 flex flex-col">
                   <div className="flex justify-between py-1">
                     <span>Tiền Sản Phẩm</span>
-                    <span>₫{subtotal}</span>
+                    <span>₫{subtotal.toLocaleString("it-IT")}</span>
                   </div>
                   <div className="w-full h-[1px] bg-black opacity-20"></div>
 
                   <div className="flex justify-between py-1">
                     <span>Phí Vận Chuyển</span>
-                    <span>₫{shippingCharges}</span>
+                    <span>₫{shippingCharges.toLocaleString("it-IT")}</span>
                   </div>
                   <div className="w-full h-[1px] bg-black opacity-20"></div>
 
                   <div className="flex justify-between py-1">
                     <span>Phí Bảo Hành VC</span>
-                    <span>₫{tax}</span>
+                    <span>₫{tax.toLocaleString("it-IT")}</span>
                   </div>
                   <div className="w-full h-[1px] bg-black opacity-20"></div>
                 </div>
@@ -276,7 +282,9 @@ const ConfirmOrder = () => {
                 <div>
                   <div className="flex justify-between items-center py-4">
                     <span>Tổng Tiền</span>
-                    <span>₫{totalPrice}</span>
+                    <span className="text-primary font-bold">
+                      ₫{totalPrice.toLocaleString("it-IT")}
+                    </span>
                   </div>
                 </div>
 
@@ -284,13 +292,13 @@ const ConfirmOrder = () => {
                   <div className="flex items-center justify-around p-1">
                     <Link
                       to="/login/shipping"
-                      className="h-10 w-36 text-center rounded bg-[#03a9f4] py-3 px-5 text-white hover:opacity-100 opacity-80"
+                      className="text-center rounded bg-[#03a9f4] py-3 px-5 text-white hover:opacity-100 opacity-80"
                     >
                       TRỞ LẠI
                     </Link>
                     <button
                       onClick={proceedToPayment}
-                      className="h-10 w-36 text-center rounded bg-primary py-3 px-5 text-white hover:opacity-100 opacity-80"
+                      className="text-center rounded bg-primary py-3 px-5 text-white hover:opacity-100 opacity-80"
                     >
                       THANH TOÁN
                     </button>

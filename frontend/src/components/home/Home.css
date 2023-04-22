@@ -121,6 +121,12 @@
 }
 
 @media screen and (max-width: 600px) {
+  /* .home-page {
+    background-color: red;
+  } */
+  .home-products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .productCard > p {
     font-size: 1.7vmax;
   }

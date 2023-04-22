@@ -320,6 +320,8 @@ import BlockTitle from "../others/BlockTitle";
 import { nFormatter } from "../home/ProductCard";
 import useHover from "../../hooks/useHover";
 import { GrFormAdd } from "react-icons/gr";
+import { useAlert } from "react-alert";
+
 const labels = {
   0.5: "Rất tệ",
   1: "Tệ",
@@ -336,6 +338,7 @@ const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const { idProduct } = useParams();
   const { hovered, nodeRef } = useHover();
+  const alert = useAlert();
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -374,7 +377,7 @@ const ProductDetails = ({ match }) => {
 
   const addToCartHandler = () => {
     dispatch(addItemsToCart(idProduct || match?.params?.id, quantity));
-    // alert.success("Item Added To Cart");
+    alert.success("Sản phẩm đã được thêm vào giỏ hàng");
   };
 
   const submitReviewToggle = () => {
@@ -395,17 +398,17 @@ const ProductDetails = ({ match }) => {
   console.log("idProduct", idProduct);
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (reviewError) {
-      // alert.error(reviewError);
+      alert.error(reviewError);
       dispatch(clearErrors());
     }
 
     if (success) {
-      // alert.success("Review Submitted Successfully");
+      alert.success("Đã bình luận sản phẩm");
       dispatch({ type: NEW_REVIEW_RESET });
     }
     dispatch(getProductDetails(idProduct || match?.params?.id));
@@ -629,7 +632,7 @@ const ProductDetails = ({ match }) => {
                 </div>
 
                 <textarea
-                  className="w-full border border-slate-200"
+                  className="w-full border border-slate-200 outline-none p-2"
                   cols="30"
                   rows="5"
                   value={comment}
