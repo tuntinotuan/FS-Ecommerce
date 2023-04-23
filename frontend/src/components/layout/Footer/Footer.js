@@ -34,8 +34,8 @@ const Footer = () => {
   return (
     <footer className="">
       <div className="bg-[#FBFBFB] py-12">
-        <div className="page-container border border-transparent border-b-slate-300 pb-10">
-          <div className="grid grid-cols-5 gap-10">
+        <div className="page-container max-lg:px-5 border border-transparent border-b-slate-300 pb-10">
+          <div className="max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2 grid grid-cols-5 gap-10">
             <div>
               <h2 className="text-xs font-bold mb-5">CHĂM SÓC KHÁCH HÀNG</h2>
               <ul className="text-xs">
@@ -58,7 +58,7 @@ const Footer = () => {
             </div>
             <div>
               <h2 className="text-xs font-bold mb-5">THANH TOÁN</h2>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="max-sm:grid-cols-2 grid grid-cols-3 gap-2">
                 {logoPay.map((items) => (
                   <div className="flex items-center justify-center bg-white rounded-[3px] shadow-md py-2">
                     <img src={items} alt="" className="w-12" />
@@ -66,7 +66,7 @@ const Footer = () => {
                 ))}
               </div>
               <h2 className="text-xs font-bold my-5">ĐƠN VỊ VẬN CHUYỂN</h2>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="max-sm:grid-cols-2 grid grid-cols-3 gap-2">
                 {logoShip.map((items) => (
                   <div className="flex items-center justify-center bg-white rounded-[3px] shadow-md py-2">
                     <img src={items} alt="" className="w-12" />
@@ -124,9 +124,9 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="page-container flex items-center justify-between text-xs text-graytagp pt-10">
-          <p>© 2023 Shopee. Tất cả các quyền được bảo lưu.</p>
-          <div className="flex items-center">
+        <div className="page-container max-lg:flex-col max-lg:px-5 max-lg:gap-5 flex items-center justify-between text-xs text-graytagp pt-10">
+          <p>© 2023 Shop Now. Tất cả các quyền được bảo lưu.</p>
+          <div className="max-lg:grid max-lg:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 max-lg:gap-2 flex items-center">
             <p>Quốc gia & Khu vực:</p>
             {country.map((items, index) => (
               <span
@@ -143,12 +143,12 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-[#F5F5F5] mx-auto flex flex-col items-center justify-center text-center py-10">
-        <div className="flex items-center mb-10">
+        <div className="max-sm:grid max-sm:grid-cols-2 max-sm:gap-4 flex items-center mb-10">
           {policy.map((items, index) => (
             <span
               className={`text-[13px] text-graytagp ${
                 index === 0
-                  ? ""
+                  ? "max-sm:border max-sm:border-transparent max-sm:border-l-slate-300"
                   : "border border-transparent border-l-slate-300"
               } px-4 cursor-pointer`}
             >
@@ -168,22 +168,22 @@ const Footer = () => {
             className="w-32 mb-2"
           />
         </div>
-        <p className="text-xs text-graytagp mb-4">Công ty TNHH Shopee</p>
+        <p className="text-xs text-graytagp mb-4">Công ty TNHH Shop Now</p>
         <div className="flex flex-col gap-[6px] text-xs text-graytagp">
           <span>
-            Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai,
-            Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam. Tổng
-            đài hỗ trợ: 19001221 - Email: cskh@hotro.poem.vn
+            Địa chỉ: Tầng 4-10, Tòa nhà Poem, số 5 đường cách mạng tháng 8,
+            Phường Khuê Trung, Quận Cẩm Lệ, Thành phố Đà NẵNg, Việt Nam. Tổng
+            đài hỗ trợ: 1900100Yes - Email: cskh@hotro.poem.vn
           </span>
           <span>
             Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Văn Tuấn - Điện thoại liên
-            hệ: 024 73081221 (ext 4678)
+            hệ: 090 515089999 (ext 1235)
           </span>
           <span>
-            Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp
-            lần đầu ngày 10/02/2015
+            Mã số doanh nghiệp: 0123456789 do Sở Kế hoạch & Đầu tư TP Đà Nẵng
+            cấp lần đầu ngày 22/02/2022
           </span>
-          <span>© 2015 - Bản quyền thuộc về Công ty TNHH Poem</span>
+          <span>© 2022 - Bản quyền thuộc về Công ty TNHH Poem</span>
         </div>
       </div>
     </footer>
@@ -194,26 +194,26 @@ export default Footer;
 
 const customer = [
   "Trung Tâm Trợ Giúp",
-  "Shopee Blog",
-  "Shopee Mall",
+  "Shop Now Blog",
+  "Shop Now Mall",
   "Hướng Dẫn Mua Hàng",
   "Hướng Dẫn Bán Hàng",
   "Thanh Toán",
-  "Shopee Xu",
+  "Shop Now Xu",
   "Vận Chuyển",
   "Trả Hàng & Hoàn Tiền",
   "Chăm Sóc Khách Hàng",
   "Chính Sách Bảo Hành",
 ];
 const shop = [
-  "Giới Thiệu Về Shopee Việt Nam",
+  "Giới Thiệu Về Shop Now Việt Nam",
   "Tuyển Dụng",
-  "Điều Khoản Shopee",
+  "Điều Khoản Shop Now",
   "Chính Sách Bảo Mật",
   "Chính Hãng",
   "Kênh Người Bán",
   "Flash Sales",
-  "Chương Trình Tiếp Thị Liên Kết Shopee",
+  "Chương Trình Tiếp Thị Liên Kết Shop Now",
   "Liên Hệ Với Truyền Thông",
 ];
 const logoPay = [

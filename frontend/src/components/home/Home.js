@@ -69,7 +69,7 @@ const Home = () => {
                 ))}
             </div> */}
             <div
-              className="home-products grid grid-cols-5 gap-3"
+              className="home-products max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2 max-[320px]:grid-cols-1 grid grid-cols-5 gap-3"
               id="container"
             >
               {products &&

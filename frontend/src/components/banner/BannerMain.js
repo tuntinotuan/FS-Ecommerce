@@ -11,8 +11,11 @@ const BannerMain = () => {
   const { hovered, nodeRef } = useHover();
   return (
     <section className="bg-white shadow-sm">
-      <div className="page-container flex items-start gap-2 py-5">
-        <div className="banner-main max-w-[800px] shadow-sm" ref={nodeRef}>
+      <div className="page-container max-md:flex-col flex items-start gap-2 py-5">
+        <div
+          className="banner-main max-lg:max-w-[540px] max-md:w-full max-md:max-w-none max-w-[800px] shadow-sm"
+          ref={nodeRef}
+        >
           <Swiper
             grabCursor="true"
             slidesPerView={"auto"}
@@ -28,7 +31,7 @@ const BannerMain = () => {
             ))}
           </Swiper>
         </div>
-        <div className="flex flex-col justify-start gap-2">
+        <div className="max-md:grid max-md:grid-cols-2 flex flex-col justify-start gap-2">
           <img
             src="https://images.fpt.shop/unsafe/fit-in/385x100/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/11/638168506395035568_F-H2_385x100.jpg"
             alt=""

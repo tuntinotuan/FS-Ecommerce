@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import Main from "./components/layout/Main";
 import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products";
-import Search from "./components/Product/Search";
+// import Search from "./components/Product/Search";
 import LoginSignUp from "./components/User/LoginSignUp";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
@@ -79,7 +79,7 @@ function App() {
             path="/products/:keyword"
             element={<Products></Products>}
           ></Route>
-          <Route path="/search" element={<Search></Search>}></Route>
+          {/* <Route path="/search" element={<Search></Search>}></Route> */}
           {/* <Route path="/account" element={<Profile></Profile>} /> */}
           <Route
             path="/account"

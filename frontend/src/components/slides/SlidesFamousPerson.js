@@ -6,9 +6,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import useHover from "../../hooks/useHover";
+import useViewport from "../../hooks/useViewport";
 
 const SlidesFamousPerson = () => {
   const { hovered, nodeRef } = useHover();
+  const { width } = useViewport();
+  const tablet = width < 1024;
+  const mobile = width < 768;
+  const mobileSmaller = width < 640;
   return (
     <section
     // className="bg-white shadow-sm"
@@ -19,7 +24,9 @@ const SlidesFamousPerson = () => {
       >
         <Swiper
           grabCursor="true"
-          slidesPerView={5}
+          slidesPerView={
+            (mobileSmaller && 2) || (mobile && 3) || (tablet && 4) || 5
+          }
           spaceBetween={12}
           navigation={hovered}
           pagination={hovered}
