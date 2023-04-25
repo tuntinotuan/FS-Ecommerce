@@ -203,7 +203,7 @@ const ConfirmOrder = () => {
                   </div>
 
                   <div className="pl-5">
-                    <ul className="h-[250px] w-full mt-5 max-h-[300px] overflow-auto ">
+                    <ul className="confirm-order-scroll h-[250px] w-full mt-5 max-h-[300px] overflow-auto ">
                       {cartItems &&
                         cartItems.map((item) => (
                           <li

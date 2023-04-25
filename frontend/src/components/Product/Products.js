@@ -270,11 +270,11 @@ const Products = ({ match }) => {
       {loading ? (
         <Loader></Loader>
       ) : (
-        <section className="page-container py-4">
+        <section className="max-lg:px-5 page-container py-4">
           <SlidesProducts></SlidesProducts>
           <BlockTitle children="Sản phẩm" className="mt-5"></BlockTitle>
 
-          <div className="flex items-start gap-5">
+          <div className="max-md:flex-col flex items-start gap-5">
             <div className="w-[200px]">
               <Link
                 className="flex items-center gap-3 border border-transparent border-b-slate-200 p-3 cursor-pointer"
@@ -283,7 +283,7 @@ const Products = ({ match }) => {
                 <GrList></GrList>
                 <h2 className="text-lg font-bold">Tất cả sản phẩm</h2>
               </Link>
-              <ul className="flex flex-col gap-2 py-4 px-2">
+              <ul className="max-md:flex-row flex flex-col gap-2 py-4 px-2">
                 {categories.map((category) => (
                   <NavLink
                     key={category}
@@ -330,7 +330,7 @@ const Products = ({ match }) => {
                 <FilterPrice></FilterPrice>
               </div>
               {products?.length !== 0 ? (
-                <div className="grid grid-cols-5 gap-3">
+                <div className="max-lg:grid-cols-3 max-sm:grid-cols-2 max-[415px]:grid-cols-1 grid grid-cols-5 gap-3">
                   {products &&
                     products.map((product) => (
                       <ProductCard key={product._id} product={product} />

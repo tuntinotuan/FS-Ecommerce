@@ -201,24 +201,59 @@
     font: 400 4vw "Roboto";
   }
 } */
-
-::-webkit-scrollbar {
+:root {
+  --gradient2: linear-gradient(
+    to right,
+    #20e3b2,
+    #08b5e1,
+    #918fc9,
+    #c56bb4,
+    #fc4589,
+    #625bf6,
+    #0759b6,
+    #20e3b2,
+    #08b5e1,
+    #918fc9,
+    #c56bb4,
+    #fc4589,
+    #625bf6,
+    #0759b6
+  );
+}
+.confirm-order-scroll::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.confirm-order-scroll::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+.confirm-order-scroll::-webkit-scrollbar-thumb {
   background: #43c6ac;
   border-radius: 10px;
+  background-image: var(--gradient2);
+  background-size: 600% 600%;
+  animation: gradient 2s ease alternate infinite;
+  /* height: 2px; */
+  filter: blur(0.666666px);
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+.confirm-order-scroll::-webkit-scrollbar-thumb:hover {
   background: #03a9f4;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
 }

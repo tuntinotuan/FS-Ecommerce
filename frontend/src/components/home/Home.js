@@ -49,7 +49,7 @@ const Home = () => {
       ) : (
         <Fragment>
           <BannerMain></BannerMain>
-          <section className="home-page page-container my-10">
+          <section className="max-lg:px-5 home-page page-container my-10">
             {/* <div className="banner">
               <p>Welcome to Ecommerce</p>
               <h1>FIND AMAZING PRODUCTS BELOW</h1>

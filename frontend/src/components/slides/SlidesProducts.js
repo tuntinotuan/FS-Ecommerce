@@ -14,7 +14,7 @@ const SlidesProducts = () => {
     // className="bg-white shadow-sm"
     >
       <div
-        className="page-container banner-main max-h-[400px] flex items-start gap-2 select-none"
+        className="max-sm:max-h-[700px] page-container banner-main max-h-[400px] flex items-start gap-2 select-none"
         ref={nodeRef}
       >
         <Swiper
