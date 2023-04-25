@@ -216,10 +216,10 @@ const UpdateProfile = ({ history }) => {
         <Loader />
       ) : (
         <Fragment>
-          <section className="bg-primary py-10">
+          <section className="max-sm:px-10 bg-primary py-10">
             <div className="page-container flex items-center justify-center">
               <form
-                className="p-8 bg-white shadow-lg rounded-md flex flex-col gap-5"
+                className="max-[415px]:max-w-[290px] max-[415px]:p-4 p-8 bg-white shadow-lg rounded-md flex flex-col gap-5"
                 encType="multipart/form-data"
                 onSubmit={updateProfileSubmit}
               >
@@ -231,7 +231,7 @@ const UpdateProfile = ({ history }) => {
                 </div>
                 <div className="w-full h-10">
                   <input
-                    className="w-full h-full pl-3 pr-8 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md"
+                    className="w-full h-full px-3 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md"
                     placeholder="Tên của bạn?"
                     autoFocus
                     required
@@ -242,7 +242,7 @@ const UpdateProfile = ({ history }) => {
                 </div>
                 <div className="w-full h-10">
                   <input
-                    className="w-full h-full pl-3 pr-8 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md"
+                    className="w-full h-full px-3 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md"
                     placeholder="Email của bạn?"
                     required
                     name="email"

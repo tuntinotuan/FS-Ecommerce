@@ -366,6 +366,7 @@ const ProductDetails = ({ match }) => {
     if (product?.Stock <= quantity) return;
     const qty = quantity + 1;
     setQuantity(qty);
+    setQuantityEqualZero(false);
   };
 
   const decreaseQuantity = () => {
@@ -373,6 +374,28 @@ const ProductDetails = ({ match }) => {
     if (1 >= quantity) return;
     const qty = quantity - 1;
     setQuantity(qty);
+    setQuantityEqualZero(false);
+  };
+  let prevQuantity;
+  const changeQuantity = (e) => {
+    let qty = Number(e.target.value);
+    console.log("qty", qty);
+    if (qty > 0) {
+      prevQuantity = qty;
+    }
+    if (qty < 0) return setQuantity(1);
+    if (qty === 0) return setQuantity(null);
+    if (product?.Stock < qty) return setQuantity(product?.Stock);
+    setQuantity(qty);
+    setQuantityEqualZero(false);
+  };
+  console.log("quantity", quantity);
+  const [quantityEqualZero, setQuantityEqualZero] = useState(false);
+  const quantityFocusOut = () => {
+    if (Number(quantity) == "") return setQuantityEqualZero(true);
+    setQuantityEqualZero(false);
+    // setQuantity(prevQuantity);
+    console.log("focus out quantity", prevQuantity);
   };
 
   const addToCartHandler = () => {
@@ -520,7 +543,7 @@ const ProductDetails = ({ match }) => {
                   </p>
                   <p className="flex items-center gap-1 text-sm border border-transparent border-l-slate-300 pl-3">
                     <span className="text-[16px] border border-transparent border-b-slate-900 pb-[2px]">
-                      {product?.numOfReviews}
+                      {nFormatter(product?.sold, 1)}
                     </span>
                     <span className="text-graytagp">Đã bán</span>
                     <AiOutlineQuestionCircle className="text-[16px] text-graytagp"></AiOutlineQuestionCircle>
@@ -553,7 +576,11 @@ const ProductDetails = ({ match }) => {
                         disabled={product?.Stock < 1 ? true : false}
                         type="number"
                         value={quantity}
-                        className="w-12 h-8 text-center p-2 border border-t-[#d3d3d3] border-b-[#d3d3d3] outline-none"
+                        onChange={changeQuantity}
+                        className={`w-12 h-8 text-center p-2 border border-t-[#d3d3d3] border-b-[#d3d3d3] outline-none focus:outline-primary z-10 ${
+                          quantityEqualZero && "outline-taghot"
+                        }`}
+                        onBlur={quantityFocusOut}
                       />
                       <button
                         disabled={product?.Stock < 1 ? true : false}
@@ -565,10 +592,27 @@ const ProductDetails = ({ match }) => {
                     </div>
                     <p className="text-graytagp">{`${product.Stock} sản phẩm có sẵn`}</p>
                   </div>
+                  {product?.Stock === quantity && (
+                    <p className="text-xs text-taghot ml-[100px]">
+                      Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này
+                    </p>
+                  )}
+                  {quantityEqualZero && (
+                    <p className="text-xs text-taghot ml-[100px]">
+                      Vui lòng nhập số lượng
+                    </p>
+                  )}
                   <button
-                    disabled={product?.Stock < 1 ? true : false}
+                    disabled={
+                      product?.Stock < 1 ||
+                      quantity === "" ||
+                      quantity === "0" ||
+                      quantity === null
+                        ? true
+                        : false
+                    }
                     onClick={addToCartHandler}
-                    className="flex items-center gap-2 text-primary opacity-80 hover:opacity-100 border border-primary shadow-primary py-2 px-5"
+                    className="flex items-center gap-2 text-primary opacity-80 hover:opacity-100 border border-primary shadow-primary py-2 px-5 mt-5"
                   >
                     <BsCartPlus></BsCartPlus>
                     Thêm Vào Giỏ Hàng

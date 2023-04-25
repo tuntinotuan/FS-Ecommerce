@@ -119,7 +119,7 @@ const ProductCard = ({ product, hiddenReview = false }) => {
           <div className="flex items-center justify-between mt-auto">
             <span className="text-primary">{`₫${priceConverted}`}</span>
             <span className="text-xs opacity-50">{`Đã bán ${nFormatter(
-              product.price,
+              product.sold,
               1
             )}`}</span>
           </div>

@@ -42,6 +42,14 @@ class ApiFeatures {
 
     return this;
   }
+
+  sort(field) {
+    // const sort = Number(this.queryStr.page);
+    this.query = this.query.sort((a, b) => {
+      return a[field] >= b[field] ? 1 : -1;
+    });
+    return this;
+  }
 }
 
 module.exports = ApiFeatures;

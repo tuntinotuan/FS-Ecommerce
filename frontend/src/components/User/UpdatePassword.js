@@ -65,7 +65,7 @@ const UpdatePassword = ({ history }) => {
       ) : (
         <Fragment>
           <section className="bg-primary py-10">
-            <div className="page-container flex items-center justify-center">
+            <div className="max-[415px]:px-5 page-container flex items-center justify-center">
               <form
                 className="p-8 bg-white shadow-lg rounded-md flex flex-col gap-5"
                 encType="multipart/form-data"

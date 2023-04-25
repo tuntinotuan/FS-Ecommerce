@@ -170,8 +170,8 @@ const Cart = () => {
   const scrollbarHeight = document.body.scrollHeight;
   // let pointScrollFixed = offset < scrollbarHeight - 1400;
   let pointScrollFixed = true;
-  console.log("offset", offset);
-  console.log("document.body.scrollHeight", document.body.scrollHeight);
+  // console.log("offset", offset);
+  // console.log("document.body.scrollHeight", document.body.scrollHeight);
   return (
     <div className="py-5">
       <div className="page-container relative flex flex-col items-end">
@@ -199,7 +199,7 @@ const Cart = () => {
             <ul className="">
               {cartItems?.map((items) => (
                 <li
-                  className="flex items-center text-sm mt-5  bg-white shadow-md px-7 py-5"
+                  className="flex items-center text-sm mt-5 bg-white shadow-md px-7 py-5"
                   key={items.product}
                 >
                   <div className="w-[50%] max-w-[50%] flex items-center">
@@ -228,7 +228,18 @@ const Cart = () => {
                       type="number"
                       value={items.quantity}
                       className="w-12 h-9 text-center p-2 border border-t-[#d3d3d3] border-b-[#d3d3d3] outline-none"
-                      // onChange={() => itemChange()}
+                      onChange={(e) => {
+                        let qty = Number(e.target.value);
+                        if (Number(items.stock) < qty) {
+                          // setTimeout(() => {
+                          dispatch(addItemsToCart(items.product, items.stock));
+                          // }, 1000);
+                        } else {
+                          // setTimeout(() => {
+                          dispatch(addItemsToCart(items.product, qty));
+                          // }, 1000);
+                        }
+                      }}
                     />
                     <button
                       className="border border-[#d3d3d3] w-9 h-9 flex justify-center items-center"
@@ -272,7 +283,7 @@ const Cart = () => {
           )}
         </div>
         <div
-          className={`${
+          className={`max-lg:w-[95%] max-md:w-[94%] max-sm:w-[92%] ${
             pointScrollFixed ? "fixed bottom-0 z-50" : "mt-10"
           } w-[60%] rounded-[3px] transition-all`}
         >
@@ -282,7 +293,7 @@ const Cart = () => {
             } w-full bg-white px-7 py-8 flex justify-around items-center text-base`}
           >
             <div className="flex ">
-              <h1 className="mr-5">Tổng thanh toán</h1>
+              <h1 className="max-sm:hidden mr-5">Tổng thanh toán</h1>
               <h1>
                 (<span>{cartItems.length}</span> Sản Phẩm):
               </h1>

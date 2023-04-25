@@ -94,7 +94,7 @@ const Header = ({ history }) => {
   function logoutUser() {
     setShowMenu(false);
     dispatch(logout());
-    alert.success("Logout Successfully");
+    alert.success("Đã đăng xuất");
   }
 
   return (
@@ -478,7 +478,7 @@ const Header = ({ history }) => {
                                 {items.name}
                               </h6>
                               <div className="text-primary">
-                                <span className="text-[10px] mx-4">
+                                <span className="text-[10px] mx-4 truncate">
                                   {items.quantity > 1
                                     ? `${items.quantity} x`
                                     : ""}

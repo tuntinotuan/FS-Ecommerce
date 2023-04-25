@@ -90,15 +90,15 @@ const Profile = ({ history }) => {
           {user ? (
             <section className="pt-5 pb-10">
               <div className="page-container bg-white rounded-[3px] shadow-sm p-5">
-                <div className="border border-transparent border-b-slate-200 pb-5 mb-5">
+                <div className="max-lg:text-center border border-transparent border-b-slate-200 pb-5 mb-5">
                   <h1 className="text-lg">Hồ Sơ Của Tôi</h1>
                   <p className="opacity-80">
                     Quản lý thông tin hồ sơ để cập nhật những thông tin cần
                     thiết cho bạn
                   </p>
                 </div>
-                <div className="flex items-start gap-10">
-                  <div className="flex flex-col items-center gap-10 text-center border border-transparent border-r-slate-200 py-10 px-20">
+                <div className="max-lg:flex-col max-lg:items-center flex items-start gap-10">
+                  <div className="max-lg:border-none max-lg:p-5 flex flex-col items-center gap-10 text-center border border-transparent border-r-slate-200 py-10 px-20">
                     <img
                       src={user?.avatar?.url}
                       alt={user?.name}
@@ -111,21 +111,21 @@ const Profile = ({ history }) => {
                       Chỉnh sửa thông tin
                     </Link>
                   </div>
-                  <div className="flex flex-col gap-10 h-auto">
-                    <div className="flex items-center justify-between w-[300px]">
+                  <div className="max-lg:items-center flex flex-col gap-10 h-auto">
+                    <div className="max-[415px]:w-[250px] flex items-center justify-between w-[300px]">
                       <h2>Tên:</h2>
                       <p>{user?.name}</p>
                     </div>
-                    <div className="flex items-center justify-between w-[300px]">
+                    <div className="max-[415px]:w-[250px] flex items-center justify-between w-[300px]">
                       <h2>Email:</h2>
                       <p>{user?.email}</p>
                     </div>
-                    <div className="flex items-center justify-between w-[300px]">
+                    <div className="max-[415px]:w-[250px] flex items-center justify-between w-[300px]">
                       <h2>Ngày tham gia:</h2>
                       <p>{String(user?.createdAt).substr(0, 10)}</p>
                     </div>
 
-                    <div className="flex items-center gap-10 mt-auto">
+                    <div className="max-sm:flex-col max-sm:gap-5 flex items-center gap-10 mt-auto">
                       <Link
                         to="/orders"
                         className="flex items-center gap-2 bg-primary opacity-80 hover:opacity-100 text-white rounded-[3px] py-2 px-5"

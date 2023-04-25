@@ -92,6 +92,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   if (req.body.status === "Shipped") {
     order.orderItems.forEach(async (o) => {
       await updateStock(o.product, o.quantity);
+      await updateSold(o.product, o.quantity);
     });
   }
   order.orderStatus = req.body.status;
@@ -105,11 +106,17 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
-
 async function updateStock(id, quantity) {
   const product = await Product.findById(id);
 
   product.Stock -= quantity;
+
+  await product.save({ validateBeforeSave: false });
+}
+async function updateSold(id, quantity) {
+  const product = await Product.findById(id);
+
+  product.sold += quantity;
 
   await product.save({ validateBeforeSave: false });
 }
