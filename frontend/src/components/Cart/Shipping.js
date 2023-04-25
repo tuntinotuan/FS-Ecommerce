@@ -280,9 +280,9 @@ const Shipping = () => {
         <CheckoutSteps activeStep={0} />
       </div>
 
-      <div className="flex gap-5 px-40">
-        <div className="w-[50%]">
-          <div className="w-full h-auto shadow-md rounded bg-white p-10">
+      <div className="max-lg:flex-col-reverse max-lg:px-5 max-sm:px-2 flex justify-center gap-5">
+        <div>
+          <div className="max-lg:text-center w-full h-auto shadow-md rounded bg-white p-10">
             <div className="text-center font-bold opacity-60 text-lg tracking-widest pb-4">
               <h1 className="text-[#1572e8]">DỊCH VỤ VẬN CHUYỂN</h1>
             </div>
@@ -309,18 +309,14 @@ const Shipping = () => {
             </div>
           </div>
         </div>
-        <form
-          className="w-[50%]"
-          encType="multipart/form-data"
-          onSubmit={shippingSubmit}
-        >
+        <form encType="multipart/form-data" onSubmit={shippingSubmit}>
           <div className="w-full h-auto shadow-md rounded bg-white p-5">
             <div className="p-5">
               <div className="text-center font-bold opacity-60 text-lg tracking-widest pb-7">
                 <h1 className="text-[#1572e8]">CHI TIẾT VẬN CHUYỂN</h1>
               </div>
-              <div className="flex items-center justify-between pb-5">
-                <div className="flex flex-col w-[50%] pr-4">
+              <div className="max-sm:flex-col max-sm:items-start flex items-center justify-between gap-5 pb-5">
+                <div className="flex flex-col w-full">
                   <label className="text-base mb-2">Tỉnh/ Thành phố</label>
                   <select
                     // required
@@ -336,7 +332,7 @@ const Shipping = () => {
                     ))}
                   </select>
                 </div>
-                <div className="flex flex-col w-[50%] pl-4">
+                <div className="flex flex-col w-full">
                   <label className="text-base mb-2">Quận/ Huyện</label>
                   <select
                     // required
@@ -353,8 +349,8 @@ const Shipping = () => {
                   </select>
                 </div>
               </div>
-              <div className="flex justify-between items-center pb-5">
-                <div className="flex flex-col w-[50%] pr-4 ">
+              <div className="max-sm:flex-col max-sm:items-start  flex justify-between items-center gap-5 pb-5">
+                <div className="flex flex-col w-full">
                   <label className="text-base mb-2">Xã/ Phường</label>
                   <select
                     // required
@@ -366,7 +362,7 @@ const Shipping = () => {
                     ))}
                   </select>
                 </div>
-                <div className="flex flex-col w-[50%] pl-4">
+                <div className="flex flex-col w-full">
                   <label className="text-base mb-2">Địa chỉ cụ thể</label>
                   <input
                     required
@@ -378,7 +374,7 @@ const Shipping = () => {
                 </div>
               </div>
               <div>
-                <div className="flex flex-col w-[50%] pr-4">
+                <div className="flex flex-col">
                   <label className="text-base mb-2">Số điện thoại</label>
                   <input
                     type="number"
@@ -392,7 +388,7 @@ const Shipping = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-end mt-10 gap-4">
+          <div className="max-sm:justify-center flex justify-end mt-10 gap-4">
             <Link
               to="/cart"
               className="text-center rounded bg-[#03a9f4] py-3 px-5 text-white hover:opacity-100 opacity-80"
