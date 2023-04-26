@@ -127,24 +127,24 @@ const Payment = ({ history }) => {
       {/* <p>4000002760003184</p> */}
       <div className="flex justify-center items-center py-10">
         <form
-          className="bg-white rounded shadow-sm p-10 flex flex-col gap-6"
+          className="max-sm:p-5 bg-white rounded shadow-sm p-10 flex flex-col gap-6"
           onSubmit={(e) => submitHandler(e)}
         >
           <div className="flex justify-between items-center gap-8">
-            <div className="bg-[#f2f2f2] py-5 px-8 rounded">
+            <div className="max-sm:p-2 bg-[#f2f2f2] py-5 px-8 rounded">
               <img src={Visa} alt="" />
             </div>
-            <div className="bg-[#f2f2f2] py-5 px-8 rounded">
+            <div className="max-sm:p-2 bg-[#f2f2f2] py-5 px-8 rounded">
               <img src={Master} alt="" />
             </div>
-            <div className="bg-[#f2f2f2] py-5 px-8 rounded">
+            <div className="max-sm:p-2 bg-[#f2f2f2] py-5 px-8 rounded">
               <img src={Jbc} alt="" />
             </div>
           </div>
-          <div className="flex justify-between items-center">
-            <hr className="h-[1px] w-20" />
+          <div className="max-sm:text-sm max-sm:text-center flex justify-between items-center">
+            <hr className="max-sm:w-10 h-[1px] w-20" />
             <p>hoặc thanh toán bằng thẻ tín dụng</p>
-            <hr className="h-[1px] w-20" />
+            <hr className="max-sm:w-10 h-[1px] w-20" />
           </div>
           <div className="flex flex-col gap-2">
             <lable className="opacity-75">Họ và tên chủ thẻ</lable>
