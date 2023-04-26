@@ -6,7 +6,7 @@ import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import "./CheckoutSteps.css";
 
-const CheckoutSteps = ({ activeStep }) => {
+const CheckoutSteps = ({ activeStep, textSize = "" }) => {
   const steps = [
     {
       label: "Chi Tiết Vận Chuyển",
@@ -51,6 +51,7 @@ const CheckoutSteps = ({ activeStep }) => {
                   color:
                     activeStep >= index ? "#43c6ac" : "rgba(0, 0, 0, 0.649)",
                 }}
+                className={`${textSize}`}
               >
                 {item.label}
               </div>
