@@ -185,7 +185,7 @@ import ProductCard from "../home/ProductCard";
 import { Link, NavLink, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import { Typography } from "@mui/material";
+import { Rating, Typography } from "@mui/material";
 import BlockTitle from "../others/BlockTitle";
 import { GrList } from "react-icons/gr";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
@@ -266,7 +266,7 @@ const Products = ({ match }) => {
 
   return (
     <Fragment>
-      <MetaData title="PRODUCTS -- ECOMMERCE" />
+      <MetaData title="Tất cả sản phẩm trong | Shop Now" />
       {loading ? (
         <Loader></Loader>
       ) : (
@@ -310,7 +310,7 @@ const Products = ({ match }) => {
                 />
               </Box>
               <fieldset>
-                <Typography component="legend">Ratings Above</Typography>
+                <Typography component="legend">Đánh Giá</Typography>
                 <Slider
                   value={ratings}
                   onChange={(e, newRating) => {
@@ -322,6 +322,103 @@ const Products = ({ match }) => {
                   max={5}
                 />
               </fieldset>
+              <div className="flex flex-col items-start gap-1 text-sm">
+                <div className="mb-2">Đánh Giá</div>
+                <NavLink
+                  // className={({ isActive }) =>
+                  //   isActive
+                  //     ? "text-primary font-bold bg-slate-200 rounded-full p-1"
+                  //     : "hover:text-primary"
+                  // }
+                  className={`${
+                    ratings === 5
+                      ? "text-primary bg-slate-200 rounded-full p-1"
+                      : ""
+                  } flex items-center gap-1 px-2`}
+                  onClick={() => setRatings(ratings === 5 ? 0 : 5)}
+                >
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={5}
+                    size="small"
+                    precision={0.5}
+                    readOnly
+                  />
+                </NavLink>
+                <NavLink
+                  // className={({ isActive }) =>
+                  //   isActive
+                  //     ? "text-primary font-bold bg-slate-200 rounded-full p-1"
+                  //     : "hover:text-primary"
+                  // }
+                  className={`${
+                    ratings === 4
+                      ? "text-primary bg-slate-200 rounded-full p-1"
+                      : ""
+                  } flex items-center gap-1 px-2`}
+                  onClick={() => setRatings(ratings === 4 ? 0 : 4)}
+                >
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={4}
+                    size="small"
+                    precision={0.5}
+                    readOnly
+                  />
+                  trở lên
+                </NavLink>
+                <NavLink
+                  className={`${
+                    ratings === 3
+                      ? "text-primary bg-slate-200 rounded-full p-1"
+                      : ""
+                  } flex items-center gap-1 px-2`}
+                  onClick={() => setRatings(ratings === 3 ? 0 : 3)}
+                >
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={3}
+                    size="small"
+                    precision={0.5}
+                    readOnly
+                  />
+                  trở lên
+                </NavLink>
+                <NavLink
+                  className={`${
+                    ratings === 2
+                      ? "text-primary bg-slate-200 rounded-full p-1"
+                      : ""
+                  } flex items-center gap-1 px-2`}
+                  onClick={() => setRatings(ratings === 2 ? 0 : 2)}
+                >
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={2}
+                    size="small"
+                    precision={0.5}
+                    readOnly
+                  />
+                  trở lên
+                </NavLink>
+                <NavLink
+                  className={`${
+                    ratings === 1
+                      ? "text-primary bg-slate-200 rounded-full p-1"
+                      : ""
+                  } flex items-center gap-1 px-2`}
+                  onClick={() => setRatings(ratings === 1 ? 0 : 1)}
+                >
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={1}
+                    size="small"
+                    precision={0.5}
+                    readOnly
+                  />
+                  trở lên
+                </NavLink>
+              </div>
             </div>
 
             <div className="flex-1 mb-3">
