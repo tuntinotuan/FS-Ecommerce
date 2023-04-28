@@ -13,7 +13,6 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -131,17 +130,16 @@ const UpdateProduct = ({ history, match }) => {
   return (
     <Fragment>
       <MetaData title="Create Product" />
-      <div className="dashboard">
-        <SideBar />
-        <div className="newProductContainer">
+      <div className="flex justify-center py-10">
+        <div className="bg-white rounded shadow-lg p-5 w-[500px]">
           <form
-            className="createProductForm"
+            className="flex flex-col gap-5"
             encType="multipart/form-data"
             onSubmit={updateProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1 className="text-center text-lg font-bold">Create Product</h1>
 
-            <div>
+            <div className="flex gap-3 items-center">
               <SpellcheckIcon />
               <input
                 type="text"
@@ -149,9 +147,11 @@ const UpdateProduct = ({ history, match }) => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
+
               />
             </div>
-            <div>
+            <div className="flex gap-3 items-center">
               <AttachMoneyIcon />
               <input
                 type="number"
@@ -159,10 +159,12 @@ const UpdateProduct = ({ history, match }) => {
                 required
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}
+                className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
+
               />
             </div>
 
-            <div>
+            <div className="flex gap-3 items-center">
               <DescriptionIcon />
 
               <textarea
@@ -171,14 +173,18 @@ const UpdateProduct = ({ history, match }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
                 rows="1"
+                className="w-full h-14  max-h-20 p-2 outline-none border border-[#1572e8] rounded "
+
               ></textarea>
             </div>
 
-            <div>
+            <div className="flex gap-3 items-center">
               <AccountTreeIcon />
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+              className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
+
               >
                 <option value="">Choose Category</option>
                 {categories.map((cate) => (
@@ -189,7 +195,7 @@ const UpdateProduct = ({ history, match }) => {
               </select>
             </div>
 
-            <div>
+            <div className="flex gap-3 items-center">
               <StorageIcon />
               <input
                 type="number"
@@ -197,10 +203,12 @@ const UpdateProduct = ({ history, match }) => {
                 required
                 onChange={(e) => setStock(e.target.value)}
                 value={Stock}
+                className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
+
               />
             </div>
 
-            <div id="createProductFormFile">
+            <div className="flex gap-3 items-center">
               <input
                 type="file"
                 name="avatar"
@@ -210,26 +218,27 @@ const UpdateProduct = ({ history, match }) => {
               />
             </div>
 
-            <div id="createProductFormImage">
+            <div className="flex gap-3 items-center">
               {oldImages &&
                 oldImages.map((image, index) => (
                   <img key={index} src={image.url} alt="Old Product Preview" />
                 ))}
             </div>
 
-            <div id="createProductFormImage">
+            <div className="flex gap-3 items-center">
               {imagesPreview.map((image, index) => (
                 <img key={index} src={image} alt="Product Preview" />
               ))}
             </div>
 
-            <Button
-              id="createProductBtn"
+            <button
               type="submit"
               disabled={loading ? true : false}
+              className="w-full h-10 bg-primary rounded text-white opacity-70 active:bg-[#1572e8]"
+
             >
               Update
-            </Button>
+            </button>
           </form>
         </div>
       </div>

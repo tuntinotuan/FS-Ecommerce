@@ -62,14 +62,14 @@ const UsersList = ({ history }) => {
     },
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Tên",
       minWidth: 150,
       flex: 0.5,
     },
 
     {
       field: "role",
-      headerName: "Role",
+      headerName: "Vai trò",
       // type: "number",
       minWidth: 150,
       flex: 0.3,
@@ -81,20 +81,28 @@ const UsersList = ({ history }) => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
+      headerName: "Thao tác",
+      minWidth: 200,
       type: "number",
       sortable: false,
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/user/${params.id}`}>
-              <EditIcon />
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                to={`/admin/user/${params.id}`}
+                className="w-14 py-3 px-5 rounded  flex justify-center items-center h-3 bg-[#1572e8] text-white opacity-70 hover:opacity-100"
+              >
+                <p>EDIT</p>
+              </Link>
 
-            <Button onClick={() => deleteUserHandler(params.id)}>
-              <DeleteIcon />
-            </Button>
+              <Link
+                onClick={() => deleteUserHandler(params.id)}
+                className="w-14 py-3 px-5 rounded  flex justify-center items-center h-3 bg-[#f25961] text-white opacity-70 hover:opacity-100"
+              >
+                <p>Delete</p>
+              </Link>
+            </div>
           </Fragment>
         );
       },
@@ -116,18 +124,17 @@ const UsersList = ({ history }) => {
   return (
     <Fragment>
       <MetaData title={`ALL USERS - Admin`} />
+      <div className="h-40 p-10 flex  bg-[linear-gradient(-45deg,#06418e,#1572e8)] text-xl font-bold text-white">
+        Tất cả người dùng
+      </div>
 
-      <div className="dashboard">
-        <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL USERS</h1>
-
+      <div className="relative -top-14 px-10">
+        <div className="shadow-lg">
           <DataGrid
             rows={rows}
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
-            className="productListTable"
             autoHeight
           />
         </div>

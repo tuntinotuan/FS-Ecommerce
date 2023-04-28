@@ -76,6 +76,7 @@ import UserControl from "../../others/UserControl";
 
 const Header = ({ history }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const { show, setShow } = useClickOutSide();
   const { show: showMenu, setShow: setShowMenu, nodeRef } = useClickOutSide();
   const {
@@ -83,7 +84,6 @@ const Header = ({ history }) => {
     setShow: setShowControl,
     nodeRefControl,
   } = useClickOutSide();
-  const alert = useAlert();
 
   const [hiddenCart, setHiddenCart] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
@@ -544,7 +544,7 @@ const Header = ({ history }) => {
                   <div className="flex items-center">
                     <div className="mr-2">
                       <img
-                        className="w-9 h-9 rounded-[50%]"
+                        className="w-9 h-9 rounded-full object-cover"
                         src={user.avatar.url}
                         alt="img"
                       />

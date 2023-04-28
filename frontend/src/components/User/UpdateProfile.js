@@ -257,7 +257,7 @@ const UpdateProfile = ({ history }) => {
                   <img
                     src={avatarPreview}
                     alt="Avatar Preview"
-                    className="w-10 rounded-full"
+                    className="w-10 h-10 rounded-full object-cover"
                   />
                   <input
                     type="file"

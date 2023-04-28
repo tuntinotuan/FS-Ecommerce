@@ -1,61 +1,92 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import Girl from "../../images/girl.jpg";
+import { ImHome, ImCart, ImUsers } from "react-icons/im";
+import {
+  MdRateReview,
+  MdOutlineProductionQuantityLimits,
+} from "react-icons/md";
 import "./sidebar.css";
-import logo from "../../images/logo.png";
-import { Link } from "react-router-dom";
-import { TreeView, TreeItem } from "@mui/lab";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import PostAddIcon from "@mui/icons-material/PostAdd";
-import AddIcon from "@mui/icons-material/Add";
-import ImportExportIcon from "@mui/icons-material/ImportExport";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleIcon from "@mui/icons-material/People";
-import RateReviewIcon from "@mui/icons-material/RateReview";
+import Logo from "../../images/shopNow.png";
+import { FiMenu } from "react-icons/fi";
+import { FaLayerGroup } from "react-icons/fa";
+import { useState } from "react";
 
 const Sidebar = () => {
-  return (
-    <div className="sidebar">
-      <Link to="/">
-        <img src={logo} alt="Ecommerce" />
-      </Link>
-      <Link to="/admin/dashboard">
-        <p>
-          <DashboardIcon /> Dashboard
-        </p>
-      </Link>
-      <Link>
-        <TreeView
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ImportExportIcon />}
-        >
-          <TreeItem nodeId="1" label="Products">
-            <Link to="/admin/products">
-              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
-            </Link>
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
-            <Link to="/admin/product">
-              <TreeItem nodeId="3" label="Create" icon={<AddIcon />} />
+  const menuItems = [
+    {
+      path: "/admin/dashboard",
+      name: "Dashboard",
+      icon: <ImHome size={25} />,
+    },
+    {
+      path: "/admin/products",
+      name: "Products",
+      icon: <MdOutlineProductionQuantityLimits size={25} />,
+    },
+    {
+      path: "/admin/orders",
+      name: "Orders",
+      icon: <ImCart size={25} />,
+    },
+    {
+      path: "/admin/users",
+      name: "Users",
+      icon: <ImUsers size={25} />,
+    },
+    {
+      path: "/admin/reviews",
+      name: "Reviews",
+      icon: <MdRateReview size={25} />,
+    },
+  ];
+  return (
+    <div
+      style={{ width: isOpen ? "250px" : "50px" }}
+      className=" h-[100vh] w-[250px] z-50 transition-all shadow-lg"
+    >
+      <div className="">
+        <div className="bg-[#1572e8] flex items-center justify-around gap-4 px-3 h-16 text-white ">
+          {/* <h1
+            style={{ display: isOpen ? "block" : "none" }}
+            className="text-base font-bold italic"
+          >
+            SHOP NOW
+          </h1> */}
+          {isOpen && (
+            <Link to="/admin/dashboard">
+              <img src={Logo} alt="" className="w-full h-full" />
             </Link>
-          </TreeItem>
-        </TreeView>
-      </Link>
-      <Link to="/admin/orders">
-        <p>
-          <ListAltIcon />
-          Orders
-        </p>
-      </Link>
-      <Link to="/admin/users">
-        <p>
-          <PeopleIcon /> Users
-        </p>
-      </Link>
-      <Link to="/admin/reviews">
-        <p>
-          <RateReviewIcon />
-          Reviews
-        </p>
-      </Link>
+          )}
+          <Link>
+            <FiMenu size={25} onClick={toggle} />
+          </Link>
+        </div>
+      </div>
+      <div className="">
+        <div className="sidebar-page py-5">
+          {menuItems.map((item, index) => (
+            <NavLink
+              to={item.path}
+              key={index}
+              className="link flex py-3 px-3 gap-4 items-center transition-none"
+              activeclassName="active"
+            >
+              <div className="">{item.icon}</div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="text-base"
+              >
+                {item.name}
+              </div>
+            </NavLink>
+          ))}
+        </div>
+        <div></div>
+      </div>
     </div>
   );
 };

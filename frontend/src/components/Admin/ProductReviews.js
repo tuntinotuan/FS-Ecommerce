@@ -102,14 +102,15 @@ const ProductReviews = ({ history }) => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Button
-              onClick={() =>
+            <button
+                onClick={() =>
                 // deleteReviewHandler(params.getValue(params.id, "id"))
                 deleteReviewHandler(params.id)
               }
-            >
-              <DeleteIcon />
-            </Button>
+                className="w-14 py-3 px-5 rounded  flex justify-center items-center h-3 bg-[#f25961] text-white opacity-70 hover:opacity-100"
+              >
+                <p>Delete</p>
+              </button>
           </Fragment>
         );
       },
@@ -131,15 +132,13 @@ const ProductReviews = ({ history }) => {
   return (
     <Fragment>
       <MetaData title={`ALL REVIEWS - Admin`} />
-
-      <div className="dashboard">
-        <SideBar />
-        <div className="productReviewsContainer">
+      <div className="h-40 p-10 flex  bg-[linear-gradient(-45deg,#06418e,#1572e8)] text-xl font-bold text-white">ALL REVIEWS</div>
+      <div className="relative -top-14 px-10 ">
+        <div className="shadow-lg bg-white">
           <form
             className="productReviewsForm"
             onSubmit={productReviewsSubmitHandler}
           >
-            <h1 className="productReviewsFormHeading">ALL REVIEWS</h1>
 
             <div>
               <Star />
@@ -152,15 +151,15 @@ const ProductReviews = ({ history }) => {
               />
             </div>
 
-            <Button
-              id="createProductBtn"
+            <button
               type="submit"
               disabled={
                 loading ? true : false || productId === "" ? true : false
               }
+              className="bg-primary py-2 px-5 rounded text-white"
             >
               Search
-            </Button>
+            </button>
           </form>
 
           {reviews && reviews.length > 0 ? (
@@ -169,7 +168,6 @@ const ProductReviews = ({ history }) => {
               columns={columns}
               pageSize={10}
               disableSelectionOnClick
-              className="productListTable"
               autoHeight
             />
           ) : (

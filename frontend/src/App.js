@@ -125,41 +125,54 @@ function App() {
           path="/admin/dashboard"
           element={<Dashboard></Dashboard>}
         ></Route> */}
-        {/* <Route element={<WrapAdmin></WrapAdmin>}> */}
-        <Route
-          path="/admin/dashboard"
+        <Route element={<WrapAdmin></WrapAdmin>}>
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute isAdmin>
+                <Dashboard></Dashboard>
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path="/admin/products"
+            element={<ProductList></ProductList>}
+          ></Route>
+          <Route
+            path="/admin/product"
+            element={<NewProduct></NewProduct>}
+          ></Route>
+          <Route
+            path="/admin/product/:idProduct"
+            element={<UpdateProduct></UpdateProduct>}
+          ></Route>
+          <Route path="/admin/orders" element={<OrderList></OrderList>}></Route>
+          <Route
+            path="/admin/order/:idOrder"
+            element={<ProcessOrder></ProcessOrder>}
+          ></Route>
+          <Route path="/admin/users" element={<UsersList></UsersList>} />
+
+          <Route
+            path="/admin/user/:idUser"
+            element={<UpdateUser></UpdateUser>}
+          />
+
+          <Route
+            path="/admin/reviews"
+            element={<ProductReviews></ProductReviews>}
+          />
+          {/* <Route
+          path="/formtest"
           element={
-            <ProtectedRoute isAdmin>
-              <Dashboard></Dashboard>
-            </ProtectedRoute>
+            <>
+              <HeadLoginAndSignUp title="Cấp lại mật khẩu mới"></HeadLoginAndSignUp>
+              <SignUpFormV2 />
+              <Footer></Footer>
+            </>
           }
-        ></Route>
-        {/* </Route> */}
-        <Route
-          path="/admin/products"
-          element={<ProductList></ProductList>}
-        ></Route>
-        <Route
-          path="/admin/product"
-          element={<NewProduct></NewProduct>}
-        ></Route>
-        <Route
-          path="/admin/product/:idProduct"
-          element={<UpdateProduct></UpdateProduct>}
-        ></Route>
-        <Route path="/admin/orders" element={<OrderList></OrderList>}></Route>
-        <Route
-          path="/admin/order/:idOrder"
-          element={<ProcessOrder></ProcessOrder>}
-        ></Route>
-        <Route path="/admin/users" element={<UsersList></UsersList>} />
-
-        <Route path="/admin/user/:idUser" element={<UpdateUser></UpdateUser>} />
-
-        <Route
-          path="/admin/reviews"
-          element={<ProductReviews></ProductReviews>}
-        />
+        /> */}
+        </Route>
         <Route
           path="/login"
           element={

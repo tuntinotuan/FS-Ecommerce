@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
+    "formik": "^2.2.9",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.1",
@@ -26,6 +27,7 @@
     "react-countup": "^2.0.0",
     "react-icons": "^4.8.0",
     "stripe": "^12.1.0",
-    "validator": "^13.9.0"
+    "validator": "^13.9.0",
+    "yup": "^1.1.1"
   }
 }

@@ -102,7 +102,7 @@ const Profile = ({ history }) => {
                     <img
                       src={user?.avatar?.url}
                       alt={user?.name}
-                      className="w-[100px] h-[100px] object-contain rounded-full"
+                      className="w-[100px] h-[100px] object-cover rounded-full"
                     />
                     <Link
                       to="/me/update"

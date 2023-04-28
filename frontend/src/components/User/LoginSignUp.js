@@ -467,7 +467,11 @@ const LoginSignUp = ({ registerSwitch = false }) => {
   const navigate = useNavigate();
   const alert = useAlert();
   const { click, setClick } = useClickEye();
-  const { error, isAuthenticated } = useSelector((state) => state.user);
+  const {
+    error,
+    isAuthenticated,
+    user: userFromData,
+  } = useSelector((state) => state.user);
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -531,7 +535,9 @@ const LoginSignUp = ({ registerSwitch = false }) => {
     }
 
     if (isAuthenticated) {
-      navigate(redirect);
+      userFromData.role === "admin"
+        ? navigate("/admin/dashboard")
+        : navigate(redirect);
     }
   }, [dispatch, error, alert, isAuthenticated, redirect]);
 
@@ -664,7 +670,7 @@ const LoginSignUp = ({ registerSwitch = false }) => {
               <img
                 src={avatarPreview}
                 alt="Avatar Preview"
-                className="w-10 rounded-full"
+                className="w-10 h-10 rounded-full object-cover"
               />
               <input
                 type="file"

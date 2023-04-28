@@ -1,0 +1,20 @@
+
+
+.box_model_chilren {
+    display: none;
+}
+
+.box_model:hover .box_model_chilren {
+    display: block;
+}
+
+.box_model_chilren::before {
+    content: "";
+    position: absolute;
+    clip-path: polygon(50% 57%, 0% 100%, 100% 100%);
+    background-color: #fff;
+    top: 5px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+}

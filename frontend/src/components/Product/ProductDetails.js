@@ -699,7 +699,7 @@ const ProductDetails = ({ match }) => {
 
             <div className="page-container flex flex-col gap-4 bg-white rounded-[3px] shadow-sm p-6 my-4">
               <h1 className="text-xl uppercase">Đánh giá sản phẩm</h1>
-              <div className="flex items-center gap-5 bg-primary bg-opacity-10 border border-slate-200 rounded-[3px] p-8">
+              <div className="flex items-end justify-between gap-5 bg-primary bg-opacity-10 border border-slate-200 rounded-[3px] p-8">
                 <div className="flex flex-col items-center gap-2 w-[120px]">
                   <h1 className="flex items-end gap-1 text-lg text-[#faaf00]">
                     <h1 className="text-3xl">{`${
@@ -722,8 +722,11 @@ const ProductDetails = ({ match }) => {
                     {...options}
                   />
                 </div>
-                <button onClick={submitReviewToggle} className="submitReview">
-                  Submit Review
+                <button
+                  onClick={submitReviewToggle}
+                  className="bg-primary text-white opacity-80 py-2 px-4 hover:opacity- rounded-[3px] cursor-pointer"
+                >
+                  Bình Luận
                 </button>
               </div>
               {product?.reviews && product?.reviews[0] ? (

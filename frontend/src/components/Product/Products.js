@@ -296,7 +296,7 @@ const Products = ({ match }) => {
                   </NavLink>
                 ))}
               </ul>
-              <Box
+              {/* <Box
               // sx={{ width: 100 }}
               >
                 <Slider
@@ -308,7 +308,7 @@ const Products = ({ match }) => {
                   min={0}
                   max={99999}
                 />
-              </Box>
+              </Box> */}
               <fieldset>
                 <Typography component="legend">Đánh Giá</Typography>
                 <Slider

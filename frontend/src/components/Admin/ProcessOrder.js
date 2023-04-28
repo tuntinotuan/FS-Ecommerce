@@ -56,9 +56,8 @@ const ProcessOrder = ({ history, match }) => {
   return (
     <Fragment>
       <MetaData title="Process Order" />
-      <div className="dashboard">
-        <SideBar />
-        <div className="newProductContainer">
+      <div className="p-10">
+        <div className="bg-white rounded p-10 shadow">
           {loading ? (
             <Loader />
           ) : (
@@ -68,7 +67,7 @@ const ProcessOrder = ({ history, match }) => {
                 display: order.orderStatus === "Delivered" ? "block" : "grid",
               }}
             >
-              <div>
+              <div className="flex ">
                 <div className="confirmshippingArea">
                   <Typography>Shipping Info</Typography>
                   <div className="orderDetailsContainerBox">

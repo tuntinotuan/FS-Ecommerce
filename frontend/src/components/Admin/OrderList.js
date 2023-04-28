@@ -56,7 +56,7 @@ const OrderList = ({ history }) => {
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Trạng thái",
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
@@ -65,7 +65,7 @@ const OrderList = ({ history }) => {
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Số lượng sản phẩm",
       type: "number",
       minWidth: 150,
       flex: 0.4,
@@ -73,7 +73,7 @@ const OrderList = ({ history }) => {
 
     {
       field: "amount",
-      headerName: "Amount",
+      headerName: "Thành tiền",
       type: "number",
       minWidth: 270,
       flex: 0.5,
@@ -82,20 +82,28 @@ const OrderList = ({ history }) => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
+      headerName: "Thao tác",
+      minWidth: 200,
       type: "number",
       sortable: false,
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/order/${params.id}`}>
-              <EditIcon />
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                to={`/admin/order/${params.id}`}
+                className="w-14 py-3 px-5 rounded  flex justify-center items-center h-3 bg-[#1572e8] text-white opacity-70 hover:opacity-100"
+              >
+                <p>EDIT</p>
+              </Link>
 
-            <Button onClick={() => deleteOrderHandler(params.id)}>
-              <DeleteIcon />
-            </Button>
+              <Link
+                onClick={() => deleteOrderHandler(params.id)}
+                className="w-14 py-3 px-5 rounded  flex justify-center items-center h-3 bg-[#f25961] text-white opacity-70 hover:opacity-100"
+              >
+                <p>Delete</p>
+              </Link>
+            </div>
           </Fragment>
         );
       },
@@ -117,18 +125,17 @@ const OrderList = ({ history }) => {
   return (
     <Fragment>
       <MetaData title={`ALL ORDERS - Admin`} />
+      <div className="h-40 p-10 flex  bg-[linear-gradient(-45deg,#06418e,#1572e8)] text-xl font-bold text-white">
+        Tất cả đơn hàng
+      </div>
 
-      <div className="dashboard">
-        <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL ORDERS</h1>
-
+      <div className="relative -top-14 px-10">
+        <div className="shadow-lg">
           <DataGrid
             rows={rows}
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
-            className="productListTable"
             autoHeight
           />
         </div>

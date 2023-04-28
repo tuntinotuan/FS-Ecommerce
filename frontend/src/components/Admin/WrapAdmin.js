@@ -1,14 +1,20 @@
 import React, { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import HeaderAdmin from "./HeaderAdmin";
+import FooterAdmin from "./FooterAdmin";
 
 const WrapAdmin = () => {
   return (
     <Fragment>
-      <div>Header</div>
-      <div className="flex items-center mt-20 border-4 border-transparent border-b-primary">
+      <div className="flex">
         <Sidebar></Sidebar>
-        <Outlet></Outlet>
+        <div className="flex-1 overflow-auto h-[100vh]">
+          <HeaderAdmin />
+          <div className="h-[90vh] overflow-auto">
+          <Outlet />
+          </div>
+        </div>
       </div>
     </Fragment>
   );

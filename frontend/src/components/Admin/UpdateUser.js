@@ -78,19 +78,18 @@ const UpdateUser = ({ history, match }) => {
   return (
     <Fragment>
       <MetaData title="Update User" />
-      <div className="dashboard">
-        <SideBar />
-        <div className="newProductContainer">
+      <div className="flex justify-center py-10">
+        <div className="bg-white rounded shadow-lg p-5 w-[500px]">
           {loading ? (
             <Loader />
           ) : (
             <form
-              className="createProductForm"
+              className="flex flex-col gap-5"
               onSubmit={updateUserSubmitHandler}
             >
-              <h1>Update User</h1>
+              <h1 className="text-center text-lg font-bold">Update User</h1>
 
-              <div>
+              <div className="flex gap-3 items-center">
                 <PersonIcon />
                 <input
                   type="text"
@@ -98,9 +97,10 @@ const UpdateUser = ({ history, match }) => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
                 />
               </div>
-              <div>
+              <div className="flex gap-3 items-center">
                 <MailOutlineIcon />
                 <input
                   type="email"
@@ -108,27 +108,30 @@ const UpdateUser = ({ history, match }) => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
                 />
               </div>
 
-              <div>
+              <div className="flex gap-3 items-center">
                 <VerifiedUserIcon />
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
+                <select value={role} onChange={(e) => setRole(e.target.value)}
+                className="w-full h-14  p-2 outline-none border border-[#1572e8] rounded "
+                >
                   <option value="">Choose Role</option>
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
                 </select>
               </div>
 
-              <Button
-                id="createProductBtn"
+              <button
                 type="submit"
                 disabled={
                   updateLoading ? true : false || role === "" ? true : false
                 }
+                className="w-full h-10 bg-primary rounded text-white opacity-70 active:bg-[#1572e8]"
               >
                 Update
-              </Button>
+              </button>
             </form>
           )}
         </div>

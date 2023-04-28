@@ -18,6 +18,7 @@ import BannerMain from "../banner/BannerMain";
 import BlockTitle from "../others/BlockTitle";
 import SlidesFamousPerson from "../slides/SlidesFamousPerson";
 import CollaborateBrands from "../others/CollaborateBrands";
+import SignUpFormFinal from "../form/SignUpFormFinal";
 
 const products = [
   {
@@ -87,6 +88,8 @@ const Home = () => {
               Thương hiệu đồng hành cùng Shop
             </BlockTitle>
             <CollaborateBrands></CollaborateBrands>
+            {/* <SignUpFormV2></SignUpFormV2> */}
+            {/* <SignUpFormFinal></SignUpFormFinal> */}
           </section>
         </Fragment>
       )}
