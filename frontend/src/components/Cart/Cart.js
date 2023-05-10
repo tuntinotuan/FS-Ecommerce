@@ -285,7 +285,9 @@ const Cart = () => {
         <div
           className={`max-lg:w-[95%] max-md:w-[94%] max-sm:w-[92%] ${
             pointScrollFixed ? "fixed bottom-0 z-50" : "mt-10"
-          } w-[60%] rounded-[3px] transition-all`}
+          } w-[60%] rounded-[3px] transition-all ${
+            cartItems?.length <= 0 && "hidden"
+          }`}
         >
           <div
             className={`${
