@@ -58,8 +58,8 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(resultPerPage);
-  // .sort();
+    .pagination(resultPerPage)
+    .sort();
 
   const products = await apiFeature.query;
   let filteredProductsCount = products.length;
@@ -104,6 +104,19 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
 //     filteredProductsCount,
 //   });
 // });
+
+// Sort product
+exports.sortProducts = catchAsyncErrors(async (req, res, next) => {
+  const { type } = req.query;
+  const sort = type === "desc" ? -1 : 1;
+  const sortObject = { price: sort };
+  const products = await Product.find().sort(sortObject);
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
 
 // Get All Product (Admin)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {

@@ -218,6 +218,7 @@ const Products = ({ match }) => {
   // const [category, setCategory] = useState("");
 
   const [ratings, setRatings] = useState(0);
+  const [type, setType] = useState("");
   let array = [];
   // products.category.filter(item, index) => array.indexOf(item) === index);
   const {
@@ -260,9 +261,19 @@ const Products = ({ match }) => {
       dispatch(clearErrors());
     }
     // setTimeout(() => {
-    dispatch(getProduct(keyword, currentPage, price, category, ratings));
+    dispatch(getProduct(keyword, currentPage, price, category, ratings, type));
     // }, 500);
-  }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
+  }, [
+    dispatch,
+    keyword,
+    currentPage,
+    price,
+    category,
+    ratings,
+    type,
+    alert,
+    error,
+  ]);
 
   return (
     <Fragment>
@@ -309,7 +320,7 @@ const Products = ({ match }) => {
                   max={99999}
                 />
               </Box> */}
-              <fieldset>
+              {/* <fieldset>
                 <Typography component="legend">Đánh Giá</Typography>
                 <Slider
                   value={ratings}
@@ -321,7 +332,7 @@ const Products = ({ match }) => {
                   min={0}
                   max={5}
                 />
-              </fieldset>
+              </fieldset> */}
               <div className="flex flex-col items-start gap-1 text-sm">
                 <div className="mb-2">Đánh Giá</div>
                 <NavLink
@@ -424,7 +435,7 @@ const Products = ({ match }) => {
             <div className="flex-1 mb-3">
               <div className="flex items-center gap-3 bg-[#EDEDED] rounded-[3px] py-3 px-4 mb-3">
                 <p>Sắp xếp theo</p>
-                <FilterPrice></FilterPrice>
+                <FilterPrice type={type} setType={setType}></FilterPrice>
               </div>
               {products?.length !== 0 ? (
                 <div className="max-lg:grid-cols-3 max-sm:grid-cols-2 max-[415px]:grid-cols-1 grid grid-cols-5 gap-3">
