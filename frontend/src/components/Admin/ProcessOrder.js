@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
 import { Link, useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
-import SideBar from "./Sidebar";
 import {
   getOrderDetails,
   clearErrors,
@@ -10,13 +9,19 @@ import {
 } from "../../actions/orderAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { Button } from "@mui/material";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 import "./processOrder.css";
 
 const ProcessOrder = ({ history, match }) => {
+  const dispatch = useDispatch();
+  const { idOrder } = useParams();
+  const alert = useAlert();
+
+  const [status, setStatus] = useState("");
+
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
 
@@ -30,23 +35,17 @@ const ProcessOrder = ({ history, match }) => {
     dispatch(updateOrder(idOrder, myForm));
   };
 
-  const dispatch = useDispatch();
-  const { idOrder } = useParams();
-  // const alert = useAlert();
-
-  const [status, setStatus] = useState("");
-
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
     if (updateError) {
-      // alert.error(updateError);
+      alert.error(updateError);
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      // alert.success("Order Updated Successfully");
+      alert.success("Đã cập nhật trạng thái đơn hàng");
       dispatch({ type: UPDATE_ORDER_RESET });
     }
 
@@ -148,7 +147,6 @@ const ProcessOrder = ({ history, match }) => {
                   </div>
                 </div>
               </div>
-              {/*  */}
               <div
                 style={{
                   display: order.orderStatus === "Delivered" ? "none" : "block",

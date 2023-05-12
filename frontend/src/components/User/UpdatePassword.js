@@ -19,9 +19,9 @@ const UpdatePassword = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
-  const { click, setClick } = useClickEye();
-
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
+
+  const { click, setClick } = useClickEye();
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -47,10 +47,7 @@ const UpdatePassword = ({ history }) => {
 
     if (isUpdated) {
       alert.success("Đổi mật khẩu thành công");
-
-      // history.push("/account");
       navigate("/account");
-
       dispatch({
         type: UPDATE_PASSWORD_RESET,
       });

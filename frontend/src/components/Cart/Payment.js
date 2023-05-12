@@ -2,8 +2,7 @@ import React, { Fragment, useEffect, useRef } from "react";
 import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData";
-import { Typography } from "@mui/material";
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import {
   CardNumberElement,
   CardCvcElement,
@@ -23,12 +22,12 @@ import Master from "../../images/master.png";
 import Jbc from "../../images/jcb.png";
 import Visa from "../../images/visa.png";
 
-const Payment = ({ history }) => {
+const Payment = () => {
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
 
   const dispatch = useDispatch();
-  // const alert = useAlert();
+  const alert = useAlert();
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef(null);
@@ -91,7 +90,7 @@ const Payment = ({ history }) => {
       if (result.error) {
         payBtn.current.disabled = false;
 
-        // alert.error(result.error.message);
+        alert.error(result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
           order.paymentInfo = {
@@ -101,30 +100,29 @@ const Payment = ({ history }) => {
 
           dispatch(createOrder(order));
 
-          // history.push("/success");
           navigate("/success");
         } else {
-          // alert.error("There's some issue while processing payment ");
+          alert.error("There's some issue while processing payment ");
         }
       }
     } catch (error) {
       payBtn.current.disabled = false;
-      // alert.error(error.response.data.message);
+      alert.error(error.response.data.message);
     }
   };
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
   }, [dispatch, error, alert]);
 
   return (
     <Fragment>
+      {/* <p>4000002760003184</p> */}
       <MetaData title="Payment" />
       <CheckoutSteps activeStep={2} />
-      {/* <p>4000002760003184</p> */}
       <div className="flex justify-center items-center py-10">
         <form
           className="max-sm:p-5 bg-white rounded shadow-sm p-10 flex flex-col gap-6"

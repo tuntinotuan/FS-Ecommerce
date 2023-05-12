@@ -7,20 +7,16 @@ import {
   getAllReviews,
   deleteReviews,
 } from "../../actions/productAction";
-// import { useAlert } from "react-alert";
-import { Button } from "@mui/material";
+import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Star from "@mui/icons-material/Star";
-
-import SideBar from "./Sidebar";
 import { DELETE_REVIEW_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router-dom";
 
 const ProductReviews = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const alert = useAlert();
+  const alert = useAlert();
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.review
@@ -46,18 +42,17 @@ const ProductReviews = ({ history }) => {
       dispatch(getAllReviews(productId));
     }
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      // alert.error(deleteError);
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      // alert.success("Review Deleted Successfully");
-      // history.push("/admin/reviews");
+      alert.success("Đã xoá đánh giá");
       navigate("/admin/reviews");
       dispatch({ type: DELETE_REVIEW_RESET });
     }
@@ -103,14 +98,11 @@ const ProductReviews = ({ history }) => {
         return (
           <Fragment>
             <button
-                onClick={() =>
-                // deleteReviewHandler(params.getValue(params.id, "id"))
-                deleteReviewHandler(params.id)
-              }
-                className="w-14 py-3 px-5 rounded  flex justify-center items-center h-3 bg-[#f25961] text-white opacity-70 hover:opacity-100"
-              >
-                <p>Delete</p>
-              </button>
+              onClick={() => deleteReviewHandler(params.id)}
+              className="w-14 py-3 px-5 rounded  flex justify-center items-center h-3 bg-[#f25961] text-white opacity-70 hover:opacity-100"
+            >
+              <p>Delete</p>
+            </button>
           </Fragment>
         );
       },
@@ -132,14 +124,15 @@ const ProductReviews = ({ history }) => {
   return (
     <Fragment>
       <MetaData title={`ALL REVIEWS - Admin`} />
-      <div className="h-40 p-10 flex  bg-[linear-gradient(-45deg,#06418e,#1572e8)] text-xl font-bold text-white">ALL REVIEWS</div>
+      <div className="h-40 p-10 flex  bg-[linear-gradient(-45deg,#06418e,#1572e8)] text-xl font-bold text-white">
+        ALL REVIEWS
+      </div>
       <div className="relative -top-14 px-10 ">
         <div className="shadow-lg bg-white">
           <form
             className="productReviewsForm"
             onSubmit={productReviewsSubmitHandler}
           >
-
             <div>
               <Star />
               <input

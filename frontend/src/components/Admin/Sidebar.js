@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Girl from "../../images/girl.jpg";
 import { ImHome, ImCart, ImUsers } from "react-icons/im";
 import {
   MdRateReview,
@@ -9,7 +8,6 @@ import {
 import "./sidebar.css";
 import Logo from "../../images/shopNow.png";
 import { FiMenu } from "react-icons/fi";
-import { FaLayerGroup } from "react-icons/fa";
 import { useState } from "react";
 
 const Sidebar = () => {
@@ -50,12 +48,6 @@ const Sidebar = () => {
     >
       <div className="">
         <div className="bg-[#1572e8] flex items-center justify-around gap-4 px-3 h-16 text-white ">
-          {/* <h1
-            style={{ display: isOpen ? "block" : "none" }}
-            className="text-base font-bold italic"
-          >
-            SHOP NOW
-          </h1> */}
           {isOpen && (
             <Link to="/admin/dashboard">
               <img src={Logo} alt="" className="w-full h-full" />

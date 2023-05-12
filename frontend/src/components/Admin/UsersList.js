@@ -3,20 +3,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { useAlert } from "react-alert";
-import { Button } from "@mui/material";
+import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import SideBar from "./Sidebar";
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constants/userConstants";
 
 const UsersList = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const alert = useAlert();
+  const alert = useAlert();
 
   const { error, users } = useSelector((state) => state.allUsers);
 
@@ -32,18 +27,17 @@ const UsersList = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      // alert.error(deleteError);
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      // alert.success(message);
-      // history.push("/admin/users");
+      alert.success(message);
       navigate("/admin/users");
       dispatch({ type: DELETE_USER_RESET });
     }

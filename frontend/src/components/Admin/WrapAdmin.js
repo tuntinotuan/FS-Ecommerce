@@ -12,7 +12,7 @@ const WrapAdmin = () => {
         <div className="flex-1 overflow-auto h-[100vh]">
           <HeaderAdmin />
           <div className="h-[90vh] overflow-auto">
-          <Outlet />
+            <Outlet />
           </div>
         </div>
       </div>

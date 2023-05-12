@@ -2,22 +2,20 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, createProduct } from "../../actions/productAction";
-// import { useAlert } from "react-alert";
-import { Button } from "@mui/material";
+import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DescriptionIcon from "@mui/icons-material/Description";
 import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import SideBar from "./Sidebar";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router-dom";
 
 const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const alert = useAlert();
+  const alert = useAlert();
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
@@ -41,13 +39,12 @@ const NewProduct = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
-      // alert.success("Product Created Successfully");
-      // history.push("/admin/dashboard");
+      alert.success("Đã tạo sản phẩm mới");
       navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
@@ -139,8 +136,10 @@ const NewProduct = ({ history }) => {
 
             <div className="flex gap-3 items-center">
               <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}
-              className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded ">
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
+              >
                 <option value="">Choose Category</option>
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>

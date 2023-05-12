@@ -15,9 +15,7 @@ const SlidesFamousPerson = () => {
   const mobile = width < 768;
   const mobileSmaller = width < 640;
   return (
-    <section
-    // className="bg-white shadow-sm"
-    >
+    <section>
       <div
         className="page-container banner-main flex items-start gap-2 select-none"
         ref={nodeRef}

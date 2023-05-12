@@ -4,7 +4,6 @@ import { Fragment, useEffect, useState } from "react";
 import Main from "./components/layout/Main";
 import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products";
-// import Search from "./components/Product/Search";
 import LoginSignUp from "./components/User/LoginSignUp";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
@@ -17,7 +16,6 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import Payment from "./components/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
@@ -40,8 +38,6 @@ import HeadLoginAndSignUp from "./components/layout/Header/HeadLoginAndSignUp";
 import WrapAdmin from "./components/Admin/WrapAdmin";
 
 function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
-
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
@@ -49,6 +45,7 @@ function App() {
 
     setStripeApiKey(data.stripeApiKey);
   }
+
   useEffect(() => {
     store.dispatch(loadUser());
     getStripeApiKey();
@@ -57,6 +54,7 @@ function App() {
   return (
     <Fragment>
       <Routes>
+        {/* Home Route */}
         <Route element={<Main></Main>}>
           <Route
             path="/"
@@ -79,8 +77,6 @@ function App() {
             path="/products/:keyword"
             element={<Products></Products>}
           ></Route>
-          {/* <Route path="/search" element={<Search></Search>}></Route> */}
-          {/* <Route path="/account" element={<Profile></Profile>} /> */}
           <Route
             path="/account"
             element={
@@ -94,7 +90,6 @@ function App() {
             path="/password/update"
             element={<UpdatePassword></UpdatePassword>}
           />
-
           <Route path="/cart" element={<Cart></Cart>}></Route>
           <Route path="/login/shipping" element={<Shipping></Shipping>}></Route>
           <Route
@@ -118,13 +113,10 @@ function App() {
             path="/order/:idOrder"
             element={<OrderDetails></OrderDetails>}
           ></Route>
-
           <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
         </Route>
-        {/* <Route
-          path="/admin/dashboard"
-          element={<Dashboard></Dashboard>}
-        ></Route> */}
+
+        {/* Admin Route */}
         <Route element={<WrapAdmin></WrapAdmin>}>
           <Route
             path="/admin/dashboard"
@@ -152,27 +144,17 @@ function App() {
             element={<ProcessOrder></ProcessOrder>}
           ></Route>
           <Route path="/admin/users" element={<UsersList></UsersList>} />
-
           <Route
             path="/admin/user/:idUser"
             element={<UpdateUser></UpdateUser>}
           />
-
           <Route
             path="/admin/reviews"
             element={<ProductReviews></ProductReviews>}
           />
-          {/* <Route
-          path="/formtest"
-          element={
-            <>
-              <HeadLoginAndSignUp title="Cấp lại mật khẩu mới"></HeadLoginAndSignUp>
-              <SignUpFormV2 />
-              <Footer></Footer>
-            </>
-          }
-        /> */}
         </Route>
+
+        {/* User Route */}
         <Route
           path="/login"
           element={

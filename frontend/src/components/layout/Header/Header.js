@@ -1,62 +1,8 @@
-// import React from "react";
-// import { ReactNavbar } from "overlay-navbar";
-// import logo from "../../../images/logo.png";
-// import { MdAccountCircle } from "react-icons/md";
-// import { MdSearch } from "react-icons/md";
-// import { MdAddShoppingCart } from "react-icons/md";
-// import Logo from "../../../images/logo.png";
-
-// const options = {
-//   burgerColorHover: "#eb4034",
-//   logo,
-//   logoWidth: "20vmax",
-//   navColor1: "white",
-//   logoHoverSize: "10px",
-//   logoHoverColor: "#eb4034",
-//   link1Text: "Home",
-//   link2Text: "Products",
-//   link3Text: "Contact",
-//   link4Text: "About",
-//   link1Url: "/",
-//   link2Url: "/products",
-//   link3Url: "/contact",
-//   link4Url: "/about",
-//   link1Size: "1.3vmax",
-//   link1Color: "rgba(35, 35, 35,0.8)",
-//   nav1justifyContent: "flex-end",
-//   nav2justifyContent: "flex-end",
-//   nav3justifyContent: "flex-start",
-//   nav4justifyContent: "flex-start",
-//   link1ColorHover: "#eb4034",
-//   link1Margin: "1vmax",
-//   profileIconUrl: "/login",
-//   profileIconColor: "rgba(35, 35, 35,0.8)",
-//   searchIconColor: "rgba(35, 35, 35,0.8)",
-//   cartIconColor: "rgba(35, 35, 35,0.8)",
-//   profileIconColorHover: "#eb4034",
-//   searchIconColorHover: "#eb4034",
-//   cartIconColorHover: "#eb4034",
-//   cartIconMargin: "1vmax",
-//   profileIcon: true,
-//   ProfileIconElement: MdAccountCircle,
-//   searchIcon: true,
-//   SearchIconElement: MdSearch,
-//   cartIcon: true,
-//   CartIconElement: MdAddShoppingCart,
-// };
-
-// const Header = () => {
-//   return <ReactNavbar {...options} />;
-// };
-
-// export default Header;
-
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { AiFillCloseCircle, AiOutlineSearch } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BsPhone, BsLaptop, BsTablet, BsKeyboard } from "react-icons/bs";
-import { RiComputerLine } from "react-icons/ri";
-import { AiOutlineApple, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HiMenu } from "react-icons/hi";
 import { SlEarphonesAlt } from "react-icons/sl";
 import { BiLogIn } from "react-icons/bi";
@@ -72,9 +18,8 @@ import { logout } from "../../../actions/userAction";
 import useClickOutSide from "../../../hooks/useClickOutSide";
 import Search from "../../Search/Search";
 import SearchMobile from "../../Search/SearchMobile";
-import UserControl from "../../others/UserControl";
 
-const Header = ({ history }) => {
+const Header = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const { show, setShow } = useClickOutSide();
@@ -87,9 +32,7 @@ const Header = ({ history }) => {
 
   const [hiddenCart, setHiddenCart] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
-  const { error, loading, isAuthenticated, user } = useSelector(
-    (state) => state.user
-  );
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   function logoutUser() {
     setShowMenu(false);
@@ -106,7 +49,6 @@ const Header = ({ history }) => {
             className="text-white cursor-pointer"
             onClick={() => setShowMenu(true)}
           ></HiMenu>
-          {/* {showMenu && ( */}
           <div
             className={`max-md:block max-sm:w-[50vw] max-[415px]:w-[60vw] fixed top-0 bottom-0 left-0 w-[40vw] bg-primary shadow-xl p-5 z-40 ${
               showMenu ? "-translate-x-0" : "-translate-x-full"
@@ -346,7 +288,6 @@ const Header = ({ history }) => {
               className="absolute top-2 right-2 text-white cursor-pointer"
             ></AiFillCloseCircle>
           </div>
-          {/* )} */}
         </div>
         <div className="flex items-center gap-5 text-white">
           <Link to="/" className="max-lg:w-[120px] w-[160px]">
@@ -446,7 +387,7 @@ const Header = ({ history }) => {
                 {cartItems.length < 1 ? (
                   <div className="empty_cart w-96 h-80 bg-white shadow-lg p-10 rounded mt-[28px]">
                     <div>
-                      <img src={EmptyCart} />
+                      <img src={EmptyCart} alt={EmptyCart} />
                     </div>
                   </div>
                 ) : (

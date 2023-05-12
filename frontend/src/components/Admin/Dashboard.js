@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import Sidebar from "./Sidebar.js";
 import "./dashboard.css";
-import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
@@ -9,11 +7,7 @@ import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
 import MetaData from "../layout/MetaData";
 import { Doughnut, Line } from "react-chartjs-2";
-import Chart from "chart.js/auto";
-import HeaderAdmin from "./HeaderAdmin.js";
-
 import Circle from "../../images/circel.svg";
-// Chart?.register(Doughnut, Line);
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -98,7 +92,11 @@ const Dashboard = () => {
               <p className="text-base">{totalAmount}</p>
             </div>
             <div className="h-full">
-              <img src={Circle} className="h-full absolute right-0" />
+              <img
+                src={Circle}
+                className="h-full absolute right-0"
+                alt={Circle}
+              />
             </div>
           </div>
 
@@ -108,7 +106,11 @@ const Dashboard = () => {
               <p className="text-base">{users && users?.length}</p>
             </div>
             <div className="h-full">
-              <img src={Circle} className="h-full absolute right-0" />
+              <img
+                src={Circle}
+                className="h-full absolute right-0"
+                alt={Circle}
+              />
             </div>
           </Link>
 
@@ -118,7 +120,11 @@ const Dashboard = () => {
               <p className="text-base">{users && users?.length}</p>
             </div>
             <div className="h-full">
-              <img src={Circle} className="h-full absolute right-0" />
+              <img
+                src={Circle}
+                className="h-full absolute right-0"
+                alt={Circle}
+              />
             </div>
           </Link>
         </div>
@@ -130,7 +136,11 @@ const Dashboard = () => {
               <p className="text-base">{orders && orders?.length}</p>
             </div>
             <div className="h-full">
-              <img src={Circle} className="h-full absolute right-0" />
+              <img
+                src={Circle}
+                className="h-full absolute right-0"
+                alt={Circle}
+              />
             </div>
           </Link>
 
@@ -140,7 +150,11 @@ const Dashboard = () => {
               <p className="text-base">{products && products?.length}</p>
             </div>
             <div className="h-full">
-              <img src={Circle} className="h-full absolute right-0" />
+              <img
+                src={Circle}
+                className="h-full absolute right-0"
+                alt={Circle}
+              />
             </div>
           </Link>
         </div>

@@ -1,13 +1,10 @@
 import React from "react";
-import { BsSearch, BsBell } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
-import { FaBell } from "react-icons/fa";
 import { AiOutlineRight } from "react-icons/ai";
 import Girl from "../../images/girl.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import "./HeaderAdmin.css";
-import Logo from "../../images/shopNow.png";
-import { FiMenu } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { logout } from "../../actions/userAction";
@@ -16,9 +13,7 @@ const HeaderAdmin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
-  const { error, loading, isAuthenticated, user } = useSelector(
-    (state) => state.user
-  );
+  const { user } = useSelector((state) => state.user);
   function logoutUser() {
     dispatch(logout());
     navigate("/login");
@@ -60,6 +55,7 @@ const HeaderAdmin = () => {
                         <img
                           src={Girl}
                           className="object-cover rounded-full w-full h-full"
+                          alt={Girl}
                         />
                       </div>
                       <div className="overflow-hidden flex flex-col opacity-80 truncate">
@@ -77,11 +73,6 @@ const HeaderAdmin = () => {
                 </div>
               </div>
             </li>
-            {/* <li className='flex items-center'>
-                                <button className='text-white'>
-                                    <FaBell size={25} />
-                                </button>
-                            </li> */}
             <li className="box_model relative">
               <div className="w-10 h-10 rounded-full">
                 <img

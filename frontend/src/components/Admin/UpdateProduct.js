@@ -5,8 +5,7 @@ import {
   updateProduct,
   getProductDetails,
 } from "../../actions/productAction";
-// import { useAlert } from "react-alert";
-import { Button } from "@mui/material";
+import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -16,11 +15,11 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate, useParams } from "react-router-dom";
 
-const UpdateProduct = ({ history, match }) => {
+const UpdateProduct = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { idProduct } = useParams();
-  // const alert = useAlert();
+  const alert = useAlert();
 
   const { error, product } = useSelector((state) => state.productDetails);
 
@@ -49,8 +48,6 @@ const UpdateProduct = ({ history, match }) => {
     "SmartPhones",
   ];
 
-  // const productId = match.params.id;
-
   useEffect(() => {
     if (product && product._id !== idProduct) {
       dispatch(getProductDetails(idProduct));
@@ -63,18 +60,17 @@ const UpdateProduct = ({ history, match }) => {
       setOldImages(product.images);
     }
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      // alert.error(updateError);
+      alert.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success("Product Updated Successfully");
-      // history.push("/admin/products");
+      alert.success("Đã cập nhật sản phẩm");
       navigate("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
@@ -148,7 +144,6 @@ const UpdateProduct = ({ history, match }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
-
               />
             </div>
             <div className="flex gap-3 items-center">
@@ -160,7 +155,6 @@ const UpdateProduct = ({ history, match }) => {
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}
                 className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
-
               />
             </div>
 
@@ -174,7 +168,6 @@ const UpdateProduct = ({ history, match }) => {
                 cols="30"
                 rows="1"
                 className="w-full h-14  max-h-20 p-2 outline-none border border-[#1572e8] rounded "
-
               ></textarea>
             </div>
 
@@ -183,8 +176,7 @@ const UpdateProduct = ({ history, match }) => {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-              className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
-
+                className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
               >
                 <option value="">Choose Category</option>
                 {categories.map((cate) => (
@@ -204,7 +196,6 @@ const UpdateProduct = ({ history, match }) => {
                 onChange={(e) => setStock(e.target.value)}
                 value={Stock}
                 className="w-full h-8 p-2 outline-none border border-[#1572e8] rounded "
-
               />
             </div>
 
@@ -235,7 +226,6 @@ const UpdateProduct = ({ history, match }) => {
               type="submit"
               disabled={loading ? true : false}
               className="w-full h-10 bg-primary rounded text-white opacity-70 active:bg-[#1572e8]"
-
             >
               Update
             </button>

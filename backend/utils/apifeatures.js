@@ -45,14 +45,11 @@ class ApiFeatures {
 
   sort() {
     const type = this.queryStr.type;
-    console.log("type", { type });
-    // let queryStr = JSON.stringify(queryCopy);
-    // const { type } = Number(this.queryStr.page);
+
     const sort = type === "desc" ? -1 : type === "asc" && 1;
     const sortObject = sort && { price: sort };
     console.log("sort", { sort });
 
-    // const sort = Number(this.queryStr.page);
     this.query = this.query.sort(sortObject);
 
     return this;

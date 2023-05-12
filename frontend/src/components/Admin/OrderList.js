@@ -3,12 +3,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { useAlert } from "react-alert";
-import { Button } from "@mui/material";
+import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import SideBar from "./Sidebar";
+
 import {
   deleteOrder,
   getAllOrders,
@@ -19,11 +16,9 @@ import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 const OrderList = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const alert = useAlert();
+  const alert = useAlert();
 
   const { error, orders } = useSelector((state) => state.allOrders);
-
   const { error: deleteError, isDeleted } = useSelector((state) => state.order);
 
   const deleteOrderHandler = (id) => {
@@ -32,18 +27,17 @@ const OrderList = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      // alert.error(deleteError);
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      // alert.success("Order Deleted Successfully");
-      // history.push("/admin/orders");
+      alert.success("Đã xoá đơn hàng");
       navigate("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }
@@ -125,7 +119,7 @@ const OrderList = ({ history }) => {
   return (
     <Fragment>
       <MetaData title={`ALL ORDERS - Admin`} />
-      <div className="h-40 p-10 flex  bg-[linear-gradient(-45deg,#06418e,#1572e8)] text-xl font-bold text-white">
+      <div className="h-40 p-10 flex bg-[linear-gradient(-45deg,#06418e,#1572e8)] text-xl font-bold text-white">
         Tất cả đơn hàng
       </div>
 

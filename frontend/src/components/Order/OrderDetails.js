@@ -6,17 +6,17 @@ import { Link, useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { getOrderDetails, clearErrors } from "../../actions/orderAction";
 import Loader from "../layout/Loader/Loader";
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 
 const OrderDetails = ({ match }) => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { idOrder } = useParams();
   const dispatch = useDispatch();
-  // const alert = useAlert();
+  const alert = useAlert();
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 

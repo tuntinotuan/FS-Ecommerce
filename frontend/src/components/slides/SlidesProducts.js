@@ -10,9 +10,7 @@ import useHover from "../../hooks/useHover";
 const SlidesProducts = () => {
   const { hovered, nodeRef } = useHover();
   return (
-    <section
-    // className="bg-white shadow-sm"
-    >
+    <section>
       <div
         className="max-sm:max-h-[700px] page-container banner-main max-h-[400px] flex items-start gap-2 select-none"
         ref={nodeRef}
