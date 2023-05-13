@@ -7,6 +7,8 @@ import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
 import MetaData from "../layout/MetaData";
 import { Doughnut, Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
+
 import Circle from "../../images/circel.svg";
 
 const Dashboard = () => {
