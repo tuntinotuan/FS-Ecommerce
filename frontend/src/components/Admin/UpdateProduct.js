@@ -212,7 +212,7 @@ const UpdateProduct = ({ history }) => {
             <div className="flex gap-3 items-center">
               {oldImages &&
                 oldImages.map((image, index) => (
-                  <img key={index} src={image.url} alt="Old Product Preview" />
+                  <img key={index} src={image?.url} alt="Old Product Preview" />
                 ))}
             </div>
 

@@ -76,7 +76,7 @@ const HeaderAdmin = () => {
             <li className="box_model relative">
               <div className="w-10 h-10 rounded-full">
                 <img
-                  src={user?.avatar.url}
+                  src={user?.avatar?.url}
                   alt=""
                   className="object-cover rounded-full w-full h-full cursor-pointer"
                 />
