@@ -18,7 +18,7 @@ const PageNotFound = () => {
       <p>Sorry, the page you're looking for cannot be accessed</p>
       <Link to="/" className="mt-2">
         <button className="btn-back-home hover:text-primary hover:shadow-sm">
-          <span>Back home</span>
+          <span>Trở về trang chủ</span>
         </button>
       </Link>
     </main>
