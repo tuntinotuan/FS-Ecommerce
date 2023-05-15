@@ -35,6 +35,7 @@ import {
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   CLEAR_ERRORS,
+  CLEAR_SUCCESS,
 } from "../constants/userConstants";
 import axios from "axios";
 
@@ -152,7 +153,7 @@ export const forgotPassword = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FORGOT_PASSWORD_FAIL,
-      payload: error.response.data.message,
+      payload: error.response.data.error,
     });
   }
 };
@@ -244,4 +245,8 @@ export const deleteUser = (id) => async (dispatch) => {
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
+};
+// Clearing clearSuccess
+export const clearSuccess = () => async (dispatch) => {
+  dispatch({ type: CLEAR_SUCCESS });
 };

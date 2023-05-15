@@ -39,6 +39,7 @@ import {
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   CLEAR_ERRORS,
+  CLEAR_SUCCESS,
 } from "../constants/userConstants";
 
 export const userReducer = (state = { user: {} }, action) => {
@@ -199,6 +200,12 @@ export const forgotPasswordReducer = (state = {}, action) => {
       return {
         ...state,
         error: null,
+      };
+    case CLEAR_SUCCESS:
+      return {
+        ...state,
+        success: null,
+        message: null,
       };
 
     default:

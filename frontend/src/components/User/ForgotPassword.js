@@ -3,14 +3,21 @@ import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword } from "../../actions/userAction";
+import { clearSuccess, forgotPassword } from "../../actions/userAction";
 import { clearErrors } from "../../actions/productAction";
+import { VscError } from "react-icons/vsc";
+import LoadingSpin from "../layout/Loader/LoadingSpin";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { error, message } = useSelector((state) => state.forgotPassword);
+  let regexEmail =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  console.log("test regexEmail", regexEmail.test("tuan"));
+  const { loading, error, message } = useSelector(
+    (state) => state.forgotPassword
+  );
 
   const [email, setEmail] = useState("");
 
@@ -24,13 +31,14 @@ const ForgotPassword = () => {
   };
 
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
+    // if (error) {
+    //   alert.error(error);
+    //   dispatch(clearErrors());
+    // }
 
     if (message) {
-      alert.success(message);
+      alert.success(`Đã gửi đến ${email}`);
+      dispatch(clearSuccess());
     }
   }, [dispatch, error, alert, message]);
   return (
@@ -46,23 +54,40 @@ const ForgotPassword = () => {
                 <h1 className="text-center">Đặt lại mật khẩu</h1>
               </div>
             </div>
+            {error && (
+              <div className="flex items-start gap-2 bg-taghot bg-opacity-5 border border-taghot rounded-[2px] mb-8 p-2">
+                <VscError size={18} className="text-taghot"></VscError>
+                <p className="text-sm">
+                  {error === "User not found" &&
+                    "Không tìm thấy email, vui lòng nhập email đã đăng ký với Shop"}
+                </p>
+              </div>
+            )}
             <div className="text-base">
-              <div className="w-full h-10 mb-8 ">
+              <div className="w-full h-10 mb-8">
                 <input
                   type="text"
                   placeholder="Email của bạn?"
-                  className="w-full h-full rounded-[2px] px-3 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md"
+                  className={`${
+                    email && !regexEmail.test(email)
+                      ? "bg-taghot bg-opacity-5 border border-taghot focus:border-taghot rounded-[2px]"
+                      : ""
+                  } w-full h-full rounded-[2px] px-3 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-sm`}
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                {email && !regexEmail.test(email) && (
+                  <p className="text-xs text-taghot mt-1">Email không hợp lệ</p>
+                )}
               </div>
               <button
                 type="submit"
                 value="Send"
-                className="h-10 w-full bg-[#43c6ac] rounded text-white text-base tracking-widest opacity-80 hover:opacity-100"
+                disabled={!email || !regexEmail.test(email)}
+                className="flex items-center justify-center h-10 w-full bg-[#43c6ac] rounded text-white text-base tracking-widest opacity-80 hover:opacity-100 disabled:cursor-wait disabled:bg-opacity-60 disabled:hover:opacity-80"
               >
-                TIẾP THEO
+                {loading ? <LoadingSpin></LoadingSpin> : "TIẾP THEO"}
               </button>
             </div>
           </div>
