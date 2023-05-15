@@ -8,8 +8,9 @@ import { FaEye } from "react-icons/fa";
 import "./LoginSignUp.css";
 import Profile from "../../images/Profile.png";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, login, register } from "../../actions/userAction";
+import { login, register } from "../../actions/userAction";
 import useClickEye from "../../hooks/useClickEye";
+import { VscError } from "react-icons/vsc";
 
 const LoginSignUp = ({ registerSwitch = false }) => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const LoginSignUp = ({ registerSwitch = false }) => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
+    console.log("error", error);
     dispatch(login(loginEmail, loginPassword));
   };
 
@@ -81,11 +83,6 @@ const LoginSignUp = ({ registerSwitch = false }) => {
   const redirect = location?.search ? location?.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-
     if (isAuthenticated) {
       userFromData.role === "admin"
         ? navigate("/admin/dashboard")
@@ -101,24 +98,46 @@ const LoginSignUp = ({ registerSwitch = false }) => {
         </div>
         {!show ? (
           <form
-            className="p-8 bg-white shadow-lg w-[400px] h-[410px] rounded-md flex flex-col"
+            className="p-8 bg-white shadow-lg w-[400px] h-auto rounded-md flex flex-col"
             onSubmit={loginSubmit}
           >
             <h1 className="text-xl mb-8">Đăng nhập</h1>
+            {error && (
+              <div className="flex items-start gap-2 bg-taghot bg-opacity-5 border border-taghot rounded-[2px] mb-8 p-2">
+                <VscError size={24} className="text-taghot"></VscError>
+                <p className="text-sm">
+                  {error === "Invalid email or password" &&
+                    "Tên tài khoản của bạn hoặc Mật khẩu không đúng, vui lòng thử lại"}
+                </p>
+              </div>
+            )}
             <div className="w-full h-10 mb-8">
               <input
-                className="w-full h-full pl-3 pr-8 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md"
+                className={`${
+                  error && !loginEmail
+                    ? "bg-taghot bg-opacity-5 border border-taghot focus:border-taghot rounded-[2px]"
+                    : ""
+                } w-full h-full pl-3 pr-8 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md`}
                 placeholder="Email của bạn?"
                 autoFocus
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
               />
+              {error && !loginEmail && (
+                <p className="text-xs text-taghot mt-1">
+                  Vui lòng điền vào mục này.
+                </p>
+              )}
             </div>
-            <div className="relative w-full h-10  mb-8 flex justify-between border-">
+            <div className="relative w-full h-10 flex justify-between border-">
               <input
                 maxLength={15}
                 type={`${hiddenPassword ? "password" : "text"}`}
-                className="w-full h-full pl-3 pr-8 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md"
+                className={`${
+                  error && !loginPassword
+                    ? "bg-taghot bg-opacity-5 border border-taghot focus:border-taghot rounded-[2px]"
+                    : ""
+                } w-full h-full pl-3 pr-8 border border-slate-200 outline-1 outline-none focus:border-graytagp focus:shadow-md`}
                 placeholder="Mật khẩu của bạn?"
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
@@ -134,9 +153,15 @@ const LoginSignUp = ({ registerSwitch = false }) => {
                 )}
               </div>
             </div>
+            {error && !loginPassword && (
+              <p className="text-xs text-taghot mt-1">
+                Vui lòng điền vào mục này.
+              </p>
+            )}
             <button
               type="submit"
-              className="uppercase w-full h-10 bg-[#43c6ac] text-white text-base tracking-widest opacity-80 hover:opacity-100 rounded"
+              disabled={!loginEmail || !loginPassword}
+              className="uppercase w-full h-10 bg-[#43c6ac] text-white text-base tracking-widest opacity-80 hover:opacity-100 rounded disabled:cursor-wait disabled:bg-opacity-60 disabled:hover:opacity-80 mt-8"
             >
               Đăng nhập
             </button>
