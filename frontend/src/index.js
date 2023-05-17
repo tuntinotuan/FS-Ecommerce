@@ -8,6 +8,7 @@ import store from "./store";
 
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import Chatbot from "./components/Chat/Chatbot";
 
 const options = {
   timeout: 5000,
@@ -21,6 +22,7 @@ root.render(
     <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...options}>
         <Router>
+          {/* <Chatbot></Chatbot> */}
           <App />
         </Router>
       </AlertProvider>
