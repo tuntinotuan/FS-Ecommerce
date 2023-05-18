@@ -36,7 +36,6 @@ import PageNotFound from "./components/layout/PageNotFound/PageNotFound";
 import Footer from "./components/layout/Footer/Footer";
 import HeadLoginAndSignUp from "./components/layout/Header/HeadLoginAndSignUp";
 import WrapAdmin from "./components/Admin/WrapAdmin";
-import Chatbot from "./components/Chat/Chatbot";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -54,7 +53,6 @@ function App() {
 
   return (
     <Fragment>
-      {/* <Chatbot></Chatbot> */}
       <Routes>
         {/* Home Route */}
         <Route element={<Main></Main>}>

@@ -11,8 +11,8 @@ const errorMiddleware = require("./middleware/error");
 dotenv.config({ path: "backend/config/config.env" });
 
 app.use(cookieParser());
-app.use(bodyParser.json({ limit: "10mb" }));
-app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(fileUpload());
 app.use(express.json());
 

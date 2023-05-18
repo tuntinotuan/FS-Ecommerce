@@ -11,6 +11,7 @@ import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router-dom";
+import LoadingSpin from "../layout/Loader/LoadingSpin";
 
 const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const NewProduct = ({ history }) => {
 
     if (success) {
       alert.success("Đã tạo sản phẩm mới");
-      navigate("/admin/dashboard");
+      navigate("/admin/products");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, history, success]);
@@ -179,9 +180,9 @@ const NewProduct = ({ history }) => {
             <button
               type="submit"
               disabled={loading ? true : false}
-              className="w-full h-10 bg-primary rounded text-white opacity-70 active:bg-[#1572e8]"
+              className="flex items-center justify-center w-full h-10 bg-primary rounded text-white opacity-70 active:bg-[#1572e8] disabled:cursor-wait disabled:bg-opacity-60 disabled:hover:opacity-80"
             >
-              Create
+              {loading ? <LoadingSpin></LoadingSpin> : "Create"}
             </button>
           </form>
         </div>

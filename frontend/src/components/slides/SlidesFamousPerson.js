@@ -7,6 +7,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import useHover from "../../hooks/useHover";
 import useViewport from "../../hooks/useViewport";
+import Ambassador1 from "../../images/AmbassadorHomepage/Ambassador1.webp";
+import Ambassador2 from "../../images/AmbassadorHomepage/Ambassador2.webp";
+import Ambassador3 from "../../images/AmbassadorHomepage/Ambassador3.webp";
+import Ambassador4 from "../../images/AmbassadorHomepage/Ambassador4.png";
+import Ambassador5 from "../../images/AmbassadorHomepage/Ambassador5.png";
+import Ambassador6 from "../../images/AmbassadorHomepage/Ambassador6.webp";
+import Ambassador7 from "../../images/AmbassadorHomepage/Ambassador7.webp";
+import Ambassador8 from "../../images/AmbassadorHomepage/Ambassador8.png";
 
 const SlidesFamousPerson = () => {
   const { hovered, nodeRef } = useHover();
@@ -55,35 +63,69 @@ export default SlidesFamousPerson;
 
 const famous = [
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_1.png?v=1212",
+    img: Ambassador1,
     title: "HOT TIKTOKER GIA THỊ LINH",
   },
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_2.png?v=1212",
+    img: Ambassador2,
     title: "Ca sỹ/ Model Bảo Hân Helia",
   },
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_3.png?v=1212",
+    img: Ambassador3,
     title: "Ca sỹ/ Diễn viên Lê Na",
   },
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_4.png?v=1212",
+    img: Ambassador4,
     title: "Hot Youtuber Jenny Huỳnh",
   },
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_5.png?v=1212",
+    img: Ambassador5,
     title: "Diễn viên/ Youtuber Gin Trần",
   },
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_6.png?v=1212",
+    img: Ambassador6,
     title: "Review Youtuber Lạ Sneaker",
   },
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_7.png?v=1212",
+    img: Ambassador7,
     title: "Hot Youtuber Bông Tím",
   },
   {
-    img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_8.png?v=1212",
+    img: Ambassador8,
     title: "Game thủ Stark Đại Đế ",
   },
 ];
+// const famous = [
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_1.png?v=1212",
+//     title: "HOT TIKTOKER GIA THỊ LINH",
+//   },
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_2.png?v=1212",
+//     title: "Ca sỹ/ Model Bảo Hân Helia",
+//   },
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_3.png?v=1212",
+//     title: "Ca sỹ/ Diễn viên Lê Na",
+//   },
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_4.png?v=1212",
+//     title: "Hot Youtuber Jenny Huỳnh",
+//   },
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_5.png?v=1212",
+//     title: "Diễn viên/ Youtuber Gin Trần",
+//   },
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_6.png?v=1212",
+//     title: "Review Youtuber Lạ Sneaker",
+//   },
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_7.png?v=1212",
+//     title: "Hot Youtuber Bông Tím",
+//   },
+//   {
+//     img: "https://theme.hstatic.net/200000104423/1000577263/14/ht_image_8.png?v=1212",
+//     title: "Game thủ Stark Đại Đế ",
+//   },
+// ];
