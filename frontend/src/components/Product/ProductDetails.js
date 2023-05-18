@@ -14,6 +14,7 @@ import {
   getProductDetails,
   newReview,
 } from "../../actions/productAction";
+import { myOrders } from "../../actions/orderAction";
 import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
@@ -53,11 +54,15 @@ const ProductDetails = ({ match }) => {
   const { hovered, nodeRef } = useHover();
   const alert = useAlert();
 
+  const [showComment, setShowComment] = useState(true);
+
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
+  const { orders } = useSelector((state) => state.myOrders);
 
-  console.log("product", product);
+  // console.log("orders", orders);
+  // console.log("product", product);
 
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
@@ -118,6 +123,17 @@ const ProductDetails = ({ match }) => {
 
   const submitReviewToggle = () => {
     open ? setOpen(false) : setOpen(true);
+    dispatch(myOrders());
+    orders &&
+      orders.map(
+        (items) =>
+          items.orderStatus === "Delivered" &&
+          items.orderItems.map((item) => {
+            if (item.product === idProduct) {
+              return setShowComment(false);
+            }
+          })
+      );
   };
 
   const reviewSubmitHandler = () => {
@@ -131,7 +147,7 @@ const ProductDetails = ({ match }) => {
 
     setOpen(false);
   };
-  console.log("idProduct", idProduct);
+  // console.log("idProduct", idProduct);
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -363,51 +379,70 @@ const ProductDetails = ({ match }) => {
               onClose={submitReviewToggle}
               className="w-[800px] mx-auto"
             >
-              <DialogTitle>Đánh Giá Sản Phẩm</DialogTitle>
-              <DialogContent className="">
-                <div className="flex items-center gap-2">
-                  <h2 className="mr-10">Chất lượng sản phẩm</h2>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    value={5}
-                    precision={0.5}
-                    size={24}
-                    isHalf={true}
-                    emptyIcon={<i className="far fa-star"></i>}
-                    halfIcon={<i className="fa fa-star-half-alt"></i>}
-                    fullIcon={<i className="fa fa-star"></i>}
-                    activeColor="#ffd700"
-                  />
-                  <p
-                    className={`${
-                      rating > 3 ? "text-tagnew" : "text-graytagp"
-                    }`}
-                  >
-                    {labels[rating]}
-                  </p>
-                </div>
+              {!showComment ? (
+                <Fragment>
+                  <DialogTitle>Đánh Giá Sản Phẩm</DialogTitle>
+                  <DialogContent className="">
+                    <div className="flex items-center gap-2">
+                      <h2 className="mr-10">Chất lượng sản phẩm</h2>
+                      <ReactStars
+                        count={5}
+                        onChange={ratingChanged}
+                        value={5}
+                        precision={0.5}
+                        size={24}
+                        isHalf={true}
+                        emptyIcon={<i className="far fa-star"></i>}
+                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                        fullIcon={<i className="fa fa-star"></i>}
+                        activeColor="#ffd700"
+                      />
+                      <p
+                        className={`${
+                          rating > 3 ? "text-tagnew" : "text-graytagp"
+                        }`}
+                      >
+                        {labels[rating]}
+                      </p>
+                    </div>
 
-                <textarea
-                  className="w-full border border-slate-200 outline-none p-2"
-                  cols="30"
-                  rows="5"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                ></textarea>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={submitReviewToggle}
-                  color="secondary"
-                  className="uppercase"
-                >
-                  Trở lại
-                </Button>
-                <Button onClick={reviewSubmitHandler} color="primary">
-                  Hoàn Thành
-                </Button>
-              </DialogActions>
+                    <textarea
+                      className="w-full border border-slate-200 outline-none p-2"
+                      cols="30"
+                      rows="5"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    ></textarea>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button
+                      onClick={submitReviewToggle}
+                      color="secondary"
+                      className="uppercase"
+                    >
+                      Trở lại
+                    </Button>
+                    <Button onClick={reviewSubmitHandler} color="primary">
+                      Hoàn Thành
+                    </Button>
+                  </DialogActions>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <DialogTitle>
+                    Vui lòng mua sản phẩm trước khi Đánh giá Bạn nhé 😥😥
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button
+                      onClick={submitReviewToggle}
+                      color="secondary"
+                      className="uppercase"
+                    >
+                      Trở lại
+                    </Button>
+                  </DialogActions>
+                </Fragment>
+              )}
             </Dialog>
 
             <div className="page-container flex flex-col gap-4 bg-white rounded-[3px] shadow-sm p-6 my-4">
@@ -439,7 +474,7 @@ const ProductDetails = ({ match }) => {
                   onClick={submitReviewToggle}
                   className="bg-primary text-white opacity-80 py-2 px-4 hover:opacity- rounded-[3px] cursor-pointer"
                 >
-                  Bình Luận
+                  Đánh giá
                 </button>
               </div>
               {product?.reviews && product?.reviews[0] ? (
