@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import Master from "../../images/master.png";
 import Jbc from "../../images/jcb.png";
 import Visa from "../../images/visa.png";
+import { removeItemsFromCart } from "../../actions/cartAction";
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -99,7 +100,10 @@ const Payment = () => {
           };
 
           dispatch(createOrder(order));
-
+          order &&
+            order.orderItems.map((item) => {
+              dispatch(removeItemsFromCart(item.product));
+            });
           navigate("/success");
         } else {
           alert.error("There's some issue while processing payment ");
