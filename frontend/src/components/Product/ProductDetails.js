@@ -280,7 +280,7 @@ const ProductDetails = ({ match }) => {
                     <div className="text-center flex justify-center mr-4">
                       <button
                         disabled={product?.Stock < 1 ? true : false}
-                        className="border border-[#d3d3d3] w-8 h-8 flex justify-center items-center"
+                        className="border border-[#d3d3d3] w-8 h-8 flex justify-center items-center disabled:cursor-wait"
                         onClick={decreaseQuantity}
                       >
                         <BsDash />
@@ -292,12 +292,12 @@ const ProductDetails = ({ match }) => {
                         onChange={changeQuantity}
                         className={`w-12 h-8 text-center p-2 border border-t-[#d3d3d3] border-b-[#d3d3d3] outline-none focus:outline-primary z-10 ${
                           quantityEqualZero && "outline-taghot"
-                        }`}
+                        }  disabled:cursor-wait`}
                         onBlur={quantityFocusOut}
                       />
                       <button
                         disabled={product?.Stock < 1 ? true : false}
-                        className="border border-[#d3d3d3] w-8 h-8 flex justify-center items-center"
+                        className="border border-[#d3d3d3] w-8 h-8 flex justify-center items-center disabled:cursor-wait"
                         onClick={increaseQuantity}
                       >
                         <GrFormAdd />
@@ -325,7 +325,7 @@ const ProductDetails = ({ match }) => {
                         : false
                     }
                     onClick={addToCartHandler}
-                    className="flex items-center gap-2 text-primary opacity-80 hover:opacity-100 border border-primary shadow-primary py-2 px-5 mt-5"
+                    className="flex items-center gap-2 text-primary opacity-80 hover:opacity-100 border border-primary shadow-primary py-2 px-5 mt-5 disabled:cursor-wait"
                   >
                     <BsCartPlus></BsCartPlus>
                     Thêm Vào Giỏ Hàng
